@@ -1,3 +1,4 @@
+import 'package:baby_tracker/pages/calender/widgets/List_item.dart';
 import 'package:baby_tracker/pages/calender/widgets/toolbar_widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +22,7 @@ class _CalenderViewState extends State<CalenderView> {
         child: Column(children: [
           Text("14 june 2020"),
           ToolBarWidgets(),
-          ListView(
-            children: [],
-          ),
+          ListItem(),
         ]),
       ),
     );

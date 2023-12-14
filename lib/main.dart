@@ -1,6 +1,7 @@
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/calender/view/calender_view.dart';
 import 'package:baby_tracker/pages/inapp/view/inapp_view.dart';
 import 'package:baby_tracker/pages/onbording/view/onbording_view.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,6 @@ class MyApp extends StatelessWidget {
               .copyWith(background: white)
               .copyWith(background: Colors.white),
         ),
-        home: OnbordingView());
+        home: CalenderView());
   }
 }
