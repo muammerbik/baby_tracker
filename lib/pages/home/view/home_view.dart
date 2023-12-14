@@ -1,8 +1,10 @@
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/pages/home/widgets/home_buttons.dart';
 import 'package:baby_tracker/pages/home/widgets/home_container.dart';
 import 'package:baby_tracker/pages/home/widgets/home_row.dart';
+import 'package:baby_tracker/pages/information/view/information_view.dart';
 import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +24,11 @@ class _HomeViewState extends State<HomeView> {
       body: Column(
         children: [
           SizedBox(height: DeviceConfig.screenHeight! * 0.0640),
-         HomeRow(),
+          HomeRow(),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigation.push(page: InformationView());
+            },
             child: TextWidgets(
               text: editProfie,
               size: 13,
@@ -40,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
           SizedBox(
             height: 25,
           ),
-        HomeContainer(),
+          HomeContainer(),
         ],
       ),
     );

@@ -5,6 +5,7 @@ import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/inapp/widgets/inapp_button.dart';
 import 'package:baby_tracker/pages/inapp/widgets/inapp_row_widgets.dart';
+import 'package:baby_tracker/pages/information/view/information_view.dart';
 import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -32,7 +33,7 @@ class _InappViewState extends State<InappView> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
-                  onPressed: () { Navigation.push(page: HomeView());},
+                  onPressed: () { Navigation.push(page: InformationView());},
                   icon: Image.asset(
                     "assets/images/inapp3.png",
                     height: 15,

@@ -10,6 +10,6 @@ void setupGetIt() {
   locator.registerSingleton<OnbordingViewModel>(OnbordingViewModel());
   locator.registerSingleton<InappViewModel>(InappViewModel());
   locator.registerSingleton<InformationViewModel>(InformationViewModel());
-   locator.registerSingleton<DiaperViewModel>(DiaperViewModel());
-    locator.registerSingleton<SettingViewModel>(SettingViewModel());
+  locator.registerSingleton<DiaperViewModel>(DiaperViewModel());
+  locator.registerSingleton<SettingViewModel>(SettingViewModel());
 }

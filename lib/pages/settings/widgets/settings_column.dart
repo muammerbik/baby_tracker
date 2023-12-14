@@ -1,6 +1,8 @@
 // settings_column.dart
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/inapp/view/inapp_view.dart';
 import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
 import 'package:baby_tracker/pages/settings/viewmodel/settings_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -25,76 +27,41 @@ class _SettingsColumnState extends State<SettingsColumn> {
 
   @override
   Widget build(BuildContext context) {
+    final isFirstElement = settingsGetIt.settingsList.isNotEmpty &&
+        widget.title == settingsGetIt.settingsList.first.title;
+
     return Observer(
       builder: (context) => GestureDetector(
         onTap: () {
-          settingsGetIt.setSelectedIndex(
-            settingsGetIt.settingsList.indexOf(
-              settingsGetIt.settingsList
-                  .firstWhere((element) => element.title == widget.title),
-            ),
-          );
+          if (isFirstElement) {
+            Navigation.push(page: InappView());
+          }
         },
         child: Container(
           width: 380,
-          height: settingsGetIt.selectedIndex ==
-                  settingsGetIt.settingsList.indexOf(
-                    settingsGetIt.settingsList
-                        .firstWhere((element) => element.title == widget.title),
-                  )
-              ? 75
-              : 60,
+          height: isFirstElement ? 75 : 60,
           decoration: ShapeDecoration(
-            color: settingsGetIt.selectedIndex ==
-                    settingsGetIt.settingsList.indexOf(
-                      settingsGetIt.settingsList.firstWhere(
-                          (element) => element.title == widget.title),
-                    )
-                ? Color(0xFF4625C3)
-                : lightGrey,
+            color: isFirstElement ? Color(0xFF4625C3) : lightGrey,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 4),
+            padding: const EdgeInsets.only(top: 5),
             child: ListTile(
               leading: Image.asset(
                 widget.leading,
-                color: settingsGetIt.selectedIndex ==
-                        settingsGetIt.settingsList.indexOf(
-                          settingsGetIt.settingsList.firstWhere(
-                              (element) => element.title == widget.title),
-                        )
-                    ? white
-                    : black,
+                color: isFirstElement ? white : black,
               ),
               title: TextWidgets(
                 text: widget.title,
-                size: settingsGetIt.selectedIndex ==
-                        settingsGetIt.settingsList.indexOf(
-                          settingsGetIt.settingsList.firstWhere(
-                              (element) => element.title == widget.title),
-                        )
-                    ? 20
-                    : 14,
-                color: settingsGetIt.selectedIndex ==
-                        settingsGetIt.settingsList.indexOf(
-                          settingsGetIt.settingsList.firstWhere(
-                              (element) => element.title == widget.title),
-                        )
-                    ? Colors.white
-                    : black,
+                size: isFirstElement ? 20 : 16,
+                color: isFirstElement ? white : black,
+                textAlign: TextAlign.start,
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios_outlined,
-                color: settingsGetIt.selectedIndex ==
-                        settingsGetIt.settingsList.indexOf(
-                          settingsGetIt.settingsList.firstWhere(
-                              (element) => element.title == widget.title),
-                        )
-                    ? Colors.grey
-                    : black,
+                color: isFirstElement ? white : black,
               ),
             ),
           ),

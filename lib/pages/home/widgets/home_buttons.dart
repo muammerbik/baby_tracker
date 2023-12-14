@@ -15,7 +15,6 @@ class HomeButtons extends StatefulWidget {
     required this.color,
     required this.title,
     required this.img,
-
     this.onTap,
   }) : super(key: key);
 
@@ -48,8 +47,11 @@ class _HomeButtonsState extends State<HomeButtons> {
               leading: Image.asset(
                 widget.img,
               ),
-            
-              title: TextWidgets(text: widget.title, size: 22)),
+              title: TextWidgets(
+                text: widget.title,
+                size: 22,
+                textAlign: TextAlign.start,
+              )),
         ),
       ),
     );

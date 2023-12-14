@@ -1,3 +1,5 @@
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
+import 'package:baby_tracker/pages/inapp/view/inapp_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 part 'onbording_viewmodel.g.dart';
@@ -42,7 +44,9 @@ abstract class _OnbordingViewModelBase with Store {
 
   @action
   void continueButtonTapped() {
-    if (currentIndex == OnbordingList.length - 1) {}
+    if (currentIndex == OnbordingList.length - 1) {
+      Navigation.push(page: InappView());
+    }
     pageController.nextPage(
         duration: const Duration(milliseconds: 200), curve: Curves.linear);
   }

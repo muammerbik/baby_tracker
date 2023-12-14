@@ -26,30 +26,32 @@ class _InformationRowState extends State<InformationRow> {
             },
             child: informationGetIt.girlImageVisible
                 ? Image.asset(
-                    "assets/images/girl1.png",
+                    "assets/images/bbbx.png",
                     height: DeviceConfig.screenHeight! * 0.0323,
                     width: DeviceConfig.screenWidth! * 0.0700,
                   )
                 : Image.asset(
-                    "assets/images/girl.png",
-                    height: 30,
-                    width: 30,
+                    "assets/images/xx.png",
+                    height: DeviceConfig.screenHeight! * 0.0323,
+                    width: DeviceConfig.screenWidth! * 0.0700,
                   ),
           ),
-          SizedBox(width:  DeviceConfig.screenWidth! * 0.0700,),
+          SizedBox(
+            width: DeviceConfig.screenWidth! * 0.0700,
+          ),
           GestureDetector(
             onTap: () {
               informationGetIt.toggleSonImage();
             },
             child: informationGetIt.sonImageVisible
                 ? Image.asset(
-                    "assets/images/son1.png",
-                   height: DeviceConfig.screenHeight! * 0.0323,
-                   width: DeviceConfig.screenWidth! * 0.0700,
+                    "assets/images/aaay.png",
+                    height: DeviceConfig.screenHeight! * 0.0323,
+                    width: DeviceConfig.screenWidth! * 0.0700,
                   )
                 : Image.asset(
-                    "assets/images/son.png",
-                   height: DeviceConfig.screenHeight! * 0.0323,
+                    "assets/images/yy.png",
+                    height: DeviceConfig.screenHeight! * 0.0323,
                     width: DeviceConfig.screenWidth! * 0.0700,
                   ),
           ),

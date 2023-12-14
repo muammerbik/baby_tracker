@@ -1,8 +1,10 @@
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/information/widgets/add_images_widget.dart';
 import 'package:baby_tracker/pages/information/widgets/information_row.dart';
@@ -28,13 +30,25 @@ class _InformationViewState extends State<InformationView> {
       body: Observer(
         builder: (context) => Column(
           children: [
-            SizedBox(height: DeviceConfig.screenHeight! * 0.0693),
+            SizedBox(height: DeviceConfig.screenHeight! * 0.0453),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: IconButton(
+                      onPressed: () {
+                        Navigation.push(
+                          page: HomeView(),
+                        );
+                      },
+                      icon: Icon(Icons.arrow_back_ios))),
+            ),
             AddImageWidgets(),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: DeviceConfig.screenHeight! * 0.730,
+                height: DeviceConfig.screenHeight! * 0.690,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   border: Border.all(color: lightGrey, width: 1),
@@ -87,11 +101,11 @@ class _InformationViewState extends State<InformationView> {
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
                     CustomElevatedButtonView(
                       onTop: () {
-                        // Butona tıklandığında yapılacak işlemler
+                        Navigation.push(page: HomeView());
                       },
                       text: continuee,
                       color: lightGrey,
-                    )
+                    ),
                   ],
                 ),
               ),
