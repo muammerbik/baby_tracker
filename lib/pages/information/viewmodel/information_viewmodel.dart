@@ -18,14 +18,7 @@ abstract class _InformationViewModelBase with Store {
   @observable
   ImagePicker picker = ImagePicker();
 
-  @observable
-  TextEditingController nameController = TextEditingController();
-  @observable
-  TextEditingController birthDateController = TextEditingController();
-  @observable
-  TextEditingController timeofBirthController = TextEditingController();
-  @observable
-  TextEditingController dueDateController = TextEditingController();
+   
   @observable
   bool girlImageVisible = false;
   @observable

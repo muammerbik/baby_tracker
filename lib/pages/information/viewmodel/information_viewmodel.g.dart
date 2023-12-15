@@ -41,72 +41,6 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
     });
   }
 
-  late final _$nameControllerAtom =
-      Atom(name: '_InformationViewModelBase.nameController', context: context);
-
-  @override
-  TextEditingController get nameController {
-    _$nameControllerAtom.reportRead();
-    return super.nameController;
-  }
-
-  @override
-  set nameController(TextEditingController value) {
-    _$nameControllerAtom.reportWrite(value, super.nameController, () {
-      super.nameController = value;
-    });
-  }
-
-  late final _$birthDateControllerAtom = Atom(
-      name: '_InformationViewModelBase.birthDateController', context: context);
-
-  @override
-  TextEditingController get birthDateController {
-    _$birthDateControllerAtom.reportRead();
-    return super.birthDateController;
-  }
-
-  @override
-  set birthDateController(TextEditingController value) {
-    _$birthDateControllerAtom.reportWrite(value, super.birthDateController, () {
-      super.birthDateController = value;
-    });
-  }
-
-  late final _$timeofBirthControllerAtom = Atom(
-      name: '_InformationViewModelBase.timeofBirthController',
-      context: context);
-
-  @override
-  TextEditingController get timeofBirthController {
-    _$timeofBirthControllerAtom.reportRead();
-    return super.timeofBirthController;
-  }
-
-  @override
-  set timeofBirthController(TextEditingController value) {
-    _$timeofBirthControllerAtom.reportWrite(value, super.timeofBirthController,
-        () {
-      super.timeofBirthController = value;
-    });
-  }
-
-  late final _$dueDateControllerAtom = Atom(
-      name: '_InformationViewModelBase.dueDateController', context: context);
-
-  @override
-  TextEditingController get dueDateController {
-    _$dueDateControllerAtom.reportRead();
-    return super.dueDateController;
-  }
-
-  @override
-  set dueDateController(TextEditingController value) {
-    _$dueDateControllerAtom.reportWrite(value, super.dueDateController, () {
-      super.dueDateController = value;
-    });
-  }
-
   late final _$girlImageVisibleAtom = Atom(
       name: '_InformationViewModelBase.girlImageVisible', context: context);
 
@@ -213,10 +147,6 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
     return '''
 imageFile: ${imageFile},
 picker: ${picker},
-nameController: ${nameController},
-birthDateController: ${birthDateController},
-timeofBirthController: ${timeofBirthController},
-dueDateController: ${dueDateController},
 girlImageVisible: ${girlImageVisible},
 sonImageVisible: ${sonImageVisible}
     ''';

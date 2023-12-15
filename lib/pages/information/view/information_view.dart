@@ -5,12 +5,15 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
+import 'package:baby_tracker/pages/information/information_model.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/information/widgets/add_images_widget.dart';
 import 'package:baby_tracker/pages/information/widgets/information_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class InformationView extends StatefulWidget {
   const InformationView({Key? key}) : super(key: key);
@@ -21,6 +24,11 @@ class InformationView extends StatefulWidget {
 
 class _InformationViewState extends State<InformationView> {
   final informationGetIt = locator<InformationViewModel>();
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController birthDateController = TextEditingController();
+  TextEditingController timeofBirthController = TextEditingController();
+  TextEditingController dueDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +73,7 @@ class _InformationViewState extends State<InformationView> {
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     CustomTextFormField(
                       labelText: babyFullName,
-                      controller: informationGetIt.nameController,
+                      controller: nameController,
                       keyboardType: TextInputType.name,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
@@ -74,9 +82,9 @@ class _InformationViewState extends State<InformationView> {
                       keyboardType: TextInputType.datetime,
                       onTap: () {
                         informationGetIt.selectDate(
-                            context, informationGetIt.birthDateController);
+                            context, birthDateController);
                       },
-                      controller: informationGetIt.birthDateController,
+                      controller: birthDateController,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     CustomTextFormField(
@@ -84,23 +92,23 @@ class _InformationViewState extends State<InformationView> {
                       keyboardType: TextInputType.number,
                       onTap: () {
                         informationGetIt.selectTime(
-                            context, informationGetIt.timeofBirthController);
+                            context, timeofBirthController);
                       },
-                      controller: informationGetIt.timeofBirthController,
+                      controller: timeofBirthController,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     CustomTextFormField(
                       labelText: dueDate,
                       keyboardType: TextInputType.number,
                       onTap: () {
-                        informationGetIt.selectTime(
-                            context, informationGetIt.dueDateController);
+                        informationGetIt.selectTime(context, dueDateController);
                       },
-                      controller: informationGetIt.dueDateController,
+                      controller: dueDateController,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
                     CustomElevatedButtonView(
-                      onTop: () {
+                      onTop: () async {
+                        addHive();
                         Navigation.push(page: HomeView());
                       },
                       text: continuee,
@@ -114,5 +122,28 @@ class _InformationViewState extends State<InformationView> {
         ),
       ),
     );
+  }
+
+  Future<void> addHive() async {
+    try {
+      var box = Hive.box<InformationModel>("informationBox");
+      DateTime parsedBirthDate =
+          DateFormat('dd/MM/yyyy').parse(birthDateController.text);
+      var model = InformationModel(
+        id: Uuid().v4(),
+        img: informationGetIt.imageFile.toString(),
+        cinsiyet: informationGetIt.girlImageVisible,
+        fullName: nameController.text,
+        birthDate: DateFormat('yyyy-MM-dd').format(parsedBirthDate),
+        timeOfBirth: timeofBirthController.text,
+        dueDate: dueDateController.text,
+      );
+      await box.put(model.id, model);
+    
+
+      print(box.toMap().toString());
+    } catch (e) {
+      print("Hata: $e");
+    }
   }
 }
