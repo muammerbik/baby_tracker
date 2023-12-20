@@ -1,4 +1,6 @@
+
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
@@ -43,24 +45,36 @@ class _InformationViewState extends State<InformationView> {
 
   Future<void> loadInformation() async {
     if (informationBox.isNotEmpty) {
-      String imagePath = informationGetIt.imageFile?.path ?? "";
+    
       InformationModel lastInformation = informationBox.getAt(0)!;
-      imagePath = lastInformation.img;
+   
       nameController.text = lastInformation.fullName;
       birthDateController.text = lastInformation.birthDate;
       timeofBirthController.text = lastInformation.timeOfBirth;
       dueDateController.text = lastInformation.dueDate;
     }
   }
+  Future<Uint8List> _readFileAsBytes(String filePath) async {
+  try {
+    File file = File(filePath);
+    Uint8List bytes = await file.readAsBytes();
+    return bytes;
+  } catch (e) {
+    print("Dosya okuma hatası: $e");
+    return Uint8List(0); // Hata durumunda boş bir Uint8List döndürebilirsiniz.
+  }
+}
+
 
   Future<void> addHive() async {
     try {
       DateTime parsedBirthDate =
           DateFormat('dd/MM/yyyy').parse(birthDateController.text);
-      String imagePath = informationGetIt.imageFile?.path ?? "";
+       String imagePath = informationGetIt.imageFile?.path ?? "";
+    Uint8List imageBytes = await _readFileAsBytes(imagePath);
       var model = InformationModel(
         id: Uuid().v4(),
-        img: imagePath,
+        img: imageBytes,
         cinsiyet: informationGetIt.girlImageVisible,
         fullName: nameController.text,
         birthDate: DateFormat('yyyy-MM-dd').format(parsedBirthDate),

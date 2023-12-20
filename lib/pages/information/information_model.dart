@@ -1,5 +1,6 @@
 
 
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'information_model.g.dart';
@@ -10,7 +11,7 @@ class InformationModel extends Object {
   String id;
 
   @HiveField(1)
-  String img;
+  Uint8List img;
 
   @HiveField(2)
   bool cinsiyet;

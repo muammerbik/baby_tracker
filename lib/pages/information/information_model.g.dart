@@ -18,7 +18,7 @@ class InformationModelAdapter extends TypeAdapter<InformationModel> {
     };
     return InformationModel(
       id: fields[0] as String,
-      img: fields[1] as String,
+      img: fields[1] as Uint8List,
       cinsiyet: fields[2] as bool,
       fullName: fields[3] as String,
       birthDate: fields[4] as String,
