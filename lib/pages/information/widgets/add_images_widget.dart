@@ -15,6 +15,8 @@ class AddImageWidgets extends StatefulWidget {
 class _AddImageWidgetsState extends State<AddImageWidgets> {
   final informationGetIt = locator<InformationViewModel>();
 
+
+
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -38,7 +40,7 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
                       padding: EdgeInsets.symmetric(
                           horizontal: DeviceConfig.screenWidth! * 0.0817),
                       child: Image.asset(
-                        "assets/images/camera.png",
+                  "assets/images/camera.png"
                       ),
                     )
                   : ClipRRect(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
@@ -30,6 +32,52 @@ class _InformationViewState extends State<InformationView> {
   TextEditingController timeofBirthController = TextEditingController();
   TextEditingController dueDateController = TextEditingController();
 
+  late Box<InformationModel> informationBox;
+
+  @override
+  void initState() {
+    super.initState();
+    informationBox = Hive.box<InformationModel>("informationBox");
+    loadInformation();
+  }
+
+  Future<void> loadInformation() async {
+    if (informationBox.isNotEmpty) {
+      String imagePath = informationGetIt.imageFile?.path ?? "";
+      InformationModel lastInformation = informationBox.getAt(0)!;
+      imagePath = lastInformation.img;
+      nameController.text = lastInformation.fullName;
+      birthDateController.text = lastInformation.birthDate;
+      timeofBirthController.text = lastInformation.timeOfBirth;
+      dueDateController.text = lastInformation.dueDate;
+    }
+  }
+
+  Future<void> addHive() async {
+    try {
+      DateTime parsedBirthDate =
+          DateFormat('dd/MM/yyyy').parse(birthDateController.text);
+      String imagePath = informationGetIt.imageFile?.path ?? "";
+      var model = InformationModel(
+        id: Uuid().v4(),
+        img: imagePath,
+        cinsiyet: informationGetIt.girlImageVisible,
+        fullName: nameController.text,
+        birthDate: DateFormat('yyyy-MM-dd').format(parsedBirthDate),
+        timeOfBirth: timeofBirthController.text,
+        dueDate: dueDateController.text,
+      );
+
+      // Modeli Hive kutusuna ekleyin
+      await informationBox.clear();
+      await informationBox.add(model);
+
+      print(informationBox.toMap().toString() + "veriler kaydedildi");
+    } catch (e) {
+      print("Hata: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -42,14 +90,16 @@ class _InformationViewState extends State<InformationView> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: IconButton(
-                      onPressed: () {
-                        Navigation.push(
-                          page: HomeView(),
-                        );
-                      },
-                      icon: Icon(Icons.arrow_back_ios))),
+                alignment: Alignment.bottomLeft,
+                child: IconButton(
+                  onPressed: () {
+                    Navigation.push(
+                      page: HomeView(),
+                    );
+                  },
+                  icon: Icon(Icons.arrow_back_ios),
+                ),
+              ),
             ),
             AddImageWidgets(),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
@@ -108,7 +158,8 @@ class _InformationViewState extends State<InformationView> {
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
                     CustomElevatedButtonView(
                       onTop: () async {
-                        addHive();
+                        await addHive();
+
                         Navigation.push(page: HomeView());
                       },
                       text: continuee,
@@ -122,28 +173,5 @@ class _InformationViewState extends State<InformationView> {
         ),
       ),
     );
-  }
-
-  Future<void> addHive() async {
-    try {
-      var box = Hive.box<InformationModel>("informationBox");
-      DateTime parsedBirthDate =
-          DateFormat('dd/MM/yyyy').parse(birthDateController.text);
-      var model = InformationModel(
-        id: Uuid().v4(),
-        img: informationGetIt.imageFile.toString(),
-        cinsiyet: informationGetIt.girlImageVisible,
-        fullName: nameController.text,
-        birthDate: DateFormat('yyyy-MM-dd').format(parsedBirthDate),
-        timeOfBirth: timeofBirthController.text,
-        dueDate: dueDateController.text,
-      );
-      await box.put(model.id, model);
-    
-
-      print(box.toMap().toString());
-    } catch (e) {
-      print("Hata: $e");
-    }
   }
 }

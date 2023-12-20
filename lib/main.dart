@@ -1,8 +1,10 @@
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/information_model.dart';
 import 'package:baby_tracker/pages/information/view/information_view.dart';
+import 'package:baby_tracker/pages/onbording/view/onbording_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -11,7 +13,7 @@ import 'package:hive_flutter/adapters.dart';
 Future<void> main() async {
   setupGetIt();
   await Hive.initFlutter();
-      Hive.registerAdapter(InformationModelAdapter());
+  Hive.registerAdapter(InformationModelAdapter());
   await Hive.openBox<InformationModel>('informationBox');
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +40,6 @@ class MyApp extends StatelessWidget {
               .copyWith(background: white)
               .copyWith(background: Colors.white),
         ),
-        home: InformationView());
+        home: HomeView());
   }
 }

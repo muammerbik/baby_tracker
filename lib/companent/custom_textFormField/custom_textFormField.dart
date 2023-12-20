@@ -40,9 +40,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           textInputAction: TextInputAction.done,
           keyboardType:widget.keyboardType,
           controller: widget.controller,
+          minLines: 1,
+      
+          
           onTap: widget.onTap,
-           maxLines: widget.maxLines,
+           maxLines:  widget.maxLines ??null,
           decoration: InputDecoration(
+            
             filled: true,
             fillColor: darkWhite,
             labelText: widget.labelText,
