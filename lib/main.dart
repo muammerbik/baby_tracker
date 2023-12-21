@@ -1,22 +1,20 @@
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
-import 'package:baby_tracker/pages/information/information_model.dart';
-import 'package:baby_tracker/pages/information/view/information_view.dart';
-import 'package:baby_tracker/pages/onbording/view/onbording_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 
 //dart run build_runner build
 Future<void> main() async {
+  allAdapter();
   setupGetIt();
   await Hive.initFlutter();
-  Hive.registerAdapter(InformationModelAdapter());
-  await Hive.openBox<InformationModel>('informationBox');
-
+  await allBox();
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: cTransparent,
     statusBarIconBrightness: Brightness.dark,

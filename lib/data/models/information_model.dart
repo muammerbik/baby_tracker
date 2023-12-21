@@ -6,7 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 part 'information_model.g.dart';
 
 @HiveType(typeId: 0)
-class InformationModel extends Object {
+class InformationModel extends HiveObject {
   @HiveField(0)
   String id;
 

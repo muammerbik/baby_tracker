@@ -9,7 +9,7 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
-import 'package:baby_tracker/pages/information/information_model.dart';
+import 'package:baby_tracker/data/models/information_model.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/information/widgets/add_images_widget.dart';
 import 'package:baby_tracker/pages/information/widgets/information_row.dart';
@@ -61,7 +61,7 @@ class _InformationViewState extends State<InformationView> {
     return bytes;
   } catch (e) {
     print("Dosya okuma hatası: $e");
-    return Uint8List(0); // Hata durumunda boş bir Uint8List döndürebilirsiniz.
+    return Uint8List(0); 
   }
 }
 

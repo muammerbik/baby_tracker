@@ -1,6 +1,9 @@
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
+import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +15,8 @@ class FeedingView extends StatefulWidget {
 }
 
 class _FeedingViewState extends State<FeedingView> {
-  TextEditingController timeController = TextEditingController();
-  TextEditingController mlController = TextEditingController();
-  TextEditingController noteController = TextEditingController();
+  final feedingGetIt = locator<FeedingViewModel>();
+  final informationGetIt = locator<InformationViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +31,25 @@ class _FeedingViewState extends State<FeedingView> {
           SizedBox(height: 30),
           CustomTextFormField(
             labelText: "Time",
-            controller: timeController,
+            controller: feedingGetIt.timeController,
             keyboardType: TextInputType.name,
+            onTap: () {
+              informationGetIt.selectTime(
+                context,
+                feedingGetIt.timeController,
+              );
+            },
           ),
           SizedBox(height: 30),
           CustomTextFormField(
             labelText: "Amount(ml)",
-            controller: mlController,
+            controller: feedingGetIt.mlController,
             keyboardType: TextInputType.number,
           ),
           SizedBox(height: 30),
           CustomTextFormField(
             hintText: "Note",
-            controller: noteController,
+            controller: feedingGetIt.noteController,
             keyboardType: TextInputType.name,
             maxLines: 10,
           ),
