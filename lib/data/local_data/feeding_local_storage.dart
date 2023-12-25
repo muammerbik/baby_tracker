@@ -2,7 +2,7 @@ import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/models/feeding_model.dart';
 
 
-abstract class FedingLocalStorageHive {
+abstract class FeedingLocalStorageHive {
   Future<void> addFeeding({required FeedingModel feedingModel});
   Future<FeedingModel?> getFeeding({required String id});
   Future<List<FeedingModel>> getAllFeeding();
@@ -10,7 +10,7 @@ abstract class FedingLocalStorageHive {
   Future<FeedingModel> upDateFeeding({required FeedingModel feedModel});
 }
 
-class FeedingStorage extends FedingLocalStorageHive {
+class FeedingStorage extends FeedingLocalStorageHive {
 
   @override
   Future<void> addFeeding({required FeedingModel feedingModel}) async {

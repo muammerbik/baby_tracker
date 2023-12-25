@@ -19,7 +19,7 @@ class FeedingModelAdapter extends TypeAdapter<FeedingModel> {
     return FeedingModel(
       id: fields[0] as String,
       time: fields[1] as String,
-      amount: fields[2] as int,
+      amount: fields[2] as int?,
       note: fields[3] as String,
     );
   }

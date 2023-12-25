@@ -1,11 +1,15 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/core/hive.dart';
+import 'package:baby_tracker/data/models/information_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:uuid/uuid.dart';
 part 'information_viewmodel.g.dart';
 
 class InformationViewModel = _InformationViewModelBase
@@ -13,12 +17,68 @@ class InformationViewModel = _InformationViewModelBase
 
 abstract class _InformationViewModelBase with Store {
   @observable
+  TextEditingController nameController = TextEditingController();
+  @observable
+  TextEditingController birthDateController = TextEditingController();
+  @observable
+  TextEditingController timeofBirthController = TextEditingController();
+  @observable
+  TextEditingController dueDateController = TextEditingController();
+
+  @action
+  Future<void> addInformation() async {
+    try {
+      DateTime parsedBirthDate =
+          DateFormat('dd/MM/yyyy').parse(birthDateController.text);
+      String imagePath = imageFile?.path ?? "";
+      Uint8List imageBytes = await _readFileAsBytes(imagePath);
+      var model = InformationModel(
+        id: Uuid().v4(),
+        img: imageBytes,
+        cinsiyet: girlImageVisible,
+        fullName: nameController.text,
+        birthDate: DateFormat('yyyy-MM-dd').format(parsedBirthDate),
+        timeOfBirth: timeofBirthController.text,
+        dueDate: dueDateController.text,
+      );
+      await informationBox.clear();
+      await informationBox.add(model);
+
+      print(informationBox.toMap().toString() + "veriler kaydedildi");
+    } catch (e) {
+      print("Hata: $e");
+    }
+  }
+
+  @action
+  Future<Uint8List> _readFileAsBytes(String filePath) async {
+    try {
+      File file = File(filePath);
+      Uint8List bytes = await file.readAsBytes();
+      return bytes;
+    } catch (e) {
+      print("Dosya okuma hatası: $e");
+      return Uint8List(0);
+    }
+  }
+
+  @action
+  Future<void> loadInformation() async {
+    if (informationBox.isNotEmpty) {
+      InformationModel lastInformation = informationBox.getAt(0)!;
+      nameController.text = lastInformation.fullName;
+      birthDateController.text = lastInformation.birthDate;
+      timeofBirthController.text = lastInformation.timeOfBirth;
+      dueDateController.text = lastInformation.dueDate;
+    }
+  }
+
+  @observable
   File? imageFile;
 
   @observable
   ImagePicker picker = ImagePicker();
 
-   
   @observable
   bool girlImageVisible = false;
   @observable

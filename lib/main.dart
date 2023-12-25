@@ -9,8 +9,10 @@ import 'package:hive_flutter/adapters.dart';
 
 //dart run build_runner build
 Future<void> main() async {
-  allAdapter();
+  
   setupGetIt();
+  allAdapter();
+
   await Hive.initFlutter();
   await allBox();
   WidgetsFlutterBinding.ensureInitialized();

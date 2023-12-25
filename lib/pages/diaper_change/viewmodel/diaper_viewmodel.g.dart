@@ -25,6 +25,88 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     });
   }
 
+  late final _$diaperTimeControllerAtom =
+      Atom(name: '_DiaperViewModelBase.diaperTimeController', context: context);
+
+  @override
+  TextEditingController get diaperTimeController {
+    _$diaperTimeControllerAtom.reportRead();
+    return super.diaperTimeController;
+  }
+
+  @override
+  set diaperTimeController(TextEditingController value) {
+    _$diaperTimeControllerAtom.reportWrite(value, super.diaperTimeController,
+        () {
+      super.diaperTimeController = value;
+    });
+  }
+
+  late final _$diaperNoteControllerAtom =
+      Atom(name: '_DiaperViewModelBase.diaperNoteController', context: context);
+
+  @override
+  TextEditingController get diaperNoteController {
+    _$diaperNoteControllerAtom.reportRead();
+    return super.diaperNoteController;
+  }
+
+  @override
+  set diaperNoteController(TextEditingController value) {
+    _$diaperNoteControllerAtom.reportWrite(value, super.diaperNoteController,
+        () {
+      super.diaperNoteController = value;
+    });
+  }
+
+  late final _$diaperListAtom =
+      Atom(name: '_DiaperViewModelBase.diaperList', context: context);
+
+  @override
+  List<DiaperChangeModel> get diaperList {
+    _$diaperListAtom.reportRead();
+    return super.diaperList;
+  }
+
+  @override
+  set diaperList(List<DiaperChangeModel> value) {
+    _$diaperListAtom.reportWrite(value, super.diaperList, () {
+      super.diaperList = value;
+    });
+  }
+
+  late final _$addDiaperChangeAsyncAction =
+      AsyncAction('_DiaperViewModelBase.addDiaperChange', context: context);
+
+  @override
+  Future<void> addDiaperChange() {
+    return _$addDiaperChangeAsyncAction.run(() => super.addDiaperChange());
+  }
+
+  late final _$getAllAsyncAction =
+      AsyncAction('_DiaperViewModelBase.getAll', context: context);
+
+  @override
+  Future<void> getAll() {
+    return _$getAllAsyncAction.run(() => super.getAll());
+  }
+
+  late final _$deleteAsyncAction =
+      AsyncAction('_DiaperViewModelBase.delete', context: context);
+
+  @override
+  Future<void> delete(String id) {
+    return _$deleteAsyncAction.run(() => super.delete(id));
+  }
+
+  late final _$upDateAsyncAction =
+      AsyncAction('_DiaperViewModelBase.upDate', context: context);
+
+  @override
+  Future<void> upDate(String id) {
+    return _$upDateAsyncAction.run(() => super.upDate(id));
+  }
+
   late final _$_DiaperViewModelBaseActionController =
       ActionController(name: '_DiaperViewModelBase', context: context);
 
@@ -40,9 +122,23 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
   }
 
   @override
+  void add(DiaperChangeModel diaperChange) {
+    final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
+        name: '_DiaperViewModelBase.add');
+    try {
+      return super.add(diaperChange);
+    } finally {
+      _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-selectedStatus: ${selectedStatus}
+selectedStatus: ${selectedStatus},
+diaperTimeController: ${diaperTimeController},
+diaperNoteController: ${diaperNoteController},
+diaperList: ${diaperList}
     ''';
   }
 }

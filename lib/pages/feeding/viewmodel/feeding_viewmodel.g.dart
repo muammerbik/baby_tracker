@@ -57,12 +57,92 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
     });
   }
 
+  late final _$feedListAtom =
+      Atom(name: '_FeedingViewModelBase.feedList', context: context);
+
+  @override
+  List<FeedingModel> get feedList {
+    _$feedListAtom.reportRead();
+    return super.feedList;
+  }
+
+  @override
+  set feedList(List<FeedingModel> value) {
+    _$feedListAtom.reportWrite(value, super.feedList, () {
+      super.feedList = value;
+    });
+  }
+
+  late final _$selectedFeedAtom =
+      Atom(name: '_FeedingViewModelBase.selectedFeed', context: context);
+
+  @override
+  FeedingModel? get selectedFeed {
+    _$selectedFeedAtom.reportRead();
+    return super.selectedFeed;
+  }
+
+  @override
+  set selectedFeed(FeedingModel? value) {
+    _$selectedFeedAtom.reportWrite(value, super.selectedFeed, () {
+      super.selectedFeed = value;
+    });
+  }
+
+  late final _$addFeedingAsyncAction =
+      AsyncAction('_FeedingViewModelBase.addFeeding', context: context);
+
+  @override
+  Future<void> addFeeding() {
+    return _$addFeedingAsyncAction.run(() => super.addFeeding());
+  }
+
+  late final _$getAllAsyncAction =
+      AsyncAction('_FeedingViewModelBase.getAll', context: context);
+
+  @override
+  Future<void> getAll() {
+    return _$getAllAsyncAction.run(() => super.getAll());
+  }
+
+  late final _$deleteAsyncAction =
+      AsyncAction('_FeedingViewModelBase.delete', context: context);
+
+  @override
+  Future<void> delete(String id) {
+    return _$deleteAsyncAction.run(() => super.delete(id));
+  }
+
+  late final _$upDateAsyncAction =
+      AsyncAction('_FeedingViewModelBase.upDate', context: context);
+
+  @override
+  Future<void> upDate(String id) {
+    return _$upDateAsyncAction.run(() => super.upDate(id));
+  }
+
+  late final _$_FeedingViewModelBaseActionController =
+      ActionController(name: '_FeedingViewModelBase', context: context);
+
+  @override
+  void add(FeedingModel feed) {
+    final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
+        name: '_FeedingViewModelBase.add');
+    try {
+      return super.add(feed);
+    } finally {
+      _$_FeedingViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 timeController: ${timeController},
 mlController: ${mlController},
-noteController: ${noteController}
+noteController: ${noteController},
+feedList: ${feedList},
+selectedFeed: ${selectedFeed}
     ''';
   }
 }

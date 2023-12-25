@@ -11,7 +11,7 @@ class FeedingModel extends HiveObject {
   String time;
 
   @HiveField(2)
-  int amount;
+  int? amount;
 
   @HiveField(3)
   String note;

@@ -46,48 +46,49 @@ class _DiaperChangeColumnState extends State<DiaperChangeColumn> {
   }
 
   Widget diaperStatusRow(DiaperStatus status, String imagePath, String text) {
-  bool isSelected = diaperGetIt.selectedStatus == status;
+    bool isSelected = diaperGetIt.selectedStatus == status;
 
-    return Observer(builder: (context) =>   InkWell(
-      onTap: () {
-       
+    return Observer(
+      builder: (context) => InkWell(
+        onTap: () async {
           diaperGetIt.selectedStatus = isSelected ? null : status;
-     
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 30, // Resim genişliği
-            height: 30, // Resim yüksekliği
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Image.asset(
-                isSelected
-                    ? "assets/images/$imagePath"  
-                    : "assets/images/$imagePath",
-                height: 30, // Aynı yükseklikte tut
-                color: isSelected ? null : Color(0xFFC2C2C2),
+
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 30, // Resim genişliği
+              height: 30, // Resim yüksekliği
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Image.asset(
+                  isSelected
+                      ? "assets/images/$imagePath"
+                      : "assets/images/$imagePath",
+                  height: 30, // Aynı yükseklikte tut
+                  color: isSelected ? null : Color(0xFFC2C2C2),
+                ),
               ),
             ),
-          ),
-          SizedBox(width: 10),
-          Text(
-            text,
-            style: TextStyle(
-              color: isSelected ? darkBlue : Color(0xFFC2C2C2),
-              fontSize: 14,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500,
+            SizedBox(width: 10),
+            Text(
+              text,
+              style: TextStyle(
+                color: isSelected ? darkBlue : Color(0xFFC2C2C2),
+                fontSize: 14,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+          ],
+        ),
       ),
-    ),);
+    );
   }
 }

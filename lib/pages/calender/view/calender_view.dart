@@ -1,8 +1,9 @@
-import 'package:baby_tracker/pages/calender/calender_model.dart';
-import 'package:baby_tracker/pages/calender/widgets/List_item.dart';
+import 'package:baby_tracker/pages/calender/widgets/custom_diaper_listView.dart';
+import 'package:baby_tracker/pages/calender/widgets/custom_feed_listview.dart';
+import 'package:baby_tracker/pages/calender/widgets/custom_sleep_listView.dart';
 import 'package:baby_tracker/pages/calender/widgets/toolbar_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class CalenderView extends StatefulWidget {
   const CalenderView({super.key});
@@ -12,46 +13,34 @@ class CalenderView extends StatefulWidget {
 }
 
 class _CalenderViewState extends State<CalenderView> {
-  List<CalenderModel> calenderList = [
-    CalenderModel(
-        id: Uuid().v4(),
-        history: DateTime.now(),
-        catagori: "Diaper Change",
-        created: "12"),
-    CalenderModel(
-        id: Uuid().v4(),
-        history: DateTime.now(),
-        catagori: "Feeding",
-        created: "11"),
-    CalenderModel(
-        id: Uuid().v4(), history: DateTime.now(), catagori: "", created: "10"),
-    CalenderModel(
-        id: Uuid().v4(),
-        history: DateTime.now(),
-        catagori: "Sleep",
-        created: "9")
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Calender",
-            style: TextStyle(fontSize: 27, color: Color(0xFF4625C3))),
+        title: Text(
+          "Calender",
+          style: TextStyle(
+            fontSize: 27,
+            color: Color(0xFF4625C3),
+          ),
+        ),
       ),
-      body: Center(
-          child: ListView(
-        children: [
-          Text("14 june 2020"),
+      body: Observer(
+        builder: (context) => Column(
+          children: [
+         Text('12 Monday'),
           ToolBarWidgets(),
-          for (var i = 0; i < calenderList.length; i++)
-            Dismissible(
-                onDismissed: (direction) {},
-                key: UniqueKey(),
-                child: ListItem(item: calenderList[i])),
+          ],
+        ),
+      ),
+
+      /*  Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+         
         ],
-      )),
+      ), */
     );
   }
 }
