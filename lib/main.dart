@@ -9,13 +9,11 @@ import 'package:hive_flutter/adapters.dart';
 
 //dart run build_runner build
 Future<void> main() async {
-  
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
   setupGetIt();
   allAdapter();
-
-  await Hive.initFlutter();
   await allBox();
-  WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: cTransparent,

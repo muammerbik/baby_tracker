@@ -64,6 +64,7 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
                 onTop: () async {
                   await diaperGetIt.addDiaperChange();
                   Navigation.push(page: HomeView());
+                
                 },
                 color: lightGrey)
           ],

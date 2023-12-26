@@ -14,29 +14,29 @@ class CustomFeedListView extends StatefulWidget {
 }
 
 class _CustomFeedListViewState extends State<CustomFeedListView> {
-  final viewmodel = locator.get<FeedingViewModel>();
+  final feedingGetIt = locator<FeedingViewModel>();
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
-          itemCount: viewmodel.feedList.length,
+          itemCount: feedingGetIt.feedList.length,
           itemBuilder: (context, index) {
-            final list = viewmodel.feedList[index];
+            final list = feedingGetIt.feedList[index];
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Dismissible(
                 key: UniqueKey(),
                 onDismissed: (direction) {
-                  viewmodel.delete(list.id);
+                  feedingGetIt.delete(list.id);
                 },
                 child: GestureDetector(
                   onTap: () {
                     Navigation.push(
                       page: FeedingView(),
                     );
-                    viewmodel.upDate(list.id);
+                  
                   },
                   child: Container(
                     width: 380,
@@ -70,13 +70,13 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                                 Image.asset("assets/images/bottle.png",
                                     height: 40, color: darkBlue),
                                 Text(
-                                  list.time,
+                                  "Feeding",
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ],
                             ),
                             Text(
-                              list.note,
+                              list.time,
                               style: TextStyle(fontSize: 20),
                             )
                           ],

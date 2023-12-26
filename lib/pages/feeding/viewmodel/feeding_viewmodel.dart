@@ -1,4 +1,3 @@
-import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/local_data/feeding_local_storage.dart';
 import 'package:baby_tracker/data/models/feeding_model.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
@@ -10,8 +9,11 @@ part 'feeding_viewmodel.g.dart';
 class FeedingViewModel = _FeedingViewModelBase with _$FeedingViewModel;
 
 abstract class _FeedingViewModelBase with Store {
-  
   final feedingStorage = locator<FeedingLocalStorageHive>();
+
+  _FeedingViewModelBase() {
+    init();
+  }
 
   @observable
   TextEditingController timeController = TextEditingController();
@@ -23,8 +25,12 @@ abstract class _FeedingViewModelBase with Store {
   @observable
   List<FeedingModel> feedList = [];
 
-   @observable
-  FeedingModel? selectedFeed;
+ 
+
+  @action
+  Future<void> init() async {
+    await getAll();
+  }
 
   @action
   void add(FeedingModel feed) {
@@ -39,9 +45,6 @@ abstract class _FeedingViewModelBase with Store {
           time: timeController.text,
           amount: int.tryParse(mlController.text),
           note: noteController.text);
-
-      await feedingBox.clear();
-      //  await feedingBox.add(feedmodel);
       feedingStorage.addFeeding(feedingModel: feedmodel);
       add(feedmodel);
     } catch (e) {
@@ -51,6 +54,7 @@ abstract class _FeedingViewModelBase with Store {
 
   @action
   Future<void> getAll() async {
+    feedList.clear();
     var data = await feedingStorage.getAllFeeding();
     feedList.addAll(data);
     print(feedList);
@@ -80,15 +84,4 @@ abstract class _FeedingViewModelBase with Store {
       print(e);
     }
   }
-
-/* 
-  @action
-  Future<void> getFeeding() async {
-    if (feedingBox.isNotEmpty) {
-      FeedingModel feedingGet = feedingBox.get(0)!;
-      timeController.text = feedingGet.time;
-      mlController.text = feedingGet.amount.toString();
-      noteController.text = feedingGet.note;
-    }
-  } */
 }

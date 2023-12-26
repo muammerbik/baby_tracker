@@ -20,12 +20,7 @@ class FeedingView extends StatefulWidget {
 class _FeedingViewState extends State<FeedingView> {
   final feedingGetIt = locator<FeedingViewModel>();
   final informationGetIt = locator<InformationViewModel>();
-/* 
-  @override
-  void initState() {
-    feedingGetIt.getFeeding();
-    super.initState();
-  } */
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +66,7 @@ class _FeedingViewState extends State<FeedingView> {
                 Navigation.push(
                   page: HomeView(),
                 );
+             
               },
               color: lightGrey,
             ),

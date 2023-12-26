@@ -73,20 +73,12 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
     });
   }
 
-  late final _$selectedFeedAtom =
-      Atom(name: '_FeedingViewModelBase.selectedFeed', context: context);
+  late final _$initAsyncAction =
+      AsyncAction('_FeedingViewModelBase.init', context: context);
 
   @override
-  FeedingModel? get selectedFeed {
-    _$selectedFeedAtom.reportRead();
-    return super.selectedFeed;
-  }
-
-  @override
-  set selectedFeed(FeedingModel? value) {
-    _$selectedFeedAtom.reportWrite(value, super.selectedFeed, () {
-      super.selectedFeed = value;
-    });
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
   }
 
   late final _$addFeedingAsyncAction =
@@ -141,8 +133,7 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
 timeController: ${timeController},
 mlController: ${mlController},
 noteController: ${noteController},
-feedList: ${feedList},
-selectedFeed: ${selectedFeed}
+feedList: ${feedList}
     ''';
   }
 }

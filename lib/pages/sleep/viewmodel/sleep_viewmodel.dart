@@ -12,6 +12,10 @@ class SleepViewModel = _SleepViewModelBase with _$SleepViewModel;
 abstract class _SleepViewModelBase with Store {
   final sleepStorage = locator<SleepLocalStorageHive>();
 
+  _SleepViewModelBase() {
+    init();
+  }
+
   @observable
   TextEditingController sleepFellController = TextEditingController();
 
@@ -23,6 +27,11 @@ abstract class _SleepViewModelBase with Store {
 
   @observable
   List<SleepModel> sleepList = [];
+
+  @action
+  Future<void> init() async {
+    await getAll();
+  }
 
   @action
   void add(SleepModel slepMoel) {
@@ -37,9 +46,6 @@ abstract class _SleepViewModelBase with Store {
           fellSleep: sleepFellController.text,
           wakeUp: sleepWakeupController.text,
           note: sleepNoteController.text);
-
-      await sleepBox.clear();
-      //   await sleepBox.add(sleepModel);
       await sleepStorage.addSleep(sleepModel: sleepModel);
       add(sleepModel);
     } catch (e) {
@@ -49,6 +55,7 @@ abstract class _SleepViewModelBase with Store {
 
   @action
   Future<void> getAll() async {
+    sleepList.clear();
     var data = await sleepStorage.getAllSSleep();
     sleepList.addAll(data);
     print(sleepList);
@@ -79,11 +86,5 @@ abstract class _SleepViewModelBase with Store {
     }
   }
 
-/* 
-  Future<void> getSleep() async {
-    SleepModel sleepGet = sleepBox.get(0)!;
-    sleepFellController.text = sleepGet.fellSleep;
-    sleepWakeupController.text = sleepGet.wakeUp;
-    sleepNoteController.text = sleepGet.note;
-  } */
+
 }

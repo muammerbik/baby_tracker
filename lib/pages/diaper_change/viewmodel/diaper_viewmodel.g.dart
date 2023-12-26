@@ -75,6 +75,14 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     });
   }
 
+  late final _$initAsyncAction =
+      AsyncAction('_DiaperViewModelBase.init', context: context);
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   late final _$addDiaperChangeAsyncAction =
       AsyncAction('_DiaperViewModelBase.addDiaperChange', context: context);
 

@@ -14,6 +14,10 @@ class DiaperViewModel = _DiaperViewModelBase with _$DiaperViewModel;
 abstract class _DiaperViewModelBase with Store {
   final diaperStoragee = locator<DiaperLocalStorageHive>();
 
+  _DiaperViewModelBase() {
+    init();
+  }
+
   @observable
   DiaperStatus? selectedStatus;
 
@@ -29,6 +33,11 @@ abstract class _DiaperViewModelBase with Store {
 
   @observable
   List<DiaperChangeModel> diaperList = [];
+
+@action
+  Future<void> init() async {
+    await getAll();
+  }
 
   @action
   void add(DiaperChangeModel diaperChange) {
@@ -55,6 +64,7 @@ abstract class _DiaperViewModelBase with Store {
 
   @action
   Future<void> getAll() async {
+    diaperList.clear();
     var data = await diaperStoragee.getAllDiaper();
     diaperList.addAll(data);
     print(diaperList);
@@ -87,11 +97,5 @@ abstract class _DiaperViewModelBase with Store {
     }
   }
 
-/* 
-  Future<void> getDiaperChange() async {
-    DiaperChangeModel diaperGet = diaperBox.get(0)!;
-    diaperTimeController.text = diaperGet.time;
-    diaperNoteController.text = diaperGet.note;
-    
-  } */
+
 }

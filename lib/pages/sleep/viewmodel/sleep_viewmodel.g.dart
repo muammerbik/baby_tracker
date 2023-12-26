@@ -74,6 +74,14 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
     });
   }
 
+  late final _$initAsyncAction =
+      AsyncAction('_SleepViewModelBase.init', context: context);
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   late final _$addSleepAsyncAction =
       AsyncAction('_SleepViewModelBase.addSleep', context: context);
 

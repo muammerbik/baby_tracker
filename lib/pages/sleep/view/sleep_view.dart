@@ -66,8 +66,11 @@ class _SleepViewState extends State<SleepView> {
           CustomElevatedButtonView(
               text: "Save",
               onTop: () async {
+
+               
                 await sleepGetIt.addSleep();
                 Navigation.push(page: HomeView());
+          
               },
               color: lightGrey),
           SizedBox(
