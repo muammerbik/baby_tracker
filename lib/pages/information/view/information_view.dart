@@ -1,23 +1,16 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
-import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
-import 'package:baby_tracker/data/models/information_model.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/information/widgets/add_images_widget.dart';
 import 'package:baby_tracker/pages/information/widgets/information_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:hive/hive.dart';
-import 'package:intl/intl.dart';
-import 'package:uuid/uuid.dart';
+
 
 class InformationView extends StatefulWidget {
   const InformationView({Key? key}) : super(key: key);
@@ -32,7 +25,7 @@ class _InformationViewState extends State<InformationView> {
   @override
   void initState() {
     super.initState();
-  //  informationBox = Hive.box<InformationModel>("informationBox");
+ 
     informationGetIt.loadInformation();
   }
 

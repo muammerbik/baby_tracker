@@ -2,6 +2,7 @@ import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
@@ -63,10 +64,9 @@ class _FeedingViewState extends State<FeedingView> {
               onTop: () async {
                 if (feedingGetIt.selectedFeed == null) {
                   await feedingGetIt.addFeeding();
-              
+                  
                 } else {
                   await feedingGetIt.upDate(feedingGetIt.selectedFeed!.id);
-                  
                 }
 
                 // Diğer işlemler

@@ -1,7 +1,6 @@
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/local_data/feeding_local_storage.dart';
 import 'package:baby_tracker/data/models/feeding_model.dart';
-import 'package:baby_tracker/data/models/sleeep_model.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -27,15 +26,19 @@ abstract class _FeedingViewModelBase with Store {
   @observable
   List<FeedingModel> feedList = [];
 
- 
-
- @observable
+  @observable
   FeedingModel? selectedFeed;
 
   @action
   Future<void> init() async {
     await getAll();
   }
+
+@action
+Future<void> initGet()async{
+  await getFeeding();
+}
+
 
   @action
   void add(FeedingModel feed) {
@@ -90,6 +93,14 @@ abstract class _FeedingViewModelBase with Store {
     }
   }
 
-
-
+  @action
+  Future<void> getFeeding() async {
+    if (feedingBox.isNotEmpty) {
+      FeedingModel feedingGet = feedingBox.getAt(0)!;
+      timeController.text = feedingGet.time;
+      mlController.text = feedingGet.amount.toString();
+      noteController.text = feedingGet.note;
+    }
+  }
+  
 }

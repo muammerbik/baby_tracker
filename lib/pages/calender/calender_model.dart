@@ -13,15 +13,3 @@ class CalenderModel {
     required this.created,
   });
 }
-/*
-class CalenderModel {
-  final DateTime date;
-  final String category;
-  final String created;
-
-  CalenderModel({
-    required this.date,
-    required this.category,
-    required this.created,
-  });
-}*/

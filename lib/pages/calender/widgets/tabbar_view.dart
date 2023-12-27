@@ -1,3 +1,6 @@
+import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/calender/viewmodel/calender_viewmodel.dart';
+import 'package:baby_tracker/pages/calender/widgets/custom_all_listView.dart';
 import 'package:baby_tracker/pages/calender/widgets/custom_diaper_listView.dart';
 import 'package:baby_tracker/pages/calender/widgets/custom_feed_listview.dart';
 import 'package:baby_tracker/pages/calender/widgets/custom_sleep_listView.dart';
@@ -5,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class TabbarView extends StatefulWidget {
-  const TabbarView({super.key});
+  const TabbarView({Key? key}) : super(key: key);
 
   @override
   State<TabbarView> createState() => _TabbarViewState();
@@ -13,6 +16,9 @@ class TabbarView extends StatefulWidget {
 
 class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
   late final TabController tabController;
+
+  final calenderGetIt = locator<CalenderViewMoel>();
+
   @override
   void initState() {
     tabController = TabController(length: 4, vsync: this);
@@ -31,7 +37,7 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
       builder: (context) => Scaffold(
         appBar: AppBar(
           title: Text(
-            "Calender",
+            "Calendar",
             style: TextStyle(
               fontSize: 27,
               color: Color(0xFF4625C3),
@@ -83,8 +89,11 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
         body: TabBarView(
           controller: tabController,
           children: <Widget>[
-            Center(
-              child: Text("All List"),
+            Observer(
+              builder: (context) {
+                calenderGetIt.mergeLists();
+                return CustomAllListView();
+              },
             ),
             Observer(
               builder: (context) => CustomFeedListView(),

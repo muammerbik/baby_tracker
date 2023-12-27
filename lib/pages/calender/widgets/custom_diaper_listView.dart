@@ -28,6 +28,19 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Dismissible(
+                direction: DismissDirection.startToEnd,
+                background: Row(children: [
+                  Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                    size: 30,
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "Delete",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ]),
                 key: UniqueKey(),
                 onDismissed: (direction) {
                   diaperGetIt.delete(list.id);
@@ -41,7 +54,7 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                   },
                   child: Container(
                     width: 380,
-                    height: 119,
+                    height: 105,
                     decoration: ShapeDecoration(
                       color: Color(0xFFF3F3F3),
                       shape: RoundedRectangleBorder(
@@ -50,35 +63,51 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                     ),
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              "assets/icons/file.png",
-                              height: 50,
-                            ),
-                            Text(
-                              "12 Feb2021",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                "assets/icons/file.png",
+                                color: Colors.orange.shade800,
+                                height: 45,
+                              ),
+                              Text(
+                                "12 Feb2021",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
                         ),
                         Divider(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Image.asset("assets/images/bottle.png",
-                                    height: 40, color: darkBlue),
-                                Text(
-                                  "Diaper Change",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                children: [
+                                  Image.asset("assets/images/diaper1.png",
+                                      height: 22, color: darkBlue),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    "Diaper Change",
+                                    style: TextStyle(
+                                        fontSize: 18, color: darkBlue),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              list.time,
-                              style: TextStyle(fontSize: 20),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Text(
+                                list.time,
+                                style: TextStyle(fontSize: 16),
+                              ),
                             )
                           ],
                         ),

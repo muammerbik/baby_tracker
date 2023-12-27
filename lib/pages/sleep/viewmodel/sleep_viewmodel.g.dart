@@ -74,6 +74,22 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
     });
   }
 
+  late final _$selectedSlepAtom =
+      Atom(name: '_SleepViewModelBase.selectedSlep', context: context);
+
+  @override
+  SleepModel? get selectedSlep {
+    _$selectedSlepAtom.reportRead();
+    return super.selectedSlep;
+  }
+
+  @override
+  set selectedSlep(SleepModel? value) {
+    _$selectedSlepAtom.reportWrite(value, super.selectedSlep, () {
+      super.selectedSlep = value;
+    });
+  }
+
   late final _$initAsyncAction =
       AsyncAction('_SleepViewModelBase.init', context: context);
 
@@ -134,7 +150,8 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
 sleepFellController: ${sleepFellController},
 sleepWakeupController: ${sleepWakeupController},
 sleepNoteController: ${sleepNoteController},
-sleepList: ${sleepList}
+sleepList: ${sleepList},
+selectedSlep: ${selectedSlep}
     ''';
   }
 }

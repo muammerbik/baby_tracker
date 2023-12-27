@@ -97,6 +97,14 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
     return _$initAsyncAction.run(() => super.init());
   }
 
+  late final _$initGetAsyncAction =
+      AsyncAction('_FeedingViewModelBase.initGet', context: context);
+
+  @override
+  Future<void> initGet() {
+    return _$initGetAsyncAction.run(() => super.initGet());
+  }
+
   late final _$addFeedingAsyncAction =
       AsyncAction('_FeedingViewModelBase.addFeeding', context: context);
 
@@ -127,6 +135,14 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
   @override
   Future<void> upDate(String id) {
     return _$upDateAsyncAction.run(() => super.upDate(id));
+  }
+
+  late final _$getFeedingAsyncAction =
+      AsyncAction('_FeedingViewModelBase.getFeeding', context: context);
+
+  @override
+  Future<void> getFeeding() {
+    return _$getFeedingAsyncAction.run(() => super.getFeeding());
   }
 
   late final _$_FeedingViewModelBaseActionController =
