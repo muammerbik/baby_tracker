@@ -1,3 +1,4 @@
+
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
@@ -15,6 +16,7 @@ class CustomFeedListView extends StatefulWidget {
 
 class _CustomFeedListViewState extends State<CustomFeedListView> {
   final feedingGetIt = locator<FeedingViewModel>();
+
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -36,7 +38,7 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                     Navigation.push(
                       page: FeedingView(),
                     );
-                  
+                    feedingGetIt.selectedFeed = list; 
                   },
                   child: Container(
                     width: 380,

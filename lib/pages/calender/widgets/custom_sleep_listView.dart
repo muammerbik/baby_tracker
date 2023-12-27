@@ -31,10 +31,10 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
               },
               child: GestureDetector(
                 onTap: () {
-                     Navigation.push(
+                  Navigation.push(
                     page: SleepView(),
                   );
-                  sleepGetIt.upDate(list.id);
+                  sleepGetIt.selectedSlep = list;
                 },
                 child: Container(
                   width: 380,
@@ -68,13 +68,13 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                               Image.asset("assets/images/bottle.png",
                                   height: 40, color: darkBlue),
                               Text(
-                                list.fellSleep,
+                                "Sleep",
                                 style: TextStyle(fontSize: 18),
                               ),
                             ],
                           ),
                           Text(
-                            list.note,
+                            list.wakeUp,
                             style: TextStyle(fontSize: 20),
                           )
                         ],

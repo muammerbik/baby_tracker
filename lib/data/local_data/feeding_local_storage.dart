@@ -6,7 +6,7 @@ abstract class FeedingLocalStorageHive {
   Future<FeedingModel?> getFeeding({required String id});
   Future<List<FeedingModel>> getAllFeeding();
   Future<bool> deleteFeeding({required FeedingModel feedModel});
-  Future<FeedingModel> upDateFeeding({required FeedingModel feedModel});
+  Future<FeedingModel>  upDateFeeding({required FeedingModel feedModel});
 }
 
 class FeedingStorage extends FeedingLocalStorageHive {

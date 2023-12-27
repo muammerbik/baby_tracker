@@ -21,12 +21,6 @@ class DiaperChangeView extends StatefulWidget {
 class _DiaperChangeViewState extends State<DiaperChangeView> {
   final diaperGetIt = locator<DiaperViewModel>();
   final informationGetIt = locator<InformationViewModel>();
-/* 
-  @override
-  void initState() {
-    diaperGetIt.getDiaperChange();
-    super.initState();
-  } */
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +56,12 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
             CustomElevatedButtonView(
                 text: "Save",
                 onTop: () async {
-                  await diaperGetIt.addDiaperChange();
+                  if (diaperGetIt.selectedDiaper == null) {
+                    await diaperGetIt.addDiaperChange();
+                  } else {
+                    await diaperGetIt.upDate(diaperGetIt.selectedDiaper!.id);
+                  }
                   Navigation.push(page: HomeView());
-                
                 },
                 color: lightGrey)
           ],

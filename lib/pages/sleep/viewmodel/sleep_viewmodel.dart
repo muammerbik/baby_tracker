@@ -28,6 +28,9 @@ abstract class _SleepViewModelBase with Store {
   @observable
   List<SleepModel> sleepList = [];
 
+  @observable
+  SleepModel? selectedSlep;
+
   @action
   Future<void> init() async {
     await getAll();
@@ -85,6 +88,4 @@ abstract class _SleepViewModelBase with Store {
       print(e);
     }
   }
-
-
 }

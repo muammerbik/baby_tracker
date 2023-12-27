@@ -25,6 +25,22 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     });
   }
 
+  late final _$selectedDiaperAtom =
+      Atom(name: '_DiaperViewModelBase.selectedDiaper', context: context);
+
+  @override
+  DiaperChangeModel? get selectedDiaper {
+    _$selectedDiaperAtom.reportRead();
+    return super.selectedDiaper;
+  }
+
+  @override
+  set selectedDiaper(DiaperChangeModel? value) {
+    _$selectedDiaperAtom.reportWrite(value, super.selectedDiaper, () {
+      super.selectedDiaper = value;
+    });
+  }
+
   late final _$diaperTimeControllerAtom =
       Atom(name: '_DiaperViewModelBase.diaperTimeController', context: context);
 
@@ -144,6 +160,7 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
   String toString() {
     return '''
 selectedStatus: ${selectedStatus},
+selectedDiaper: ${selectedDiaper},
 diaperTimeController: ${diaperTimeController},
 diaperNoteController: ${diaperNoteController},
 diaperList: ${diaperList}

@@ -21,6 +21,9 @@ abstract class _DiaperViewModelBase with Store {
   @observable
   DiaperStatus? selectedStatus;
 
+  @observable
+  DiaperChangeModel? selectedDiaper;
+
   @action
   void setSelectedStatus(DiaperStatus? status) {
     selectedStatus = status;
@@ -34,7 +37,7 @@ abstract class _DiaperViewModelBase with Store {
   @observable
   List<DiaperChangeModel> diaperList = [];
 
-@action
+  @action
   Future<void> init() async {
     await getAll();
   }
@@ -53,8 +56,6 @@ abstract class _DiaperViewModelBase with Store {
           diaperStatus: selectedStatus!.index.toString(),
           note: diaperNoteController.text);
 
-      await diaperBox.clear();
-      //  await diaperBox.add(diaperModel);
       await diaperStoragee.addDiaper(diaperChangeModel: diaperModel);
       add(diaperModel);
     } catch (e) {
@@ -96,6 +97,4 @@ abstract class _DiaperViewModelBase with Store {
       print(e);
     }
   }
-
-
 }

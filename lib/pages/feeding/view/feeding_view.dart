@@ -21,7 +21,6 @@ class _FeedingViewState extends State<FeedingView> {
   final feedingGetIt = locator<FeedingViewModel>();
   final informationGetIt = locator<InformationViewModel>();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,11 +61,18 @@ class _FeedingViewState extends State<FeedingView> {
             CustomElevatedButtonView(
               text: "Save",
               onTop: () async {
-                await feedingGetIt.addFeeding();
+                if (feedingGetIt.selectedFeed == null) {
+                  await feedingGetIt.addFeeding();
+              
+                } else {
+                  await feedingGetIt.upDate(feedingGetIt.selectedFeed!.id);
+                  
+                }
+
+                // Diğer işlemler
                 Navigation.push(
                   page: HomeView(),
                 );
-             
               },
               color: lightGrey,
             ),

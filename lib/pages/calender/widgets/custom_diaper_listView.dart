@@ -34,11 +34,10 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                 },
                 child: GestureDetector(
                   onTap: () {
-
-                     Navigation.push(
-                    page: DiaperChangeView(),
-                  );
-                    diaperGetIt.upDate(list.id);
+                    Navigation.push(
+                      page: DiaperChangeView(),
+                    );
+                    diaperGetIt.selectedDiaper = list;
                   },
                   child: Container(
                     width: 380,
@@ -72,13 +71,13 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                                 Image.asset("assets/images/bottle.png",
                                     height: 40, color: darkBlue),
                                 Text(
-                                  list.time,
+                                  "Diaper Change",
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ],
                             ),
                             Text(
-                              list.note,
+                              list.time,
                               style: TextStyle(fontSize: 20),
                             )
                           ],
