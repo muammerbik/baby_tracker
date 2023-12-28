@@ -1,3 +1,5 @@
+
+import 'package:baby_tracker/data/models/feed_item_model.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/diaper_change/viewmodel/diaper_viewmodel.dart';
 import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
@@ -8,11 +10,12 @@ part 'calender_viewmodel.g.dart';
 class CalenderViewMoel = _CalenderViewMoelBase with _$CalenderViewMoel;
 
 abstract class _CalenderViewMoelBase with Store {
+ 
 
   final feedingGetIt = locator<FeedingViewModel>();
   final diaperGetIt = locator.get<DiaperViewModel>();
   final sleepGetIt = locator<SleepViewModel>();
-  
+
   @observable
   List<FeedItem> mergedList = [];
 
@@ -46,22 +49,5 @@ abstract class _CalenderViewMoelBase with Store {
 
     mergedList.sort((a, b) => b.date.compareTo(a.date));
   }
-}
 
-class FeedItem {
-  final String id;
-  final String type;
-  final String date;
-  final String iconPath;
-  final String category;
-  final String time;
-
-  FeedItem({
-    required this.id,
-    required this.type,
-    required this.date,
-    required this.iconPath,
-    required this.category,
-    required this.time,
-  });
 }

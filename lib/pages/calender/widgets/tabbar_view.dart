@@ -36,73 +36,95 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
     return Observer(
       builder: (context) => Scaffold(
         appBar: AppBar(
-          title: Text(
-            "Calendar",
-            style: TextStyle(
-              fontSize: 27,
-              color: Color(0xFF4625C3),
-            ),
+          title: Column(
+            children: [
+              Text(
+                "Calendar",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF4625C3),
+                ),
+              ),
+            ],
           ),
           centerTitle: true,
-          bottom: TabBar(controller: tabController, tabs: <Widget>[
-            Tab(
-              child: Tooltip(
-                message: "All",
-                child: Text(
-                  "All",
-                  style: TextStyle(color: Colors.grey.shade400, fontSize: 27),
-                ),
-              ),
-            ),
-            Tab(
-              child: Tooltip(
-                message: "Feeding",
-                child: Image.asset(
-                  "assets/images/bottle.png",
-                  height: 50,
-                  color: Colors.grey.shade400,
-                ),
-              ),
-            ),
-            Tab(
-              child: Tooltip(
-                message: "Diaper Change",
-                child: Image.asset(
-                  "assets/images/diaper1.png",
-                  height: 50,
-                  color: Colors.grey.shade400,
-                ),
-              ),
-            ),
-            Tab(
-              child: Tooltip(
-                message: "Sleep",
-                child: Image.asset(
-                  "assets/images/sleep.png",
-                  height: 50,
-                  color: Colors.grey.shade400,
-                ),
-              ),
-            ),
-          ]),
         ),
-        body: TabBarView(
-          controller: tabController,
-          children: <Widget>[
-            Observer(
-              builder: (context) {
-                calenderGetIt.mergeLists();
-                return CustomAllListView();
-              },
+        body: Column(
+          children: [
+            SizedBox(height: 5),
+            Text("Tue, 12 Monday",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+            SizedBox(height: 7),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TabBar(
+                controller: tabController,
+                tabs: <Widget>[
+                  Tab(
+                    child: Tooltip(
+                      message: "All",
+                      child: Text(
+                        "All",
+                        style: TextStyle(
+                            color: Colors.grey.shade400, fontSize: 27),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Tooltip(
+                      message: "Feeding",
+                      child: Image.asset(
+                        "assets/images/bottle.png",
+                        height: 50,
+                        color: Colors.grey.shade400,
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Tooltip(
+                      message: "Diaper Change",
+                      child: Image.asset(
+                        "assets/images/diaper1.png",
+                        height: 50,
+                        color: Colors.grey.shade400,
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Tooltip(
+                      message: "Sleep",
+                      child: Image.asset(
+                        "assets/images/sleep.png",
+                        height: 50,
+                        color: Colors.grey.shade400,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            Observer(
-              builder: (context) => CustomFeedListView(),
-            ),
-            Observer(
-              builder: (context) => CustomDiaperListView(),
-            ),
-            Observer(
-              builder: (context) => CustomSleepListView(),
+            Expanded(
+              child: TabBarView(
+                controller: tabController,
+                children: <Widget>[
+                  Observer(
+                    builder: (context) {
+                      calenderGetIt.mergeLists();
+                      return CustomAllListView();
+                    },
+                  ),
+                  Observer(
+                    builder: (context) => CustomFeedListView(),
+                  ),
+                  Observer(
+                    builder: (context) => CustomDiaperListView(),
+                  ),
+                  Observer(
+                    builder: (context) => CustomSleepListView(),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

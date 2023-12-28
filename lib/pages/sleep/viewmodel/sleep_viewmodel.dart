@@ -31,6 +31,11 @@ abstract class _SleepViewModelBase with Store {
   @observable
   SleepModel? selectedSlep;
 
+@action
+Future<void> initSlep()async{
+  await getSleep();
+}
+
   @action
   Future<void> init() async {
     await getAll();
@@ -86,6 +91,17 @@ abstract class _SleepViewModelBase with Store {
       sleepList = List.from(sleepList);
     } catch (e) {
       print(e);
+    }
+  }
+
+  
+  @action
+  Future<void> getSleep() async {
+    if (feedingBox.isNotEmpty) {
+      SleepModel sleepGet = sleepBox.getAt(0)!;
+      sleepFellController.text = sleepGet.fellSleep;
+      sleepWakeupController.text = sleepGet.wakeUp;
+      sleepNoteController.text = sleepGet.note;
     }
   }
 }

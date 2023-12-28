@@ -11,11 +11,11 @@ class CustomTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final VoidCallback? onTap;
   final TextInputType? keyboardType;
-   final String? hintText;
-   final int? maxLines;
+  final String? hintText;
+  final int? maxLines;
   const CustomTextFormField({
     Key? key,
-     this.labelText,
+    this.labelText,
     required this.controller,
     this.validator,
     this.onTap,
@@ -38,14 +38,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             horizontal: DeviceConfig.screenWidth! * 0.0467),
         child: TextFormField(
           textInputAction: TextInputAction.done,
-          keyboardType:widget.keyboardType,
+          keyboardType: widget.keyboardType,
           controller: widget.controller,
           onTap: widget.onTap,
-           maxLines:  widget.maxLines ??null,
+          maxLines: widget.maxLines ?? null,
           decoration: InputDecoration(
-            
             filled: true,
-            fillColor: darkWhite,
+            fillColor: Colors.grey.shade100.withOpacity(0.5),
             labelText: widget.labelText,
             hintText: widget.hintText,
             border: OutlineInputBorder(

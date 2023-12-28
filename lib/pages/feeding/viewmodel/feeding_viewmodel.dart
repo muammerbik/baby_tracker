@@ -29,16 +29,30 @@ abstract class _FeedingViewModelBase with Store {
   @observable
   FeedingModel? selectedFeed;
 
+  @observable
+  bool isButtonEnabled = false;
+
+  @action
+  void updateButtonStatus() {
+    isButtonEnabled = isFieldsFilled();
+  }
+
+  @action
+  bool isFieldsFilled() {
+    return timeController.text.isNotEmpty &&
+        mlController.text.isNotEmpty &&
+        noteController.text.isNotEmpty;
+  }
+
   @action
   Future<void> init() async {
     await getAll();
   }
 
-@action
-Future<void> initGet()async{
-  await getFeeding();
-}
-
+  @action
+  Future<void> initGet() async {
+    await getFeeding();
+  }
 
   @action
   void add(FeedingModel feed) {
@@ -102,5 +116,4 @@ Future<void> initGet()async{
       noteController.text = feedingGet.note;
     }
   }
-  
 }

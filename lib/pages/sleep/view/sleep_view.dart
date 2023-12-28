@@ -17,15 +17,14 @@ class SleepView extends StatefulWidget {
   State<SleepView> createState() => _SleepViewState();
 }
 
-class _SleepViewState extends State<SleepView> {
+class _SleepViewState extends State<SleepView> { 
   final sleepGetIt = locator<SleepViewModel>();
   final informationGetIt = locator<InformationViewModel>();
-  /* 
   @override
   void initState() {
-    sleepGetIt.getSleep();
+    sleepGetIt.initSlep();
     super.initState();
-  } */
+  }
 
   @override
   Widget build(BuildContext context) {

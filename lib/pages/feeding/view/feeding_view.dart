@@ -2,7 +2,6 @@ import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
-import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
@@ -21,6 +20,14 @@ class FeedingView extends StatefulWidget {
 class _FeedingViewState extends State<FeedingView> {
   final feedingGetIt = locator<FeedingViewModel>();
   final informationGetIt = locator<InformationViewModel>();
+
+  @override
+  void initState() {
+    feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
+    feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
+    feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,22 +67,42 @@ class _FeedingViewState extends State<FeedingView> {
             ),
             Spacer(),
             CustomElevatedButtonView(
-              text: "Save",
-              onTop: () async {
-                if (feedingGetIt.selectedFeed == null) {
-                  await feedingGetIt.addFeeding();
-                  
-                } else {
-                  await feedingGetIt.upDate(feedingGetIt.selectedFeed!.id);
-                }
+                text: "Kaydet",
+                onTop: () async {
+                  if (feedingGetIt.isButtonEnabled) {
+                    if (feedingGetIt.selectedFeed == null) {
+                      await feedingGetIt.addFeeding();
+                    } else {
+                      await feedingGetIt.upDate(feedingGetIt.selectedFeed!.id);
+                    }
 
-                // Diğer işlemler
-                Navigation.push(
-                  page: HomeView(),
-                );
-              },
-              color: lightGrey,
-            ),
+                    // Diğer işlemler
+                    Navigation.push(
+                      page: HomeView(),
+                    );
+                  } else {
+                 
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Doğrulama Hatası"),
+                          content: Text(
+                              " Devam etmek için  lütfen tüm alanları  doldurun!!!"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Tamam"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                color: darkPurple),
             SizedBox(
               height: 25,
             ),

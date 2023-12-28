@@ -63,7 +63,7 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
                   }
                   Navigation.push(page: HomeView());
                 },
-                color: lightGrey)
+                color: lightblue)
           ],
         ),
       ),

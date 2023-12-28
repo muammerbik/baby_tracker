@@ -32,9 +32,6 @@ class _CustomAllListViewState extends State<CustomAllListView> {
             itemCount: calenderGetIt.mergedList.length,
             itemBuilder: (context, index) {
               final item = calenderGetIt.mergedList[index];
-              
-
-
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Dismissible(
@@ -53,8 +50,8 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                   ]),
                   key: UniqueKey(),
                   onDismissed: (direction) {
-                    calenderGetIt.mergedList.removeAt(index); 
-
+                  
+                 
                   },
                   child: GestureDetector(
                     onTap: () {
