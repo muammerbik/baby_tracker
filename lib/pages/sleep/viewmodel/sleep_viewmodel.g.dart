@@ -90,6 +90,23 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
     });
   }
 
+  late final _$isButtonEnabledSleepAtom =
+      Atom(name: '_SleepViewModelBase.isButtonEnabledSleep', context: context);
+
+  @override
+  bool get isButtonEnabledSleep {
+    _$isButtonEnabledSleepAtom.reportRead();
+    return super.isButtonEnabledSleep;
+  }
+
+  @override
+  set isButtonEnabledSleep(bool value) {
+    _$isButtonEnabledSleepAtom.reportWrite(value, super.isButtonEnabledSleep,
+        () {
+      super.isButtonEnabledSleep = value;
+    });
+  }
+
   late final _$initSlepAsyncAction =
       AsyncAction('_SleepViewModelBase.initSlep', context: context);
 
@@ -150,6 +167,28 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
       ActionController(name: '_SleepViewModelBase', context: context);
 
   @override
+  void updateButtonStatusSleep() {
+    final _$actionInfo = _$_SleepViewModelBaseActionController.startAction(
+        name: '_SleepViewModelBase.updateButtonStatusSleep');
+    try {
+      return super.updateButtonStatusSleep();
+    } finally {
+      _$_SleepViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool isFiildsFeel() {
+    final _$actionInfo = _$_SleepViewModelBaseActionController.startAction(
+        name: '_SleepViewModelBase.isFiildsFeel');
+    try {
+      return super.isFiildsFeel();
+    } finally {
+      _$_SleepViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void add(SleepModel slepMoel) {
     final _$actionInfo = _$_SleepViewModelBaseActionController.startAction(
         name: '_SleepViewModelBase.add');
@@ -167,7 +206,8 @@ sleepFellController: ${sleepFellController},
 sleepWakeupController: ${sleepWakeupController},
 sleepNoteController: ${sleepNoteController},
 sleepList: ${sleepList},
-selectedSlep: ${selectedSlep}
+selectedSlep: ${selectedSlep},
+isButtonEnabledSleep: ${isButtonEnabledSleep}
     ''';
   }
 }

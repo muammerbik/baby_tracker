@@ -17,12 +17,14 @@ class SleepView extends StatefulWidget {
   State<SleepView> createState() => _SleepViewState();
 }
 
-class _SleepViewState extends State<SleepView> { 
+class _SleepViewState extends State<SleepView> {
   final sleepGetIt = locator<SleepViewModel>();
   final informationGetIt = locator<InformationViewModel>();
   @override
   void initState() {
-    sleepGetIt.initSlep();
+      sleepGetIt.sleepFellController.addListener(sleepGetIt.updateButtonStatusSleep);
+    sleepGetIt.sleepWakeupController.addListener(sleepGetIt.updateButtonStatusSleep);
+    sleepGetIt.sleepNoteController.addListener(sleepGetIt.updateButtonStatusSleep);
     super.initState();
   }
 
@@ -65,15 +67,36 @@ class _SleepViewState extends State<SleepView> {
           CustomElevatedButtonView(
               text: "Save",
               onTop: () async {
-                if (sleepGetIt.selectedSlep == null) {
-                  await sleepGetIt.addSleep();
-                } else {
-                  sleepGetIt.upDate(sleepGetIt.selectedSlep!.id);
-                }
+                if (sleepGetIt.isButtonEnabledSleep) {
+                  if (sleepGetIt.selectedSlep == null) {
+                    await sleepGetIt.addSleep();
+                  } else {
+                    sleepGetIt.upDate(sleepGetIt.selectedSlep!.id);
+                  }
 
-                Navigation.push(page: HomeView());
+                  Navigation.push(page: HomeView());
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Doğrulama Hatası"),
+                        content: Text(
+                            " Devam etmek için  lütfen tüm alanları  doldurun!!!"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text("Tamam"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
-              color: lightGrey),
+              color: darkBlue),
           SizedBox(
             height: 30,
           )

@@ -41,6 +41,23 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     });
   }
 
+  late final _$isButtonEnabledDiaperAtom = Atom(
+      name: '_DiaperViewModelBase.isButtonEnabledDiaper', context: context);
+
+  @override
+  bool get isButtonEnabledDiaper {
+    _$isButtonEnabledDiaperAtom.reportRead();
+    return super.isButtonEnabledDiaper;
+  }
+
+  @override
+  set isButtonEnabledDiaper(bool value) {
+    _$isButtonEnabledDiaperAtom.reportWrite(value, super.isButtonEnabledDiaper,
+        () {
+      super.isButtonEnabledDiaper = value;
+    });
+  }
+
   late final _$diaperTimeControllerAtom =
       Atom(name: '_DiaperViewModelBase.diaperTimeController', context: context);
 
@@ -135,6 +152,28 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
       ActionController(name: '_DiaperViewModelBase', context: context);
 
   @override
+  void upDateButtonstatus() {
+    final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
+        name: '_DiaperViewModelBase.upDateButtonstatus');
+    try {
+      return super.upDateButtonstatus();
+    } finally {
+      _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool statusButtonTapped() {
+    final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
+        name: '_DiaperViewModelBase.statusButtonTapped');
+    try {
+      return super.statusButtonTapped();
+    } finally {
+      _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setSelectedStatus(DiaperStatus? status) {
     final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
         name: '_DiaperViewModelBase.setSelectedStatus');
@@ -161,6 +200,7 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     return '''
 selectedStatus: ${selectedStatus},
 selectedDiaper: ${selectedDiaper},
+isButtonEnabledDiaper: ${isButtonEnabledDiaper},
 diaperTimeController: ${diaperTimeController},
 diaperNoteController: ${diaperNoteController},
 diaperList: ${diaperList}

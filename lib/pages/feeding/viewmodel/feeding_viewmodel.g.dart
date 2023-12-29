@@ -89,6 +89,22 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
     });
   }
 
+  late final _$isButtonEnabledAtom =
+      Atom(name: '_FeedingViewModelBase.isButtonEnabled', context: context);
+
+  @override
+  bool get isButtonEnabled {
+    _$isButtonEnabledAtom.reportRead();
+    return super.isButtonEnabled;
+  }
+
+  @override
+  set isButtonEnabled(bool value) {
+    _$isButtonEnabledAtom.reportWrite(value, super.isButtonEnabled, () {
+      super.isButtonEnabled = value;
+    });
+  }
+
   late final _$initAsyncAction =
       AsyncAction('_FeedingViewModelBase.init', context: context);
 
@@ -149,6 +165,28 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
       ActionController(name: '_FeedingViewModelBase', context: context);
 
   @override
+  void updateButtonStatus() {
+    final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
+        name: '_FeedingViewModelBase.updateButtonStatus');
+    try {
+      return super.updateButtonStatus();
+    } finally {
+      _$_FeedingViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool isFieldsFilled() {
+    final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
+        name: '_FeedingViewModelBase.isFieldsFilled');
+    try {
+      return super.isFieldsFilled();
+    } finally {
+      _$_FeedingViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void add(FeedingModel feed) {
     final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
         name: '_FeedingViewModelBase.add');
@@ -166,7 +204,8 @@ timeController: ${timeController},
 mlController: ${mlController},
 noteController: ${noteController},
 feedList: ${feedList},
-selectedFeed: ${selectedFeed}
+selectedFeed: ${selectedFeed},
+isButtonEnabled: ${isButtonEnabled}
     ''';
   }
 }

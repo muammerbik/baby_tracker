@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/local_data/sleep_local_storage.dart';
 import 'package:baby_tracker/data/models/sleeep_model.dart';
@@ -31,10 +33,25 @@ abstract class _SleepViewModelBase with Store {
   @observable
   SleepModel? selectedSlep;
 
-@action
-Future<void> initSlep()async{
-  await getSleep();
-}
+  @observable
+  bool isButtonEnabledSleep = false;
+
+  @action
+  void updateButtonStatusSleep() {
+    isButtonEnabledSleep = isFiildsFeel();
+  }
+
+  @action
+  bool isFiildsFeel() {
+    return sleepFellController.text.isNotEmpty &&
+        sleepWakeupController.text.isNotEmpty &&
+        sleepNoteController.text.isNotEmpty;
+  }
+
+  @action
+  Future<void> initSlep() async {
+    await getSleep();
+  }
 
   @action
   Future<void> init() async {
@@ -94,7 +111,6 @@ Future<void> initSlep()async{
     }
   }
 
-  
   @action
   Future<void> getSleep() async {
     if (feedingBox.isNotEmpty) {

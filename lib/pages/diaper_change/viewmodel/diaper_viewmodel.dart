@@ -15,6 +15,12 @@ abstract class _DiaperViewModelBase with Store {
   final diaperStoragee = locator<DiaperLocalStorageHive>();
 
   _DiaperViewModelBase() {
+    reaction(
+      (_) => selectedStatus,
+      (DiaperStatus? status) {
+        upDateButtonstatus();
+      },
+    );
     init();
   }
 
@@ -23,6 +29,36 @@ abstract class _DiaperViewModelBase with Store {
 
   @observable
   DiaperChangeModel? selectedDiaper;
+
+  @observable
+  bool isButtonEnabledDiaper = false;
+
+  @action
+  void upDateButtonstatus() {
+    isButtonEnabledDiaper = statusButtonTapped();
+  }
+
+  @action
+  Future<void> initDiaper() async {
+    await getDiaper();
+  }
+
+  @action
+  Future<void> getDiaper() async {
+    if (diaperBox.isNotEmpty) {
+      DiaperChangeModel diaperGet = diaperBox.getAt(0)!;
+      diaperTimeController.text = diaperGet.time;
+      diaperNoteController.text = diaperGet.note;
+      selectedStatus = DiaperStatus.values[int.parse(diaperGet.diaperStatus)];
+    }
+  }
+
+  @action
+  bool statusButtonTapped() {
+    return diaperTimeController.text.isNotEmpty &&
+        diaperNoteController.text.isNotEmpty &&
+        selectedStatus!.index.toString().isNotEmpty;
+  }
 
   @action
   void setSelectedStatus(DiaperStatus? status) {
@@ -89,7 +125,7 @@ abstract class _DiaperViewModelBase with Store {
       DiaperChangeModel diaperToUpdate =
           diaperList.firstWhere((feed) => feed.id == id);
       diaperToUpdate.time = diaperTimeController.text;
-      //  diaperToUpdate.amount = int.tryParse(mlController.text);
+      diaperToUpdate.diaperStatus = selectedStatus!.index.toString();
       diaperToUpdate.note = diaperNoteController.text;
       await diaperStoragee.upDateDiaper(diaperChangeModel: diaperToUpdate);
       diaperList = List.from(diaperList);

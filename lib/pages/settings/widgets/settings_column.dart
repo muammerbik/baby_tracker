@@ -37,31 +37,34 @@ class _SettingsColumnState extends State<SettingsColumn> {
             Navigation.push(page: InappView());
           }
         },
-        child: Container(
-          width: 380,
-          height: isFirstElement ? 75 : 60,
-          decoration: ShapeDecoration(
-            color: isFirstElement ? Color(0xFF4625C3) : lightGrey,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Container(
+            width: 380,
+            height: isFirstElement ? 75 : 60,
+            decoration: ShapeDecoration(
+              color: isFirstElement ? Color(0xFF4625C3) : Colors.grey.shade100,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: ListTile(
-              leading: Image.asset(
-                widget.leading,
-                color: isFirstElement ? white : black,
-              ),
-              title: TextWidgets(
-                text: widget.title,
-                size: isFirstElement ? 20 : 16,
-                color: isFirstElement ? white : black,
-                textAlign: TextAlign.start,
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios_outlined,
-                color: isFirstElement ? white : black,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: ListTile(
+                leading: Image.asset(
+                  widget.leading,
+                  color: isFirstElement ? white : black,
+                ),
+                title: TextWidgets(
+                  text: widget.title,
+                  size: isFirstElement ? 20 : 16,
+                  color: isFirstElement ? white : black,
+                  textAlign: TextAlign.start,
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  color: isFirstElement ? white : black,
+                ),
               ),
             ),
           ),

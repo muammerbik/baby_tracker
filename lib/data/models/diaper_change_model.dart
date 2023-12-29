@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
- 
+
 import 'package:hive/hive.dart';
+
 part 'diaper_change_model.g.dart';
+
 @HiveType(typeId: 2)
 class DiaperChangeModel extends HiveObject {
-@HiveField(0)
+  @HiveField(0)
   String id;
 
   @HiveField(1)
@@ -15,7 +17,7 @@ class DiaperChangeModel extends HiveObject {
 
   @HiveField(3)
   String note;
-  
+
   DiaperChangeModel({
     required this.id,
     required this.time,
@@ -28,3 +30,5 @@ class DiaperChangeModel extends HiveObject {
     return 'DiaperChangeModel(id: $id, time: $time, diaperStatus: $diaperStatus, note: $note)';
   }
 }
+
+

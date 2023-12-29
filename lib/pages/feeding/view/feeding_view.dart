@@ -23,7 +23,7 @@ class _FeedingViewState extends State<FeedingView> {
 
   @override
   void initState() {
-    feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
+     feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
     feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
     feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
     super.initState();

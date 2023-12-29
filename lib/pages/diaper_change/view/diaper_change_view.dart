@@ -23,6 +23,16 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
   final informationGetIt = locator<InformationViewModel>();
 
   @override
+  void initState() {
+    diaperGetIt.diaperTimeController
+        .addListener(diaperGetIt.upDateButtonstatus);
+
+    diaperGetIt.diaperNoteController
+        .addListener(diaperGetIt.upDateButtonstatus);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -56,12 +66,33 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
             CustomElevatedButtonView(
                 text: "Save",
                 onTop: () async {
-                  if (diaperGetIt.selectedDiaper == null) {
-                    await diaperGetIt.addDiaperChange();
-                  } else {
-                    await diaperGetIt.upDate(diaperGetIt.selectedDiaper!.id);
+                  if (diaperGetIt.isButtonEnabledDiaper) {
+                    if (diaperGetIt.selectedDiaper == null) {
+                      await diaperGetIt.addDiaperChange();
+                    } else {
+                      await diaperGetIt.upDate(diaperGetIt.selectedDiaper!.id);
+                    }
+                    Navigation.push(page: HomeView());
+                  } else{
+                     showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Doğrulama Hatası"),
+                          content: Text(
+                              " Devam etmek için  lütfen tüm alanları  doldurun!!!"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Tamam"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   }
-                  Navigation.push(page: HomeView());
                 },
                 color: lightblue)
           ],

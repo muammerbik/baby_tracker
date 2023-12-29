@@ -39,6 +39,9 @@ class _DiaperChangeColumnState extends State<DiaperChangeColumn> {
             diaperStatusRow(DiaperStatus.Mixed, "mixedd.png", "Mixed"),
             SizedBox(height: 10),
             diaperStatusRow(DiaperStatus.Dry, "dryy.png", "Dry"),
+            SizedBox(height: 20),
+            // Eklenen kısım
+          
           ],
         ),
       ),
@@ -52,7 +55,6 @@ class _DiaperChangeColumnState extends State<DiaperChangeColumn> {
       builder: (context) => InkWell(
         onTap: () async {
           diaperGetIt.selectedStatus = isSelected ? null : status;
-
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -90,5 +92,18 @@ class _DiaperChangeColumnState extends State<DiaperChangeColumn> {
         ),
       ),
     );
+  }
+
+  String getDiaperText(DiaperStatus status) {
+    switch (status) {
+      case DiaperStatus.Wet:
+        return "Wet";
+      case DiaperStatus.Dirty:
+        return "Dirty";
+      case DiaperStatus.Mixed:
+        return "Mixed";
+      case DiaperStatus.Dry:
+        return "Dry";
+    }
   }
 }
