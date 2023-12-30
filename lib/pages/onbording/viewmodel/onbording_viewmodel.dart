@@ -2,6 +2,7 @@ import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart'
 import 'package:baby_tracker/pages/inapp/view/inapp_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 part 'onbording_viewmodel.g.dart';
 
 class OnbordingViewModel = _OnbordingViewModelBase with _$OnbordingViewModel;
@@ -27,6 +28,32 @@ abstract class _OnbordingViewModelBase with Store {
         subTitle:
             "Share access to your baby's tracker with\nfamily members, babysitters, or healthcare\nproviders "),
   ];
+
+
+
+
+  @observable
+  bool isOnbordingComplated = false;
+
+
+  @action
+  Future<void> onbordingComplatedSet() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool("isOnbordingComplated", true);
+  }
+
+
+  @action
+  Future<void> onbordingComlatedGet() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    isOnbordingComplated = pref.getBool("isOnbordingComplated") ?? false;
+  }
+
+
+
+
+
+
 
   @observable
   PageController pageController = PageController();
