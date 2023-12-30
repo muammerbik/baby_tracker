@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/core/hive.dart';
+import 'package:baby_tracker/data/local_data/information_local_storage.dart';
 import 'package:baby_tracker/data/models/information_model.dart';
+import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,6 +17,8 @@ class InformationViewModel = _InformationViewModelBase
     with _$InformationViewModel;
 
 abstract class _InformationViewModelBase with Store {
+  final informationDB = locator<InformationLocalStorageHive>();
+
   @observable
   TextEditingController nameController = TextEditingController();
   @observable
@@ -42,9 +45,10 @@ abstract class _InformationViewModelBase with Store {
         dueDate: dueDateController.text,
       );
       await informationBox.clear();
-      await informationBox.add(model);
+      //   await informationBox.add(model);
+      informationDB.addInformation(informationModel: model);
 
-      print(informationBox.toMap().toString() + "veriler kaydedildi");
+   
     } catch (e) {
       print("Hata: $e");
     }

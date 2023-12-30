@@ -25,7 +25,6 @@ class _InformationViewState extends State<InformationView> {
   @override
   void initState() {
     super.initState();
- 
     informationGetIt.loadInformation();
   }
 

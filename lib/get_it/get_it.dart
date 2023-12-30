@@ -1,5 +1,6 @@
 import 'package:baby_tracker/data/local_data/diaper_local_storage.dart';
 import 'package:baby_tracker/data/local_data/feeding_local_storage.dart';
+import 'package:baby_tracker/data/local_data/information_local_storage.dart';
 import 'package:baby_tracker/data/local_data/sleep_local_storage.dart';
 import 'package:baby_tracker/pages/calender/viewmodel/calender_viewmodel.dart';
 import 'package:baby_tracker/pages/diaper_change/viewmodel/diaper_viewmodel.dart';
@@ -18,6 +19,9 @@ void setupGetIt() {
       .registerLazySingleton<FeedingLocalStorageHive>(() => FeedingStorage());
 
   locator.registerLazySingleton<SleepLocalStorageHive>(() => SleepStorage());
+
+  locator.registerLazySingleton<InformationLocalStorageHive>(() => InformationStorage());
+
 
 
 
