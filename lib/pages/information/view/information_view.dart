@@ -109,6 +109,8 @@ class _InformationViewState extends State<InformationView> {
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
                     CustomElevatedButtonView(
                       onTop: () async {
+
+                   
                         await informationGetIt.addInformation();
 
                         Navigation.push(page: HomeView());

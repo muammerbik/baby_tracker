@@ -25,6 +25,23 @@ mixin _$OnbordingViewModel on _OnbordingViewModelBase, Store {
     });
   }
 
+  late final _$isOnbordingComplatedAtom = Atom(
+      name: '_OnbordingViewModelBase.isOnbordingComplated', context: context);
+
+  @override
+  bool get isOnbordingComplated {
+    _$isOnbordingComplatedAtom.reportRead();
+    return super.isOnbordingComplated;
+  }
+
+  @override
+  set isOnbordingComplated(bool value) {
+    _$isOnbordingComplatedAtom.reportWrite(value, super.isOnbordingComplated,
+        () {
+      super.isOnbordingComplated = value;
+    });
+  }
+
   late final _$pageControllerAtom =
       Atom(name: '_OnbordingViewModelBase.pageController', context: context);
 
@@ -73,6 +90,26 @@ mixin _$OnbordingViewModel on _OnbordingViewModelBase, Store {
     });
   }
 
+  late final _$onbordingComplatedSetAsyncAction = AsyncAction(
+      '_OnbordingViewModelBase.onbordingComplatedSet',
+      context: context);
+
+  @override
+  Future<void> onbordingComplatedSet() {
+    return _$onbordingComplatedSetAsyncAction
+        .run(() => super.onbordingComplatedSet());
+  }
+
+  late final _$onbordingComlatedGetAsyncAction = AsyncAction(
+      '_OnbordingViewModelBase.onbordingComlatedGet',
+      context: context);
+
+  @override
+  Future<void> onbordingComlatedGet() {
+    return _$onbordingComlatedGetAsyncAction
+        .run(() => super.onbordingComlatedGet());
+  }
+
   late final _$_OnbordingViewModelBaseActionController =
       ActionController(name: '_OnbordingViewModelBase', context: context);
 
@@ -102,6 +139,7 @@ mixin _$OnbordingViewModel on _OnbordingViewModelBase, Store {
   String toString() {
     return '''
 OnbordingList: ${OnbordingList},
+isOnbordingComplated: ${isOnbordingComplated},
 pageController: ${pageController},
 currentIndex: ${currentIndex},
 notGoBack: ${notGoBack}

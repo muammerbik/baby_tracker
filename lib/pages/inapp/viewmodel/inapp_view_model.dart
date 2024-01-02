@@ -6,10 +6,13 @@ class InappViewModel = _InappViewModelBase with _$InappViewModel;
 
 abstract class _InappViewModelBase with Store {
   @observable
-  int selectedButtonIndex = 0;
+  int selectedButtonIndex = -1;
 
   @observable
   bool isInappComplated = false;
+
+
+  
 
   @action
   Future<void> InappComplatedSet() async {
@@ -23,5 +26,4 @@ abstract class _InappViewModelBase with Store {
     SharedPreferences pref = await SharedPreferences.getInstance();
     isInappComplated = pref.getBool("isInappComplated") ?? false;
   }
-
 }

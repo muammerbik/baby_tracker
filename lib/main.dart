@@ -3,6 +3,7 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
+import 'package:baby_tracker/pages/main_view/main_view.dart';
 import 'package:baby_tracker/pages/onbording/view/onbording_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,6 +40,6 @@ class MyApp extends StatelessWidget {
               .copyWith(background: white)
               .copyWith(background: Colors.white),
         ),
-        home: OnbordingView());
+        home: MainView());
   }
 }

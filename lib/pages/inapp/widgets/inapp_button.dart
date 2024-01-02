@@ -5,7 +5,6 @@ import 'package:baby_tracker/pages/inapp/viewmodel/inapp_view_model.dart';
 import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
 class InappButton extends StatefulWidget {
   const InappButton({Key? key}) : super(key: key);
 
@@ -15,6 +14,10 @@ class InappButton extends StatefulWidget {
 
 class _InappButtonState extends State<InappButton> {
   final inappGetIt = locator<InappViewModel>();
+
+  bool isAnyButtonSelected() {
+    return inappGetIt.selectedButtonIndex != -1;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +43,19 @@ class _InappButtonState extends State<InappButton> {
     return Observer(
       builder: (context) => Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: DeviceConfig.screenWidth! * 0.0467,
-            vertical: DeviceConfig.screenHeight! * 0.0107),
+          horizontal: DeviceConfig.screenWidth! * 0.0467,
+          vertical: DeviceConfig.screenHeight! * 0.0107,
+        ),
         child: GestureDetector(
           onTap: () {
-            inappGetIt.selectedButtonIndex = index;
+        
+            if (inappGetIt.selectedButtonIndex == index) {
+            
+              inappGetIt.selectedButtonIndex = -1;
+            } else {
+            
+              inappGetIt.selectedButtonIndex = index;
+            }
           },
           child: Container(
             width: double.infinity,
@@ -61,7 +72,8 @@ class _InappButtonState extends State<InappButton> {
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: DeviceConfig.screenWidth! * 0.0467),
+                horizontal: DeviceConfig.screenWidth! * 0.0467,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -85,7 +97,6 @@ class _InappButtonState extends State<InappButton> {
   }
 
   String getButtonText(int index) {
-    // Her bir butonun metni burada belirlenir
     if (index == 0) {
       return 'Weekly';
     } else if (index == 1) {
@@ -96,7 +107,6 @@ class _InappButtonState extends State<InappButton> {
   }
 
   String getButtonPrice(int index) {
-    // Her bir butonun fiyatı burada belirlenir
     if (index == 0) {
       return '\$10';
     } else if (index == 1) {

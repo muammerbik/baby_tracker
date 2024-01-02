@@ -2,7 +2,8 @@ import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
-import 'package:baby_tracker/pages/home/view/home_view.dart';
+import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/inapp/viewmodel/inapp_view_model.dart';
 import 'package:baby_tracker/pages/inapp/widgets/inapp_button.dart';
 import 'package:baby_tracker/pages/inapp/widgets/inapp_row_widgets.dart';
 import 'package:baby_tracker/pages/information/view/information_view.dart';
@@ -18,6 +19,8 @@ class InappView extends StatefulWidget {
 }
 
 class _InappViewState extends State<InappView> {
+  final inappGetIt = locator<InappViewModel>();
+
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -33,7 +36,11 @@ class _InappViewState extends State<InappView> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
-                  onPressed: () { Navigation.push(page: InformationView());},
+                  onPressed: () {
+                    Navigation.push(
+                      page: InformationView(),
+                    );
+                  },
                   icon: Image.asset(
                     "assets/images/inapp3.png",
                     height: 15,
@@ -61,13 +68,33 @@ class _InappViewState extends State<InappView> {
             SizedBox(height: DeviceConfig.screenHeight! * 0.0479),
             InappButton(),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0423),
+            // ...
+
             CustomElevatedButtonView(
               text: btnStart,
-              onTop: () {
-               
+              onTop: () async {
+                await inappGetIt.InappComplatedSet();
+                await inappGetIt.InappComplatedGet();
+
+                
+                if (inappGetIt.selectedButtonIndex != -1 && // Değişiklik burada
+                    inappGetIt.isInappComplated) {
+                  Navigation.push(
+                    page: InformationView(),
+                  );
+                } else if (inappGetIt.selectedButtonIndex == -1) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Lütfen,Uygun Premium paketi seçin !'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }
               },
               color: btnBlue,
-            )
+            ),
+
+// ...
           ],
         ),
       ),

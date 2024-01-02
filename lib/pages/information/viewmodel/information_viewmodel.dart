@@ -10,6 +10,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 part 'information_viewmodel.g.dart';
 
@@ -27,6 +28,22 @@ abstract class _InformationViewModelBase with Store {
   TextEditingController timeofBirthController = TextEditingController();
   @observable
   TextEditingController dueDateController = TextEditingController();
+
+  @observable
+  bool isInformationComplated = false;
+
+  @action
+  Future<void> InformationComplatedSet() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool("isInformationComplated", true);
+    isInformationComplated = true;
+  }
+
+  @action
+  Future<void> InformationComlatedGet() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    isInformationComplated = pref.getBool("isInformationComplated") ?? false;
+  }
 
   @action
   Future<void> addInformation() async {
@@ -47,8 +64,6 @@ abstract class _InformationViewModelBase with Store {
       await informationBox.clear();
       //   await informationBox.add(model);
       informationDB.addInformation(informationModel: model);
-
-   
     } catch (e) {
       print("Hata: $e");
     }

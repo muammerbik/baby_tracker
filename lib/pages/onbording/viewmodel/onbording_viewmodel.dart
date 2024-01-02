@@ -29,31 +29,20 @@ abstract class _OnbordingViewModelBase with Store {
             "Share access to your baby's tracker with\nfamily members, babysitters, or healthcare\nproviders "),
   ];
 
-
-
-
   @observable
   bool isOnbordingComplated = false;
-
 
   @action
   Future<void> onbordingComplatedSet() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setBool("isOnbordingComplated", true);
+    await pref.setBool("isOnbordingComplated", true);
   }
-
 
   @action
   Future<void> onbordingComlatedGet() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     isOnbordingComplated = pref.getBool("isOnbordingComplated") ?? false;
   }
-
-
-
-
-
-
 
   @observable
   PageController pageController = PageController();
@@ -72,6 +61,7 @@ abstract class _OnbordingViewModelBase with Store {
   @action
   void continueButtonTapped() {
     if (currentIndex == OnbordingList.length - 1) {
+      onbordingComplatedSet();
       Navigation.push(page: InappView());
     }
     pageController.nextPage(
