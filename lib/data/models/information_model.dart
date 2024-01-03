@@ -1,7 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+// information_model.dart
+import 'dart:typed_data';
 
-
-import 'package:flutter/foundation.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive/hive.dart';
 
 part 'information_model.g.dart';
 
@@ -11,7 +12,7 @@ class InformationModel extends HiveObject {
   String id;
 
   @HiveField(1)
-  Uint8List img;
+  String? img; // Resmi temsil eden byte dizisi
 
   @HiveField(2)
   bool cinsiyet;

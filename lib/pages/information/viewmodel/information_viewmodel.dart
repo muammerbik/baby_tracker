@@ -1,9 +1,11 @@
+// information_viewmodel.dart
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/local_data/information_local_storage.dart';
 import 'package:baby_tracker/data/models/information_model.dart';
+import 'package:baby_tracker/file/file.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -12,6 +14,7 @@ import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+
 part 'information_viewmodel.g.dart';
 
 class InformationViewModel = _InformationViewModelBase
@@ -52,17 +55,19 @@ abstract class _InformationViewModelBase with Store {
           DateFormat('dd/MM/yyyy').parse(birthDateController.text);
       String imagePath = imageFile?.path ?? "";
       Uint8List imageBytes = await _readFileAsBytes(imagePath);
+      final localImagePath =
+          await FileHandler().saveFileToPhoneMemory("test.png", imageBytes);
+
       var model = InformationModel(
         id: Uuid().v4(),
-        img: imageBytes,
-        cinsiyet: girlImageVisible,
+        img: localImagePath,
+        cinsiyet: isGirl ?? false,
         fullName: nameController.text,
         birthDate: DateFormat('yyyy-MM-dd').format(parsedBirthDate),
         timeOfBirth: timeofBirthController.text,
         dueDate: dueDateController.text,
       );
       await informationBox.clear();
-      //   await informationBox.add(model);
       informationDB.addInformation(informationModel: model);
     } catch (e) {
       print("Hata: $e");
@@ -86,6 +91,8 @@ abstract class _InformationViewModelBase with Store {
     if (informationBox.isNotEmpty) {
       InformationModel lastInformation = informationBox.getAt(0)!;
       nameController.text = lastInformation.fullName;
+      imageFile = File(lastInformation.img!);
+      isGirl = lastInformation.cinsiyet;
       birthDateController.text = lastInformation.birthDate;
       timeofBirthController.text = lastInformation.timeOfBirth;
       dueDateController.text = lastInformation.dueDate;
@@ -99,9 +106,7 @@ abstract class _InformationViewModelBase with Store {
   ImagePicker picker = ImagePicker();
 
   @observable
-  bool girlImageVisible = false;
-  @observable
-  bool sonImageVisible = false;
+  bool isGirl = false;
 
   @action
   Future<void> selectTime(
@@ -135,14 +140,12 @@ abstract class _InformationViewModelBase with Store {
 
   @action
   void toggleGirlImage() {
-    girlImageVisible = !girlImageVisible;
-    sonImageVisible = !girlImageVisible;
+    isGirl = true;
   }
 
   @action
   void toggleSonImage() {
-    sonImageVisible = !sonImageVisible;
-    girlImageVisible = !sonImageVisible;
+    isGirl = false;
   }
 
   @action

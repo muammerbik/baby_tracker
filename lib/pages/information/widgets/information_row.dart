@@ -24,7 +24,7 @@ class _InformationRowState extends State<InformationRow> {
             onTap: () {
               informationGetIt.toggleGirlImage();
             },
-            child: informationGetIt.girlImageVisible
+            child: informationGetIt.isGirl
                 ? Image.asset(
                     "assets/images/bbbx.png",
                     height: DeviceConfig.screenHeight! * 0.0323,
@@ -43,7 +43,7 @@ class _InformationRowState extends State<InformationRow> {
             onTap: () {
               informationGetIt.toggleSonImage();
             },
-            child: informationGetIt.sonImageVisible
+            child: !informationGetIt.isGirl
                 ? Image.asset(
                     "assets/images/aaay.png",
                     height: DeviceConfig.screenHeight! * 0.0323,

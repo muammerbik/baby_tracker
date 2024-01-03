@@ -76,11 +76,10 @@ class _InappViewState extends State<InappView> {
                 await inappGetIt.InappComplatedSet();
                 await inappGetIt.InappComplatedGet();
 
-                
                 if (inappGetIt.selectedButtonIndex != -1 && // Değişiklik burada
                     inappGetIt.isInappComplated) {
                   Navigation.push(
-                    page: InformationView(),
+                    page: InformationView(), 
                   );
                 } else if (inappGetIt.selectedButtonIndex == -1) {
                   ScaffoldMessenger.of(context).showSnackBar(

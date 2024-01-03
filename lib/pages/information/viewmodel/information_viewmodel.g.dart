@@ -75,6 +75,24 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
     });
   }
 
+  late final _$isInformationComplatedAtom = Atom(
+      name: '_InformationViewModelBase.isInformationComplated',
+      context: context);
+
+  @override
+  bool get isInformationComplated {
+    _$isInformationComplatedAtom.reportRead();
+    return super.isInformationComplated;
+  }
+
+  @override
+  set isInformationComplated(bool value) {
+    _$isInformationComplatedAtom
+        .reportWrite(value, super.isInformationComplated, () {
+      super.isInformationComplated = value;
+    });
+  }
+
   late final _$imageFileAtom =
       Atom(name: '_InformationViewModelBase.imageFile', context: context);
 
@@ -107,36 +125,40 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
     });
   }
 
-  late final _$girlImageVisibleAtom = Atom(
-      name: '_InformationViewModelBase.girlImageVisible', context: context);
+  late final _$isGirlAtom =
+      Atom(name: '_InformationViewModelBase.isGirl', context: context);
 
   @override
-  bool get girlImageVisible {
-    _$girlImageVisibleAtom.reportRead();
-    return super.girlImageVisible;
+  bool get isGirl {
+    _$isGirlAtom.reportRead();
+    return super.isGirl;
   }
 
   @override
-  set girlImageVisible(bool value) {
-    _$girlImageVisibleAtom.reportWrite(value, super.girlImageVisible, () {
-      super.girlImageVisible = value;
+  set isGirl(bool value) {
+    _$isGirlAtom.reportWrite(value, super.isGirl, () {
+      super.isGirl = value;
     });
   }
 
-  late final _$sonImageVisibleAtom =
-      Atom(name: '_InformationViewModelBase.sonImageVisible', context: context);
+  late final _$InformationComplatedSetAsyncAction = AsyncAction(
+      '_InformationViewModelBase.InformationComplatedSet',
+      context: context);
 
   @override
-  bool get sonImageVisible {
-    _$sonImageVisibleAtom.reportRead();
-    return super.sonImageVisible;
+  Future<void> InformationComplatedSet() {
+    return _$InformationComplatedSetAsyncAction
+        .run(() => super.InformationComplatedSet());
   }
 
+  late final _$InformationComlatedGetAsyncAction = AsyncAction(
+      '_InformationViewModelBase.InformationComlatedGet',
+      context: context);
+
   @override
-  set sonImageVisible(bool value) {
-    _$sonImageVisibleAtom.reportWrite(value, super.sonImageVisible, () {
-      super.sonImageVisible = value;
-    });
+  Future<void> InformationComlatedGet() {
+    return _$InformationComlatedGetAsyncAction
+        .run(() => super.InformationComlatedGet());
   }
 
   late final _$addInformationAsyncAction =
@@ -242,10 +264,10 @@ nameController: ${nameController},
 birthDateController: ${birthDateController},
 timeofBirthController: ${timeofBirthController},
 dueDateController: ${dueDateController},
+isInformationComplated: ${isInformationComplated},
 imageFile: ${imageFile},
 picker: ${picker},
-girlImageVisible: ${girlImageVisible},
-sonImageVisible: ${sonImageVisible}
+isGirl: ${isGirl}
     ''';
   }
 }

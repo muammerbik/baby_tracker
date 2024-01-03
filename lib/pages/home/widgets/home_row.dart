@@ -1,7 +1,9 @@
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
+import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/calender/view/calender_view.dart';
+import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/settings/view/settings_view.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +15,7 @@ class HomeRow extends StatefulWidget {
 }
 
 class _HomeRowState extends State<HomeRow> {
+  final informationGetIt = locator<InformationViewModel>();
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -47,7 +50,7 @@ class _HomeRowState extends State<HomeRow> {
         ),
         IconButton(
           onPressed: () {
-              Navigation.push(page: CalenderView());
+            Navigation.push(page: CalenderView());
           },
           icon: Image.asset(
             "assets/icons/file.png",

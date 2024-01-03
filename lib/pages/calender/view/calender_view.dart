@@ -23,9 +23,6 @@ class _CalenderViewState extends State<CalenderView> {
   @override
   void initState() {
     super.initState();
-    feedindviewmodel.getAll();
-    diaperGetIt.getAll();
-    sleepGetIt.getAll();
   }
 
   @override

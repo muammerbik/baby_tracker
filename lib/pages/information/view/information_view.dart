@@ -11,7 +11,6 @@ import 'package:baby_tracker/pages/information/widgets/information_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-
 class InformationView extends StatefulWidget {
   const InformationView({Key? key}) : super(key: key);
 
@@ -109,8 +108,6 @@ class _InformationViewState extends State<InformationView> {
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
                     CustomElevatedButtonView(
                       onTop: () async {
-
-                   
                         await informationGetIt.addInformation();
 
                         Navigation.push(page: HomeView());

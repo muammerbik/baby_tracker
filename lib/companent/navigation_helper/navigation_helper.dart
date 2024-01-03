@@ -8,6 +8,7 @@ class Navigation {
 
   static Future<T?>? pushNamed<T>({required String root, Object? arg}) =>
       navigationKey.currentState?.pushNamed(root, arguments: arg);
+      
   static void ofPop() => navigationKey.currentState?.pop();
   static Future<T?>? pushAndRemoveAll<T>({required Widget page}) =>
       navigationKey.currentState

@@ -40,6 +40,6 @@ class MyApp extends StatelessWidget {
               .copyWith(background: white)
               .copyWith(background: Colors.white),
         ),
-        home: MainView());
+        home: HomeView());
   }
 }
