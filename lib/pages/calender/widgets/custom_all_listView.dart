@@ -65,15 +65,18 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                             onTap: () {
                               if (item.type == "feeding") {
                                 Navigation.push(page: FeedingView());
-                                feedingGetIt.upDate(item.id);
+                                feedingGetIt.selectedFeed =
+                                    feedingGetIt.feedList[index];
                               } else if (item.type == "diaper") {
                                 Navigation.push(page: DiaperChangeView());
 
-                                diaperGetIt.upDate(item.id);
+                                diaperGetIt.selectedDiaper =
+                                    diaperGetIt.diaperList[index];
                               } else {
                                 Navigation.push(page: SleepView());
 
-                                sleepGetIt.upDate(item.id);
+                                sleepGetIt.selectedSlep =
+                                    sleepGetIt.sleepList[index];
                               }
                             },
                             child: Container(

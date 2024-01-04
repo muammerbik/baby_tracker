@@ -76,7 +76,7 @@ class _InappViewState extends State<InappView> {
                 await inappGetIt.InappComplatedSet();
                 await inappGetIt.InappComplatedGet();
 
-                if (inappGetIt.selectedButtonIndex != -1 && // Değişiklik burada
+                if (inappGetIt.selectedButtonIndex != -1 && 
                     inappGetIt.isInappComplated) {
                   Navigation.push(
                     page: InformationView(), 

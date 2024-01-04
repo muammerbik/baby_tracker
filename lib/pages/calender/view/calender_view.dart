@@ -20,10 +20,6 @@ class _CalenderViewState extends State<CalenderView> {
   final diaperGetIt = locator.get<DiaperViewModel>();
   final sleepGetIt = locator.get<SleepViewModel>();
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

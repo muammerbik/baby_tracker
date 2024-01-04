@@ -30,6 +30,7 @@ class _InformationViewState extends State<InformationView> {
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
+    final String? localImagePath = informationGetIt.imageFile?.path;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Observer(
@@ -106,15 +107,43 @@ class _InformationViewState extends State<InformationView> {
                       controller: informationGetIt.dueDateController,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
-                    CustomElevatedButtonView(
-                      onTop: () async {
-                        await informationGetIt.addInformation();
+                  CustomElevatedButtonView(
+  onTop: () async {
+    if (localImagePath!.isNotEmpty &&
+        informationGetIt.nameController.text.isNotEmpty &&
+        informationGetIt.birthDateController.text.isNotEmpty &&
+        informationGetIt.timeofBirthController.text.isNotEmpty &&
+        informationGetIt.dueDateController.text.isNotEmpty &&
+        informationGetIt.imageFile != null) {
+      await informationGetIt.addInformation();
+      informationGetIt.InformationComplatedSet();
 
-                        Navigation.push(page: HomeView());
-                      },
-                      text: continuee,
-                      color: lightGrey,
-                    ),
+      Navigation.push(page: HomeView());
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Doğrulama Hatası"),
+            content: Text("Devam etmek için lütfen tüm alanları doldurun!!!"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Tamam"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  },
+  text: continuee,
+  color: lightGrey,
+),
+                                   
+                  
                   ],
                 ),
               ),

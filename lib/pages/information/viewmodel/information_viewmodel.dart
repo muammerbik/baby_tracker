@@ -23,6 +23,10 @@ class InformationViewModel = _InformationViewModelBase
 abstract class _InformationViewModelBase with Store {
   final informationDB = locator<InformationLocalStorageHive>();
 
+  _InformationViewModelBase() {
+    init();
+  }
+
   @observable
   TextEditingController nameController = TextEditingController();
   @observable
@@ -72,6 +76,11 @@ abstract class _InformationViewModelBase with Store {
     } catch (e) {
       print("Hata: $e");
     }
+  }
+
+  @action
+  Future<void> init() async {
+    await loadInformation();
   }
 
   @action
