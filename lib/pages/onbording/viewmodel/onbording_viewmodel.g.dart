@@ -114,22 +114,22 @@ mixin _$OnbordingViewModel on _OnbordingViewModelBase, Store {
       ActionController(name: '_OnbordingViewModelBase', context: context);
 
   @override
-  void onPageChanged(int value) {
+  void continueButtonTapped() {
     final _$actionInfo = _$_OnbordingViewModelBaseActionController.startAction(
-        name: '_OnbordingViewModelBase.onPageChanged');
+        name: '_OnbordingViewModelBase.continueButtonTapped');
     try {
-      return super.onPageChanged(value);
+      return super.continueButtonTapped();
     } finally {
       _$_OnbordingViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void continueButtonTapped() {
+  void onPageChanged(int value) {
     final _$actionInfo = _$_OnbordingViewModelBaseActionController.startAction(
-        name: '_OnbordingViewModelBase.continueButtonTapped');
+        name: '_OnbordingViewModelBase.onPageChanged');
     try {
-      return super.continueButtonTapped();
+      return super.onPageChanged(value);
     } finally {
       _$_OnbordingViewModelBaseActionController.endAction(_$actionInfo);
     }

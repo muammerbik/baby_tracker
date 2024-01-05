@@ -7,7 +7,7 @@ import 'package:baby_tracker/pages/diaper_change/viewmodel/diaper_viewmodel.dart
 import 'package:baby_tracker/pages/diaper_change/widgets/diaper_change_column.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
-import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -69,12 +69,18 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
                   if (diaperGetIt.isButtonEnabledDiaper) {
                     if (diaperGetIt.selectedDiaper == null) {
                       await diaperGetIt.addDiaperChange();
+                      diaperGetIt.diaperTimeController.clear();
+                      diaperGetIt.selectedStatus = null;
+                      diaperGetIt.diaperNoteController.clear();
                     } else {
                       await diaperGetIt.upDate(diaperGetIt.selectedDiaper!.id);
+                      diaperGetIt.diaperTimeController.clear();
+                      diaperGetIt.selectedStatus = null;
+                      diaperGetIt.diaperNoteController.clear();
                     }
                     Navigation.push(page: HomeView());
-                  } else{
-                     showDialog(
+                  } else {
+                    showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(

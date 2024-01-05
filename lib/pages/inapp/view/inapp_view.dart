@@ -7,7 +7,7 @@ import 'package:baby_tracker/pages/inapp/viewmodel/inapp_view_model.dart';
 import 'package:baby_tracker/pages/inapp/widgets/inapp_button.dart';
 import 'package:baby_tracker/pages/inapp/widgets/inapp_row_widgets.dart';
 import 'package:baby_tracker/pages/information/view/information_view.dart';
-import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -68,32 +68,13 @@ class _InappViewState extends State<InappView> {
             SizedBox(height: DeviceConfig.screenHeight! * 0.0479),
             InappButton(),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0423),
-            // ...
-
             CustomElevatedButtonView(
               text: btnStart,
               onTop: () async {
-                await inappGetIt.InappComplatedSet();
-                await inappGetIt.InappComplatedGet();
-
-                if (inappGetIt.selectedButtonIndex != -1 && 
-                    inappGetIt.isInappComplated) {
-                  Navigation.push(
-                    page: InformationView(), 
-                  );
-                } else if (inappGetIt.selectedButtonIndex == -1) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Lütfen,Uygun Premium paketi seçin !'),
-                      duration: Duration(seconds: 2),
-                    ),
-                  );
-                }
+                inappGetIt.InappButtonTapped(context);
               },
               color: btnBlue,
             ),
-
-// ...
           ],
         ),
       ),

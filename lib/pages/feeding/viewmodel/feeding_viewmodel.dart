@@ -47,12 +47,22 @@ abstract class _FeedingViewModelBase with Store {
   @action
   Future<void> init() async {
     await getAll();
+  
   }
 
   @action
   Future<void> initGet() async {
     await getFeeding();
   }
+
+  
+  @action
+  Future<void> clearFields() async {
+    timeController.text = '';
+    mlController.text = '';
+    noteController.text = '';
+  }
+
 
   @action
   void add(FeedingModel feed) {
@@ -68,6 +78,7 @@ abstract class _FeedingViewModelBase with Store {
           amount: int.tryParse(mlController.text),
           note: noteController.text);
       feedingStorage.addFeeding(feedingModel: feedmodel);
+      
       add(feedmodel);
     } catch (e) {
       print(e);

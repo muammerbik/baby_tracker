@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
-import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 
 class CustomElevatedButtonView extends StatefulWidget {
   final String text;
@@ -26,6 +26,7 @@ class _CustomElevatedButtonViewState extends State<CustomElevatedButtonView> {
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
+
     return Observer(
       builder: (context) {
         return Padding(

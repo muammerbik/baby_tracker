@@ -121,6 +121,14 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
     return _$initGetAsyncAction.run(() => super.initGet());
   }
 
+  late final _$clearFieldsAsyncAction =
+      AsyncAction('_FeedingViewModelBase.clearFields', context: context);
+
+  @override
+  Future<void> clearFields() {
+    return _$clearFieldsAsyncAction.run(() => super.clearFields());
+  }
+
   late final _$addFeedingAsyncAction =
       AsyncAction('_FeedingViewModelBase.addFeeding', context: context);
 

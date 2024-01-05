@@ -5,7 +5,7 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
-import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/pages/sleep/viewmodel/sleep_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -22,9 +22,12 @@ class _SleepViewState extends State<SleepView> {
   final informationGetIt = locator<InformationViewModel>();
   @override
   void initState() {
-      sleepGetIt.sleepFellController.addListener(sleepGetIt.updateButtonStatusSleep);
-    sleepGetIt.sleepWakeupController.addListener(sleepGetIt.updateButtonStatusSleep);
-    sleepGetIt.sleepNoteController.addListener(sleepGetIt.updateButtonStatusSleep);
+    sleepGetIt.sleepFellController
+        .addListener(sleepGetIt.updateButtonStatusSleep);
+    sleepGetIt.sleepWakeupController
+        .addListener(sleepGetIt.updateButtonStatusSleep);
+    sleepGetIt.sleepNoteController
+        .addListener(sleepGetIt.updateButtonStatusSleep);
     super.initState();
   }
 
@@ -70,8 +73,14 @@ class _SleepViewState extends State<SleepView> {
                 if (sleepGetIt.isButtonEnabledSleep) {
                   if (sleepGetIt.selectedSlep == null) {
                     await sleepGetIt.addSleep();
+                    sleepGetIt.sleepFellController.clear();
+                    sleepGetIt.sleepWakeupController.clear();
+                    sleepGetIt.sleepNoteController.clear();
                   } else {
                     sleepGetIt.upDate(sleepGetIt.selectedSlep!.id);
+                    sleepGetIt.sleepFellController.clear();
+                    sleepGetIt.sleepWakeupController.clear();
+                    sleepGetIt.sleepNoteController.clear();
                   }
 
                   Navigation.push(page: HomeView());

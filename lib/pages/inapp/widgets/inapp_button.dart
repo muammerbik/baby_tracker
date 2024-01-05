@@ -2,7 +2,7 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/inapp/viewmodel/inapp_view_model.dart';
-import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 class InappButton extends StatefulWidget {

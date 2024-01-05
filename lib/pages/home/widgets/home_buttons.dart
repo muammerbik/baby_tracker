@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:baby_tracker/constants/device_config.dart';
-import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 
 class HomeButtons extends StatefulWidget {
   final Color color;

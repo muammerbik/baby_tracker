@@ -1,3 +1,4 @@
+import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
@@ -107,43 +108,37 @@ class _InformationViewState extends State<InformationView> {
                       controller: informationGetIt.dueDateController,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
-                  CustomElevatedButtonView(
-  onTop: () async {
-    if (localImagePath!.isNotEmpty &&
-        informationGetIt.nameController.text.isNotEmpty &&
-        informationGetIt.birthDateController.text.isNotEmpty &&
-        informationGetIt.timeofBirthController.text.isNotEmpty &&
-        informationGetIt.dueDateController.text.isNotEmpty &&
-        informationGetIt.imageFile != null) {
-      await informationGetIt.addInformation();
-      informationGetIt.InformationComplatedSet();
+                    CustomElevatedButtonView(
+                      onTop: () async {
+                        if (localImagePath != null &&
+                            informationGetIt.nameController.text.isNotEmpty &&
+                            informationGetIt
+                                .birthDateController.text.isNotEmpty &&
+                            informationGetIt
+                                .timeofBirthController.text.isNotEmpty &&
+                            informationGetIt
+                                .dueDateController.text.isNotEmpty &&
+                            informationGetIt.imageFile != null) {
+                          await informationGetIt.addInformation();
+                          informationGetIt.InformationComplatedSet();
 
-      Navigation.push(page: HomeView());
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Doğrulama Hatası"),
-            content: Text("Devam etmek için lütfen tüm alanları doldurun!!!"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Tamam"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  },
-  text: continuee,
-  color: lightGrey,
-),
-                                   
-                  
+                          Navigation.push(page: HomeView());
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return CustomAlertDialog(
+                                  title: "Eksik veya hatalı giriş!",
+                                  content:
+                                      "Lütfen tüm alanları eksiksiz doldurduğunuzdan emin olun",
+                                  onOkPressed: () {});
+                            },
+                          );
+                        }
+                      },
+                      text: continuee,
+                      color: lightGrey,
+                    ),
                   ],
                 ),
               ),

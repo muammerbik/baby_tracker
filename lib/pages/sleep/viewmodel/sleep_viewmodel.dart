@@ -113,11 +113,14 @@ abstract class _SleepViewModelBase with Store {
 
   @action
   Future<void> getSleep() async {
-    if (feedingBox.isNotEmpty) {
+    if (sleepBox.isNotEmpty) {
       SleepModel sleepGet = sleepBox.getAt(0)!;
       sleepFellController.text = sleepGet.fellSleep;
       sleepWakeupController.text = sleepGet.wakeUp;
       sleepNoteController.text = sleepGet.note;
     }
   }
+
+
+  
 }

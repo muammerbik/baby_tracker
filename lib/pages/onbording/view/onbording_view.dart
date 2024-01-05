@@ -54,8 +54,6 @@ class _OnbordingViewState extends State<OnbordingView> {
             CustomElevatedButtonView(
               onTop: () {
                 onbordingGetIt.continueButtonTapped();
-              
-             //   Navigation.push(page: InappView());
               },
               text: btnNext,
               color: btnBlue,

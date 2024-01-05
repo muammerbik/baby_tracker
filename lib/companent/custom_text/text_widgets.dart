@@ -7,7 +7,7 @@ class TextWidgets extends StatelessWidget {
   final double size;
   final String? family;
   final FontWeight? fontWeight;
-  final TextAlign? textAlign; // Eklenen özellik
+  final TextAlign? textAlign; 
 
   const TextWidgets({
     required this.text,
@@ -15,7 +15,7 @@ class TextWidgets extends StatelessWidget {
     required this.size,
     this.family,
     this.fontWeight,
-    this.textAlign, // Eklenen özellik
+    this.textAlign, 
   });
 
   @override

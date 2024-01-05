@@ -21,11 +21,13 @@ class _MainViewState extends State<MainView> {
   final inAppGetIt = locator<InappViewModel>();
   final informationGetIt = locator<InformationViewModel>();
 
+
   @override
   initState() {
     onbordingGetIt.onbordingComlatedGet();
     inAppGetIt.InappComplatedGet();
     informationGetIt.InformationComlatedGet();
+    
     super.initState();
   }
 

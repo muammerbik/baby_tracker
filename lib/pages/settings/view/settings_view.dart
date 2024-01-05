@@ -37,6 +37,7 @@ class _SettingsViewState extends State<SettingsView> {
                   SizedBox(height: 15),
                 ],
               ),
+          
           ],
         ),
       ),

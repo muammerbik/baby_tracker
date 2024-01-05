@@ -8,7 +8,49 @@ part 'onbording_viewmodel.g.dart';
 class OnbordingViewModel = _OnbordingViewModelBase with _$OnbordingViewModel;
 
 abstract class _OnbordingViewModelBase with Store {
+ 
+
   @observable
+  bool isOnbordingComplated = false;
+
+  @observable
+  PageController pageController = PageController();
+
+  @observable
+  int currentIndex = 0;
+
+  @observable
+  bool notGoBack = false;
+
+  @action
+  Future<void> onbordingComplatedSet() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setBool("isOnbordingComplated", true);
+  }
+
+  @action
+  Future<void> onbordingComlatedGet() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    isOnbordingComplated = pref.getBool("isOnbordingComplated") ?? false;
+  }
+
+  @action
+  void continueButtonTapped() {
+    if (currentIndex == OnbordingList.length - 1) {
+      onbordingComplatedSet();
+      Navigation.push(page: InappView());
+    }
+    pageController.nextPage(
+        duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  }
+
+  @action
+  void onPageChanged(int value) {
+    currentIndex = value;
+  }
+
+
+   @observable
   List<OnbordingModel> OnbordingList = [
     OnbordingModel(
       img: "assets/images/onbording1.png",
@@ -28,45 +70,6 @@ abstract class _OnbordingViewModelBase with Store {
         subTitle:
             "Share access to your baby's tracker with\nfamily members, babysitters, or healthcare\nproviders "),
   ];
-
-  @observable
-  bool isOnbordingComplated = false;
-
-  @action
-  Future<void> onbordingComplatedSet() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.setBool("isOnbordingComplated", true);
-  }
-
-  @action
-  Future<void> onbordingComlatedGet() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    isOnbordingComplated = pref.getBool("isOnbordingComplated") ?? false;
-  }
-
-  @observable
-  PageController pageController = PageController();
-
-  @observable
-  int currentIndex = 0;
-
-  @observable
-  bool notGoBack = false;
-
-  @action
-  void onPageChanged(int value) {
-    currentIndex = value;
-  }
-
-  @action
-  void continueButtonTapped() {
-    if (currentIndex == OnbordingList.length - 1) {
-      onbordingComplatedSet();
-      Navigation.push(page: InappView());
-    }
-    pageController.nextPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.linear);
-  }
 }
 
 class OnbordingModel {

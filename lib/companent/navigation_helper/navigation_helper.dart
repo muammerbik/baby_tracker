@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Navigation {
   Navigation._();
   static GlobalKey<NavigatorState> navigationKey = GlobalKey();
+  
   static Future<T?>? push<T>({required Widget page}) =>
       navigationKey.currentState?.push(materialPageRoute(page));
 

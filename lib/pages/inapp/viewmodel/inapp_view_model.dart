@@ -1,3 +1,6 @@
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
+import 'package:baby_tracker/pages/information/view/information_view.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'inapp_view_model.g.dart';
@@ -11,8 +14,23 @@ abstract class _InappViewModelBase with Store {
   @observable
   bool isInappComplated = false;
 
-
-  
+  @action
+  Future<void> InappButtonTapped(BuildContext context) async {
+    await InappComplatedSet();
+    await InappComplatedGet();
+    if (selectedButtonIndex != -1 && isInappComplated) {
+      Navigation.push(
+        page: InformationView(),
+      );
+    } else if (selectedButtonIndex == -1) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Lütfen, Uygun Premium paketi seçin !'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
 
   @action
   Future<void> InappComplatedSet() async {

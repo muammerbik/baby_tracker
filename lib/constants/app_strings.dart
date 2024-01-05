@@ -1,10 +1,11 @@
 // textler ve renkler yazılaacak
-import 'dart:ui';
+
 
 import 'package:flutter/material.dart';
 
-//
+
 //color
+//
 const cTransparent = Colors.transparent;
 const btnBlue = Color(0xFF4625C3);
 const lightGrey = Color(0x2D3C3C43);
@@ -16,7 +17,7 @@ const darkPurple = Color(0xFF9A63FF);
 const lightblue = Color(0xFF69CDDA);
 const darkBlue = Color(0xFF635AFF);
 
-//
+
 //Text
 //
 const mTitle = "Baby Tracker";

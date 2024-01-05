@@ -25,6 +25,14 @@ mixin _$CalenderViewMoel on _CalenderViewMoelBase, Store {
     });
   }
 
+  late final _$initGetAllAsyncAction =
+      AsyncAction('_CalenderViewMoelBase.initGetAll', context: context);
+
+  @override
+  Future<void> initGetAll() {
+    return _$initGetAllAsyncAction.run(() => super.initGetAll());
+  }
+
   late final _$_CalenderViewMoelBaseActionController =
       ActionController(name: '_CalenderViewMoelBase', context: context);
 

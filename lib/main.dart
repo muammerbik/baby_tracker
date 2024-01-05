@@ -2,9 +2,7 @@ import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart'
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
-import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/main_view/main_view.dart';
-import 'package:baby_tracker/pages/onbording/view/onbording_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -34,11 +32,11 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: Navigation.navigationKey,
         theme: ThemeData(
-          appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+          appBarTheme: AppBarTheme(backgroundColor: white),
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
+          colorScheme: ColorScheme.fromSeed(seedColor: purple)
               .copyWith(background: white)
-              .copyWith(background: Colors.white),
+              .copyWith(background: white),
         ),
         home: MainView());
   }

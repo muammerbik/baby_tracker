@@ -25,6 +25,14 @@ class _CustomAllListViewState extends State<CustomAllListView> {
   final diaperGetIt = locator.get<DiaperViewModel>();
 
   @override
+  void initState() {
+    feedingGetIt.initGet();
+    diaperGetIt.initDiaper();
+    sleepGetIt.initSlep();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) => Center(

@@ -16,12 +16,13 @@ class CustomDiaperListView extends StatefulWidget {
 
 class _CustomDiaperListViewState extends State<CustomDiaperListView> {
   final diaperGetIt = locator.get<DiaperViewModel>();
+  /* 
   @override
   void initState() {
     diaperGetIt.initDiaper();
     super.initState();
   }
-
+ */
   @override
   Widget build(BuildContext context) {
     return Observer(

@@ -15,16 +15,9 @@ import 'package:get_it/get_it.dart';
 final locator = GetIt.instance;
 void setupGetIt() {
   locator.registerLazySingleton<DiaperLocalStorageHive>(() => DiaperStorage());
-  locator
-      .registerLazySingleton<FeedingLocalStorageHive>(() => FeedingStorage());
-
+  locator.registerLazySingleton<FeedingLocalStorageHive>(() => FeedingStorage());
   locator.registerLazySingleton<SleepLocalStorageHive>(() => SleepStorage());
-
   locator.registerLazySingleton<InformationLocalStorageHive>(() => InformationStorage());
-
-
-
-
   locator.registerSingleton<OnbordingViewModel>(OnbordingViewModel());
   locator.registerSingleton<InappViewModel>(InappViewModel());
   locator.registerSingleton<InformationViewModel>(InformationViewModel());

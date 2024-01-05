@@ -14,6 +14,13 @@ class CustomSleepListView extends StatefulWidget {
 
 class _CustomSleepListViewState extends State<CustomSleepListView> {
   final sleepGetIt = locator<SleepViewModel>();
+/* 
+  @override
+  void initState() {
+    sleepGetIt.initSlep();
+    super.initState();
+  } */
+
   @override
   Widget build(BuildContext context) {
     return Padding(

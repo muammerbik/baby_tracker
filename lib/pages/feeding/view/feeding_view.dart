@@ -6,7 +6,7 @@ import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
-import 'package:baby_tracker/pages/onbording/widgets/text_widgets.dart';
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -23,7 +23,7 @@ class _FeedingViewState extends State<FeedingView> {
 
   @override
   void initState() {
-     feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
+    feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
     feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
     feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
     super.initState();
@@ -72,8 +72,15 @@ class _FeedingViewState extends State<FeedingView> {
                   if (feedingGetIt.isButtonEnabled) {
                     if (feedingGetIt.selectedFeed == null) {
                       await feedingGetIt.addFeeding();
+                      feedingGetIt.timeController.clear();
+                      feedingGetIt.mlController.clear();
+
+                      feedingGetIt.noteController.clear();
                     } else {
                       await feedingGetIt.upDate(feedingGetIt.selectedFeed!.id);
+                      feedingGetIt.timeController.clear();
+                      feedingGetIt.mlController.clear();
+                      feedingGetIt.noteController.clear();
                     }
 
                     // Diğer işlemler
@@ -81,7 +88,6 @@ class _FeedingViewState extends State<FeedingView> {
                       page: HomeView(),
                     );
                   } else {
-                 
                     showDialog(
                       context: context,
                       builder: (context) {

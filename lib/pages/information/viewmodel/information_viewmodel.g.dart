@@ -169,6 +169,14 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
     return _$addInformationAsyncAction.run(() => super.addInformation());
   }
 
+  late final _$initAsyncAction =
+      AsyncAction('_InformationViewModelBase.init', context: context);
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   late final _$_readFileAsBytesAsyncAction = AsyncAction(
       '_InformationViewModelBase._readFileAsBytes',
       context: context);

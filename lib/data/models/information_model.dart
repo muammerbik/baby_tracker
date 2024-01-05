@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // information_model.dart
-import 'dart:typed_data';
 
 import 'package:hive/hive.dart';
 

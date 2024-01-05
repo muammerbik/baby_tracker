@@ -52,6 +52,8 @@ abstract class _InformationViewModelBase with Store {
     isInformationComplated = pref.getBool("isInformationComplated") ?? false;
   }
 
+
+
   @action
   Future<void> addInformation() async {
     try {

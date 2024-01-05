@@ -1,5 +1,6 @@
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/feeding/view/feeding_view.dart';
 import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
@@ -15,12 +16,13 @@ class CustomFeedListView extends StatefulWidget {
 
 class _CustomFeedListViewState extends State<CustomFeedListView> {
   final feedingGetIt = locator<FeedingViewModel>();
-
+/* 
   @override
   void initState() {
     feedingGetIt.initGet();
+   
     super.initState();
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
