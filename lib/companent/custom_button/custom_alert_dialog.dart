@@ -1,14 +1,10 @@
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
+import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class CustomAlertDialog extends StatefulWidget {
-  final String title;
-  final String content;
-  final VoidCallback onOkPressed;
-
   const CustomAlertDialog({
-    required this.title,
-    required this.content,
-    required this.onOkPressed,
+    super.key,
   });
 
   @override
@@ -19,17 +15,17 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.title),
+      title: Text(informationTitle),
       content: Text(
-        widget.content,
+        informationContent,
         style: TextStyle(fontSize: 16),
       ),
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigation.ofPop();
           },
-          child: Text("Tamam"),
+          child: Text(ok),
         ),
       ],
     );

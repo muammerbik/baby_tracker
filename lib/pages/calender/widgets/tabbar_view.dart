@@ -1,3 +1,6 @@
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
+import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/calender/viewmodel/calender_viewmodel.dart';
 import 'package:baby_tracker/pages/calender/widgets/custom_all_listView.dart';
@@ -38,67 +41,60 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
         appBar: AppBar(
           title: Column(
             children: [
-              Text(
-                "Calendar",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF4625C3),
-                ),
-              ),
+              TextWidgets(
+                text: calender,
+                size: 30,
+                fontWeight: FontWeight.bold,
+                color: btnBlue,
+              )
             ],
           ),
           centerTitle: true,
         ),
         body: Column(
           children: [
-            SizedBox(height: 5),
-            Text("Tue, 12 Monday",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-            SizedBox(height: 7),
+            Text(
+              "Tue, 12 Monday",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  horizontal: DeviceConfig.screenWidth! * 0.0467,
+                  vertical: DeviceConfig.screenHeight! * 0.0107),
               child: TabBar(
                 controller: tabController,
                 tabs: <Widget>[
                   Tab(
                     child: Tooltip(
-                      message: "All",
+                      message: all,
                       child: Text(
-                        "All",
-                        style: TextStyle(
-                            color: Colors.grey.shade400, fontSize: 27),
+                        all,
+                        style: TextStyle(color: greyy, fontSize: 27),
                       ),
                     ),
                   ),
                   Tab(
                     child: Tooltip(
-                      message: "Feeding",
+                      message: feeding,
                       child: Image.asset(
-                        "assets/images/bottle.png",
-                        height: 50,
-                        color: Colors.grey.shade400,
+                        feedingIcon,
+                        color: greyy,
                       ),
                     ),
                   ),
                   Tab(
                     child: Tooltip(
-                      message: "Diaper Change",
+                      message: diaperChange,
                       child: Image.asset(
-                        "assets/images/diaper1.png",
-                        height: 50,
-                        color: Colors.grey.shade400,
+                        diaperIcon,
+                        color: greyy,
                       ),
                     ),
                   ),
                   Tab(
                     child: Tooltip(
-                      message: "Sleep",
-                      child: Image.asset(
-                        "assets/images/sleep.png",
-                        height: 50,
-                        color: Colors.grey.shade400,
-                      ),
+                      message: sleep,
+                      child: Image.asset(sleepIcon, color: greyy),
                     ),
                   ),
                 ],

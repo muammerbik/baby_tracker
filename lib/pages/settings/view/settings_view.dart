@@ -1,5 +1,7 @@
 // settings_view.dart
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/settings/viewmodel/settings_viewmodel.dart';
 import 'package:baby_tracker/pages/settings/widgets/settings_column.dart';
@@ -17,16 +19,19 @@ class _SettingsViewState extends State<SettingsView> {
 
   @override
   Widget build(BuildContext context) {
+    DeviceConfig().init(context);
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text("Settings",
-            style: TextStyle(fontSize: 27, color: Color(0xFF4625C3))),
-      ),
+          centerTitle: true,
+          title: TextWidgets(
+            text: settings,
+            size: 27,
+            color: btnBlue,
+          )),
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 10),
+            SizedBox(height: DeviceConfig.screenHeight! * 0.0120),
             for (int i = 0; i < settingsGetIt.settingsList.length; i++)
               Column(
                 children: [
@@ -34,10 +39,9 @@ class _SettingsViewState extends State<SettingsView> {
                     leading: settingsGetIt.settingsList[i].leading,
                     title: settingsGetIt.settingsList[i].title,
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: DeviceConfig.screenHeight! * 0.0120),
                 ],
               ),
-          
           ],
         ),
       ),

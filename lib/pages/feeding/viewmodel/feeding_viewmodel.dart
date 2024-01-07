@@ -1,7 +1,10 @@
+import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/local_data/feeding_local_storage.dart';
 import 'package:baby_tracker/data/models/feeding_model.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
@@ -33,6 +36,36 @@ abstract class _FeedingViewModelBase with Store {
   bool isButtonEnabled = false;
 
   @action
+  Future<void> isFeedingButtonTapped(BuildContext context) async {
+    if (isButtonEnabled) {
+      if (selectedFeed == null) {
+        await addFeeding();
+        timeController.clear();
+        mlController.clear();
+
+        noteController.clear();
+      } else {
+        await upDate(selectedFeed!.id);
+        timeController.clear();
+        mlController.clear();
+        noteController.clear();
+      }
+
+      // Diğer işlemler
+      Navigation.push(
+        page: HomeView(),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return CustomAlertDialog();
+        },
+      );
+    }
+  }
+
+  @action
   void updateButtonStatus() {
     isButtonEnabled = isFieldsFilled();
   }
@@ -47,22 +80,12 @@ abstract class _FeedingViewModelBase with Store {
   @action
   Future<void> init() async {
     await getAll();
-  
   }
 
   @action
   Future<void> initGet() async {
     await getFeeding();
   }
-
-  
-  @action
-  Future<void> clearFields() async {
-    timeController.text = '';
-    mlController.text = '';
-    noteController.text = '';
-  }
-
 
   @action
   void add(FeedingModel feed) {
@@ -78,7 +101,7 @@ abstract class _FeedingViewModelBase with Store {
           amount: int.tryParse(mlController.text),
           note: noteController.text);
       feedingStorage.addFeeding(feedingModel: feedmodel);
-      
+
       add(feedmodel);
     } catch (e) {
       print(e);

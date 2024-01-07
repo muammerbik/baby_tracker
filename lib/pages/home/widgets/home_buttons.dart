@@ -43,7 +43,8 @@ class _HomeButtonsState extends State<HomeButtons> {
             ),
           ),
           child: ListTile(
-              contentPadding: EdgeInsets.only(left: 10),
+              contentPadding:
+                  EdgeInsets.only(left: DeviceConfig.screenWidth! * 0.0150),
               leading: Image.asset(
                 widget.img,
               ),

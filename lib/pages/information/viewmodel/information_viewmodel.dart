@@ -1,12 +1,15 @@
 // information_viewmodel.dart
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/local_data/information_local_storage.dart';
 import 'package:baby_tracker/data/models/information_model.dart';
 import 'package:baby_tracker/file/file.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,9 +38,29 @@ abstract class _InformationViewModelBase with Store {
   TextEditingController timeofBirthController = TextEditingController();
   @observable
   TextEditingController dueDateController = TextEditingController();
-
   @observable
   bool isInformationComplated = false;
+  @observable
+  File? imageFile;
+  @observable
+  ImagePicker picker = ImagePicker();
+  @observable
+  bool isGirl = false;
+
+  @action
+  Future<void> init() async {
+    await loadInformation();
+  }
+
+  @action
+  void toggleGirlImage() {
+    isGirl = true;
+  }
+
+  @action
+  void toggleSonImage() {
+    isGirl = false;
+  }
 
   @action
   Future<void> InformationComplatedSet() async {
@@ -52,7 +75,27 @@ abstract class _InformationViewModelBase with Store {
     isInformationComplated = pref.getBool("isInformationComplated") ?? false;
   }
 
+  @action
+  Future<void> isInfoButtonTapped(BuildContext context, String pathh) async {
+    if (pathh != null &&
+        nameController.text.isNotEmpty &&
+        birthDateController.text.isNotEmpty &&
+        timeofBirthController.text.isNotEmpty &&
+        dueDateController.text.isNotEmpty &&
+        imageFile != null) {
+      await addInformation();
+      InformationComplatedSet();
 
+      Navigation.push(page: HomeView());
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return CustomAlertDialog();
+        },
+      );
+    }
+  }
 
   @action
   Future<void> addInformation() async {
@@ -81,11 +124,6 @@ abstract class _InformationViewModelBase with Store {
   }
 
   @action
-  Future<void> init() async {
-    await loadInformation();
-  }
-
-  @action
   Future<Uint8List> _readFileAsBytes(String filePath) async {
     try {
       File file = File(filePath);
@@ -110,14 +148,9 @@ abstract class _InformationViewModelBase with Store {
     }
   }
 
-  @observable
-  File? imageFile;
 
-  @observable
-  ImagePicker picker = ImagePicker();
 
-  @observable
-  bool isGirl = false;
+
 
   @action
   Future<void> selectTime(
@@ -147,16 +180,6 @@ abstract class _InformationViewModelBase with Store {
       final String formattedDate = formatter.format(picked);
       controller.text = formattedDate;
     }
-  }
-
-  @action
-  void toggleGirlImage() {
-    isGirl = true;
-  }
-
-  @action
-  void toggleSonImage() {
-    isGirl = false;
   }
 
   @action

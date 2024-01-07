@@ -1,4 +1,3 @@
-import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
@@ -39,7 +38,8 @@ class _InformationViewState extends State<InformationView> {
           children: [
             SizedBox(height: DeviceConfig.screenHeight! * 0.0453),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  horizontal: DeviceConfig.screenWidth! * 0.046),
               child: Align(
                 alignment: Alignment.bottomLeft,
                 child: IconButton(
@@ -110,34 +110,13 @@ class _InformationViewState extends State<InformationView> {
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
                     CustomElevatedButtonView(
                       onTop: () async {
-                        if (localImagePath != null &&
-                            informationGetIt.nameController.text.isNotEmpty &&
-                            informationGetIt
-                                .birthDateController.text.isNotEmpty &&
-                            informationGetIt
-                                .timeofBirthController.text.isNotEmpty &&
-                            informationGetIt
-                                .dueDateController.text.isNotEmpty &&
-                            informationGetIt.imageFile != null) {
-                          await informationGetIt.addInformation();
-                          informationGetIt.InformationComplatedSet();
-
-                          Navigation.push(page: HomeView());
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return CustomAlertDialog(
-                                  title: "Eksik veya hatalı giriş!",
-                                  content:
-                                      "Lütfen tüm alanları eksiksiz doldurduğunuzdan emin olun",
-                                  onOkPressed: () {});
-                            },
-                          );
-                        }
+                        informationGetIt.isInfoButtonTapped(
+                          context,
+                          localImagePath.toString(),
+                        );
                       },
                       text: continuee,
-                      color: lightGrey,
+                      color: darkPurple,
                     ),
                   ],
                 ),

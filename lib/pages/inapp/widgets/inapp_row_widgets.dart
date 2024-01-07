@@ -38,9 +38,9 @@ class InappRowWidgets extends StatelessWidget {
     return Row(
       children: [
         Image.asset(
-          "assets/images/inapp2.png",
+          inappImageDot,
           width: DeviceConfig.screenWidth! * 0.0351,
-          height: 15,
+          height: DeviceConfig.screenHeight! * 0.0161,
         ),
         SizedBox(
           width: DeviceConfig.screenWidth! * 0.0167,

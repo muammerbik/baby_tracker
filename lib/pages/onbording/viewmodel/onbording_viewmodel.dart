@@ -1,4 +1,5 @@
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
+import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/pages/inapp/view/inapp_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -8,8 +9,6 @@ part 'onbording_viewmodel.g.dart';
 class OnbordingViewModel = _OnbordingViewModelBase with _$OnbordingViewModel;
 
 abstract class _OnbordingViewModelBase with Store {
- 
-
   @observable
   bool isOnbordingComplated = false;
 
@@ -49,26 +48,21 @@ abstract class _OnbordingViewModelBase with Store {
     currentIndex = value;
   }
 
-
-   @observable
+  @observable
   List<OnbordingModel> OnbordingList = [
     OnbordingModel(
-      img: "assets/images/onbording1.png",
-      title: "Track Your Baby's\nActivities with Ease",
-      subTitle:
-          "Get started with tracking your baby's\nfeedings, diaper changes, sleep patterns,\nand more...",
+      img: onboardingImg1,
+      title: onboardingTitle1,
+      subTitle: onboardingSubTitle1,
     ),
     OnbordingModel(
-      img: "assets/images/onbording2.png",
-      title: 'Learn About Your\nBaby',
-      subTitle:
-          "Customize your baby's profile, set\nreminders for important activities, and\nview detailed reports on your baby's rogress ",
-    ),
+        img: onboardingImg2,
+        title: onboardingTitle2,
+        subTitle: onboardingSubTitle2),
     OnbordingModel(
-        img: "assets/images/onbording3.png",
-        title: 'Stay Connected \nwith Caregivers',
-        subTitle:
-            "Share access to your baby's tracker with\nfamily members, babysitters, or healthcare\nproviders "),
+        img: onboardingImg3,
+        title: onboardingTitle3,
+        subTitle: onboardingSubTiitle3),
   ];
 }
 

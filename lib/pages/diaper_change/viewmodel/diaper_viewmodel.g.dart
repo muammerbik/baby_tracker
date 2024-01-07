@@ -108,6 +108,14 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     });
   }
 
+  late final _$initAsyncAction =
+      AsyncAction('_DiaperViewModelBase.init', context: context);
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   late final _$initDiaperAsyncAction =
       AsyncAction('_DiaperViewModelBase.initDiaper', context: context);
 
@@ -116,20 +124,22 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     return _$initDiaperAsyncAction.run(() => super.initDiaper());
   }
 
+  late final _$isDiaperChangeButtonTappedAsyncAction = AsyncAction(
+      '_DiaperViewModelBase.isDiaperChangeButtonTapped',
+      context: context);
+
+  @override
+  Future<void> isDiaperChangeButtonTapped(BuildContext context) {
+    return _$isDiaperChangeButtonTappedAsyncAction
+        .run(() => super.isDiaperChangeButtonTapped(context));
+  }
+
   late final _$getDiaperAsyncAction =
       AsyncAction('_DiaperViewModelBase.getDiaper', context: context);
 
   @override
   Future<void> getDiaper() {
     return _$getDiaperAsyncAction.run(() => super.getDiaper());
-  }
-
-  late final _$initAsyncAction =
-      AsyncAction('_DiaperViewModelBase.init', context: context);
-
-  @override
-  Future<void> init() {
-    return _$initAsyncAction.run(() => super.init());
   }
 
   late final _$addDiaperChangeAsyncAction =
@@ -168,22 +178,22 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
       ActionController(name: '_DiaperViewModelBase', context: context);
 
   @override
-  void upDateButtonstatus() {
+  void add(DiaperChangeModel diaperChange) {
     final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
-        name: '_DiaperViewModelBase.upDateButtonstatus');
+        name: '_DiaperViewModelBase.add');
     try {
-      return super.upDateButtonstatus();
+      return super.add(diaperChange);
     } finally {
       _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  bool statusButtonTapped() {
+  void upDateButtonstatus() {
     final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
-        name: '_DiaperViewModelBase.statusButtonTapped');
+        name: '_DiaperViewModelBase.upDateButtonstatus');
     try {
-      return super.statusButtonTapped();
+      return super.upDateButtonstatus();
     } finally {
       _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -201,11 +211,11 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
   }
 
   @override
-  void add(DiaperChangeModel diaperChange) {
+  bool statusButtonTapped() {
     final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
-        name: '_DiaperViewModelBase.add');
+        name: '_DiaperViewModelBase.statusButtonTapped');
     try {
-      return super.add(diaperChange);
+      return super.statusButtonTapped();
     } finally {
       _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
     }

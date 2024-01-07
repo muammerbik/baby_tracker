@@ -41,6 +41,15 @@ mixin _$InappViewModel on _InappViewModelBase, Store {
     });
   }
 
+  late final _$InappButtonTappedAsyncAction =
+      AsyncAction('_InappViewModelBase.InappButtonTapped', context: context);
+
+  @override
+  Future<void> InappButtonTapped(BuildContext context) {
+    return _$InappButtonTappedAsyncAction
+        .run(() => super.InappButtonTapped(context));
+  }
+
   late final _$InappComplatedSetAsyncAction =
       AsyncAction('_InappViewModelBase.InappComplatedSet', context: context);
 

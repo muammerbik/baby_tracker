@@ -16,11 +16,6 @@ class CalenderView extends StatefulWidget {
 }
 
 class _CalenderViewState extends State<CalenderView> {
-  final feedindviewmodel = locator.get<FeedingViewModel>();
-  final diaperGetIt = locator.get<DiaperViewModel>();
-  final sleepGetIt = locator.get<SleepViewModel>();
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -2,9 +2,9 @@ import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
-import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +21,7 @@ class _FeedingViewState extends State<FeedingView> {
   final feedingGetIt = locator<FeedingViewModel>();
   final informationGetIt = locator<InformationViewModel>();
 
+
   @override
   void initState() {
     feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
@@ -31,18 +32,24 @@ class _FeedingViewState extends State<FeedingView> {
 
   @override
   Widget build(BuildContext context) {
+    DeviceConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigation.ofPop();
+            },
+            icon: Icon(Icons.arrow_back)),
         centerTitle: true,
-        title: TextWidgets(text: "Feeding", size: 27, color: darkBlue),
+        title: TextWidgets(text: feeding, size: 27, color: darkBlue),
       ),
       body: Observer(
         builder: (context) => Column(
           children: [
-            SizedBox(height: 30),
+            SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomTextFormField(
-              labelText: "Time",
+              labelText: time,
               controller: feedingGetIt.timeController,
               keyboardType: TextInputType.name,
               onTap: () {
@@ -52,66 +59,27 @@ class _FeedingViewState extends State<FeedingView> {
                 );
               },
             ),
-            SizedBox(height: 30),
+            SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomTextFormField(
-              labelText: "Amount(ml)",
+              labelText: amount,
               controller: feedingGetIt.mlController,
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 30),
+            SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomTextFormField(
-              hintText: "Note",
+              hintText: note,
               controller: feedingGetIt.noteController,
               keyboardType: TextInputType.name,
               maxLines: 10,
             ),
             Spacer(),
             CustomElevatedButtonView(
-                text: "Kaydet",
+                text: save,
                 onTop: () async {
-                  if (feedingGetIt.isButtonEnabled) {
-                    if (feedingGetIt.selectedFeed == null) {
-                      await feedingGetIt.addFeeding();
-                      feedingGetIt.timeController.clear();
-                      feedingGetIt.mlController.clear();
-
-                      feedingGetIt.noteController.clear();
-                    } else {
-                      await feedingGetIt.upDate(feedingGetIt.selectedFeed!.id);
-                      feedingGetIt.timeController.clear();
-                      feedingGetIt.mlController.clear();
-                      feedingGetIt.noteController.clear();
-                    }
-
-                    // Diğer işlemler
-                    Navigation.push(
-                      page: HomeView(),
-                    );
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Doğrulama Hatası"),
-                          content: Text(
-                              " Devam etmek için  lütfen tüm alanları  doldurun!!!"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text("Tamam"),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
+                  feedingGetIt.isFeedingButtonTapped(context);
                 },
                 color: darkPurple),
-            SizedBox(
-              height: 25,
-            ),
+            SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
           ],
         ),
       ),

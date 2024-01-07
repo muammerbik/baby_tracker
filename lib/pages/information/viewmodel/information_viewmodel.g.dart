@@ -141,6 +141,14 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
     });
   }
 
+  late final _$initAsyncAction =
+      AsyncAction('_InformationViewModelBase.init', context: context);
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   late final _$InformationComplatedSetAsyncAction = AsyncAction(
       '_InformationViewModelBase.InformationComplatedSet',
       context: context);
@@ -161,20 +169,22 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
         .run(() => super.InformationComlatedGet());
   }
 
+  late final _$isInfoButtonTappedAsyncAction = AsyncAction(
+      '_InformationViewModelBase.isInfoButtonTapped',
+      context: context);
+
+  @override
+  Future<void> isInfoButtonTapped(BuildContext context, String pathh) {
+    return _$isInfoButtonTappedAsyncAction
+        .run(() => super.isInfoButtonTapped(context, pathh));
+  }
+
   late final _$addInformationAsyncAction =
       AsyncAction('_InformationViewModelBase.addInformation', context: context);
 
   @override
   Future<void> addInformation() {
     return _$addInformationAsyncAction.run(() => super.addInformation());
-  }
-
-  late final _$initAsyncAction =
-      AsyncAction('_InformationViewModelBase.init', context: context);
-
-  @override
-  Future<void> init() {
-    return _$initAsyncAction.run(() => super.init());
   }
 
   late final _$_readFileAsBytesAsyncAction = AsyncAction(

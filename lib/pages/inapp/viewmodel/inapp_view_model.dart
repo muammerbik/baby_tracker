@@ -1,4 +1,5 @@
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
+import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/pages/information/view/information_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -25,7 +26,7 @@ abstract class _InappViewModelBase with Store {
     } else if (selectedButtonIndex == -1) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Lütfen, Uygun Premium paketi seçin !'),
+          content: Text(snackbarMassageInaap),
           duration: Duration(seconds: 2),
         ),
       );

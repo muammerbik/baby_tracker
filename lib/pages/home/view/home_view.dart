@@ -2,7 +2,6 @@ import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart'
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
-import 'package:baby_tracker/pages/home/widgets/home_buttons.dart';
 import 'package:baby_tracker/pages/home/widgets/home_container.dart';
 import 'package:baby_tracker/pages/home/widgets/home_row.dart';
 import 'package:baby_tracker/pages/information/view/information_view.dart';
@@ -34,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
             },
             child: TextWidgets(
               text: editProfie,
-              size: 13,
+              size: 15,
               color: darkBlue,
             ),
           ),
@@ -42,13 +41,16 @@ class _HomeViewState extends State<HomeView> {
               text: InformationGetIt.nameController.text,
               size: 25,
               color: purple),
+          SizedBox(
+            height: 8,
+          ),
           TextWidgets(
             text: '44 Months 17 Days',
             size: 14,
             color: black,
           ),
           SizedBox(
-            height: 25,
+            height: DeviceConfig.screenHeight! * 0.0269,
           ),
           HomeContainer(),
         ],

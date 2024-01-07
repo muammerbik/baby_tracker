@@ -1,5 +1,7 @@
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/feeding/view/feeding_view.dart';
@@ -16,121 +18,118 @@ class CustomFeedListView extends StatefulWidget {
 
 class _CustomFeedListViewState extends State<CustomFeedListView> {
   final feedingGetIt = locator<FeedingViewModel>();
-/* 
-  @override
-  void initState() {
-    feedingGetIt.initGet();
-   
-    super.initState();
-  } */
 
   @override
   Widget build(BuildContext context) {
+    DeviceConfig().init(context);
     return Observer(
-      builder: (context) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: feedingGetIt.feedList.isNotEmpty
-              ? ListView.builder(
-                  itemCount: feedingGetIt.feedList.length,
-                  itemBuilder: (context, index) {
-                    final list = feedingGetIt.feedList[index];
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Dismissible(
-                        direction: DismissDirection.startToEnd,
-                        background: Row(children: [
-                          Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                            size: 30,
+      builder: (context) => feedingGetIt.feedList.isNotEmpty
+          ? ListView.builder(
+              itemCount: feedingGetIt.feedList.length,
+              itemBuilder: (context, index) {
+                final list = feedingGetIt.feedList[index];
+                return Dismissible(
+                  direction: DismissDirection.startToEnd,
+                  background: Row(children: [
+                    Icon(
+                      Icons.delete,
+                      color: red,
+                      size: 30,
+                    ),
+                    TextWidgets(
+                      text: delete,
+                      size: 20,
+                      color: black,
+                    )
+                  ]),
+                  key: UniqueKey(),
+                  onDismissed: (direction) {
+                    feedingGetIt.delete(list.id);
+                  },
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigation.push(
+                        page: FeedingView(),
+                      );
+                      feedingGetIt.selectedFeed = list;
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: DeviceConfig.screenHeight! * 0.0109,
+                          horizontal: DeviceConfig.screenHeight! * 0.0200),
+                      child: Container(
+                        width: double.infinity,
+                        height: DeviceConfig.screenHeight! * 0.14,
+                        decoration: ShapeDecoration(
+                          color: darkWhite,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
                           ),
-                          SizedBox(width: 5),
-                          Text(
-                            "Delete",
-                            style: TextStyle(fontSize: 20),
-                          )
-                        ]),
-                        key: UniqueKey(),
-                        onDismissed: (direction) {
-                          feedingGetIt.delete(list.id);
-                        },
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigation.push(
-                              page: FeedingView(),
-                            );
-                            feedingGetIt.selectedFeed = list;
-                          },
-                          child: Container(
-                            width: 380,
-                            height: 105,
-                            decoration: ShapeDecoration(
-                              color: Color(0xFFF3F3F3),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: DeviceConfig.screenHeight! * 0.0059,
+                              ),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    calenderImg,
+                                    color: orange.shade800,
+                                    height: DeviceConfig.screenHeight! * 0.0491,
+                                  ),
+                                  Text(
+                                    "12 Feb2021",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
                               ),
                             ),
-                            child: Column(
+                            Divider(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        "assets/icons/file.png",
-                                        color: Colors.orange.shade800,
-                                        height: 40,
-                                      ),
-                                      Text(
-                                        "12 Feb2021",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Image.asset("assets/images/bottle.png",
-                                            height: 37, color: darkBlue),
-                                        Text(
-                                          "Feeding",
-                                          style: TextStyle(
-                                              fontSize: 18, color: darkBlue),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15),
-                                      child: Text(
-                                        list.time,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
+                                    Image.asset(feedingIcon,
+                                        height:
+                                            DeviceConfig.screenHeight! * 0.0450,
+                                        color: darkBlue),
+                                    TextWidgets(
+                                      text: feeding,
+                                      size: 18,
+                                      color: darkBlue,
                                     )
                                   ],
                                 ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          DeviceConfig.screenWidth! * 0.024),
+                                  child: TextWidgets(
+                                    text: list.time,
+                                    size: 16,
+                                    color: black,
+                                  ),
+                                )
                               ],
                             ),
-                          ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                )
-              : Center(
-                  child: Text(
-                    "No information about feeding!",
-                    style: TextStyle(fontSize: 18),
+                    ),
                   ),
-                )),
+                );
+              },
+            )
+          : Center(
+              child: TextWidgets(
+                text: feedingIsempty,
+                size: 18,
+                color: black,
+              ),
+            ),
     );
   }
 }

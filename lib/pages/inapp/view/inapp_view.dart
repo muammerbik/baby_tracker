@@ -42,7 +42,7 @@ class _InappViewState extends State<InappView> {
                     );
                   },
                   icon: Image.asset(
-                    "assets/images/inapp3.png",
+                    inappImgExit,
                     height: 15,
                     width: 15,
                   ),
@@ -53,7 +53,7 @@ class _InappViewState extends State<InappView> {
               child: TextWidgets(text: getPremium, size: 27, color: btnBlue),
             ),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0389),
-            Image.asset("assets/images/inapp1.png",
+            Image.asset(inappImageBaby,
                 width: double.infinity,
                 height: DeviceConfig.screenHeight! * 0.1229),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0403),

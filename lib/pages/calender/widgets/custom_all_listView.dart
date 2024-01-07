@@ -1,5 +1,7 @@
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/calender/viewmodel/calender_viewmodel.dart';
 import 'package:baby_tracker/pages/diaper_change/view/diaper_change_view.dart';
@@ -34,130 +36,133 @@ class _CustomAllListViewState extends State<CustomAllListView> {
 
   @override
   Widget build(BuildContext context) {
+    DeviceConfig().init(context);
     return Observer(
       builder: (context) => Center(
-        child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: calenderGetIt.mergedList.isNotEmpty
-                ? ListView.builder(
-                    itemCount: calenderGetIt.mergedList.length,
-                    itemBuilder: (context, index) {
-                      final item = calenderGetIt.mergedList[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Dismissible(
-                          direction: DismissDirection.startToEnd,
-                          background: Row(children: [
-                            Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                              size: 30,
+        child: calenderGetIt.mergedList.isNotEmpty
+            ? ListView.builder(
+                itemCount: calenderGetIt.mergedList.length,
+                itemBuilder: (context, index) {
+                  final item = calenderGetIt.mergedList[index];
+                  return Dismissible(
+                    direction: DismissDirection.startToEnd,
+                    background: Row(children: [
+                      Icon(
+                        Icons.delete,
+                        color: red,
+                        size: 30,
+                      ),
+                      TextWidgets(
+                        text: "Delete",
+                        size: 20,
+                        color: black,
+                      )
+                    ]),
+                    key: UniqueKey(),
+                    onDismissed: (direction) {
+                      if (item.type == "feeding") {
+                        feedingGetIt.delete(item.id);
+                      } else if (item.type == "diaper") {
+                        diaperGetIt.delete(item.id);
+                      } else {
+                        sleepGetIt.delete(item.id);
+                      }
+                    },
+                    child: GestureDetector(
+                      onTap: () {
+                        if (item.type == "feeding") {
+                          Navigation.push(page: FeedingView());
+                          feedingGetIt.selectedFeed =
+                              feedingGetIt.feedList[index];
+                        } else if (item.type == "diaper") {
+                          Navigation.push(page: DiaperChangeView());
+
+                          diaperGetIt.selectedDiaper =
+                              diaperGetIt.diaperList[index];
+                        } else {
+                          Navigation.push(page: SleepView());
+
+                          sleepGetIt.selectedSlep = sleepGetIt.sleepList[index];
+                        }
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: DeviceConfig.screenHeight! * 0.0109,
+                            horizontal: DeviceConfig.screenHeight! * 0.0200),
+                        child: Container(
+                          width: double.infinity,
+                          height: DeviceConfig.screenHeight! * 0.14,
+                          decoration: ShapeDecoration(
+                            color: darkWhite,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
                             ),
-                            SizedBox(width: 5),
-                            Text(
-                              "Delete",
-                              style: TextStyle(fontSize: 20),
-                            )
-                          ]),
-                          key: UniqueKey(),
-                          onDismissed: (direction) {
-                            if (item.type == "feeding") {
-                              feedingGetIt.delete(item.id);
-                            } else if (item.type == "diaper") {
-                              diaperGetIt.delete(item.id);
-                            } else {
-                              sleepGetIt.delete(item.id);
-                            }
-                          },
-                          child: GestureDetector(
-                            onTap: () {
-                              if (item.type == "feeding") {
-                                Navigation.push(page: FeedingView());
-                                feedingGetIt.selectedFeed =
-                                    feedingGetIt.feedList[index];
-                              } else if (item.type == "diaper") {
-                                Navigation.push(page: DiaperChangeView());
-
-                                diaperGetIt.selectedDiaper =
-                                    diaperGetIt.diaperList[index];
-                              } else {
-                                Navigation.push(page: SleepView());
-
-                                sleepGetIt.selectedSlep =
-                                    sleepGetIt.sleepList[index];
-                              }
-                            },
-                            child: Container(
-                              width: 380,
-                              height: 105,
-                              decoration: ShapeDecoration(
-                                color: Color(0xFFF3F3F3),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: DeviceConfig.screenHeight! * 0.0059,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      calenderImg,
+                                      color: orange.shade800,
+                                      height:
+                                          DeviceConfig.screenHeight! * 0.0491,
+                                    ),
+                                    Text(
+                                      "12 Feb2021",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              child: Column(
+                              Divider(),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          "assets/icons/file.png",
-                                          color: Colors.orange.shade800,
-                                          height: 40,
-                                        ),
-                                        Text(
-                                          "12 Feb2021",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Image.asset(item.iconPath,
-                                              height: 38, color: darkBlue),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            item.category,
-                                            style: TextStyle(
-                                                fontSize: 18, color: darkBlue),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Text(
-                                          item.time,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
+                                      Image.asset(item.iconPath,
+                                          height: DeviceConfig.screenHeight! *
+                                              0.0451,
+                                          color: darkBlue),
+                                      SizedBox(width: 5),
+                                      TextWidgets(
+                                        text: item.category,
+                                        size: 18,
+                                        color: darkBlue,
                                       )
                                     ],
                                   ),
+                                  Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      child: TextWidgets(
+                                        text: item.time,
+                                        size: 16,
+                                        color: black,
+                                      ))
                                 ],
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  )
-                : Center(
-                    child: Text(
-                      "No attached data found!",
-                      style: TextStyle(fontSize: 18),
+                      ),
                     ),
-                  )),
+                  );
+                },
+              )
+            : Center(
+                child: TextWidgets(
+                  text: diaperIsempty,
+                  size: 18,
+                  color: black,
+                ),
+              ),
       ),
     );
   }

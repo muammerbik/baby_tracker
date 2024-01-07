@@ -58,3 +58,16 @@ abstract class _CalenderViewMoelBase with Store {
     mergedList.sort((a, b) => b.date.compareTo(a.date));
   }
 }
+
+class CalenderModel {
+  String id;
+  DateTime history;
+  String catagori;
+  String created;
+  CalenderModel({
+    required this.id,
+    required this.history,
+    required this.catagori,
+    required this.created,
+  });
+}

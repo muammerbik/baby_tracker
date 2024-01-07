@@ -49,7 +49,7 @@ class _StackWidgetsState extends State<StackWidgets> {
                           .OnbordingList[widget.onbordingIndex].title,
                       size: 31,
                       color: black),
-                  const SizedBox(height: 15),
+                  SizedBox(height: DeviceConfig.screenHeight! * 0.0161),
                   TextWidgets(
                     text: onbordingGetIt
                         .OnbordingList[widget.onbordingIndex].subTitle,

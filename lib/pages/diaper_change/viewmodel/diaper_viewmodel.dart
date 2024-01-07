@@ -1,7 +1,10 @@
+import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/local_data/diaper_local_storage.dart';
 import 'package:baby_tracker/data/models/diaper_change_model.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
@@ -26,12 +29,26 @@ abstract class _DiaperViewModelBase with Store {
 
   @observable
   DiaperStatus? selectedStatus;
-
   @observable
   DiaperChangeModel? selectedDiaper;
-
   @observable
   bool isButtonEnabledDiaper = false;
+  @observable
+  TextEditingController diaperTimeController = TextEditingController();
+  @observable
+  TextEditingController diaperNoteController = TextEditingController();
+  @observable
+  List<DiaperChangeModel> diaperList = [];
+
+  @action
+  Future<void> init() async {
+    await getAll();
+  }
+
+  @action
+  void add(DiaperChangeModel diaperChange) {
+    diaperList = List.from(diaperList)..add(diaperChange);
+  }
 
   @action
   void upDateButtonstatus() {
@@ -41,6 +58,36 @@ abstract class _DiaperViewModelBase with Store {
   @action
   Future<void> initDiaper() async {
     await getDiaper();
+  }
+
+  @action
+  void setSelectedStatus(DiaperStatus? status) {
+    selectedStatus = status;
+  }
+
+  @action
+  Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
+    if (isButtonEnabledDiaper) {
+      if (selectedDiaper == null) {
+        await addDiaperChange();
+        diaperTimeController.clear();
+        selectedStatus = null;
+        diaperNoteController.clear();
+      } else {
+        await upDate(selectedDiaper!.id);
+        diaperTimeController.clear();
+        selectedStatus = null;
+        diaperNoteController.clear();
+      }
+      Navigation.push(page: HomeView());
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return CustomAlertDialog();
+        },
+      );
+    }
   }
 
   @action
@@ -58,29 +105,6 @@ abstract class _DiaperViewModelBase with Store {
     return diaperTimeController.text.isNotEmpty &&
         diaperNoteController.text.isNotEmpty &&
         selectedStatus!.index.toString().isNotEmpty;
-  }
-
-  @action
-  void setSelectedStatus(DiaperStatus? status) {
-    selectedStatus = status;
-  }
-
-  @observable
-  TextEditingController diaperTimeController = TextEditingController();
-  @observable
-  TextEditingController diaperNoteController = TextEditingController();
-
-  @observable
-  List<DiaperChangeModel> diaperList = [];
-
-  @action
-  Future<void> init() async {
-    await getAll();
-  }
-
-  @action
-  void add(DiaperChangeModel diaperChange) {
-    diaperList = List.from(diaperList)..add(diaperChange);
   }
 
   @action

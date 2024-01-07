@@ -2,7 +2,8 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
-import 'package:flutter/material.dart';
+import 'package:baby_tracker/pages/information/widgets/action_sheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class AddImageWidgets extends StatefulWidget {
@@ -15,15 +16,24 @@ class AddImageWidgets extends StatefulWidget {
 class _AddImageWidgetsState extends State<AddImageWidgets> {
   final informationGetIt = locator<InformationViewModel>();
 
-
-
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
     return Observer(
       builder: (context) => GestureDetector(
         onTap: () {
-          showImagePicker();
+          showCustomActionSheet(
+            context,
+            () {
+              // Camera Tapped
+              informationGetIt.imgFromCamera();
+            },
+            () {
+              // Gallery Tapped
+              informationGetIt.imgFromGallery();
+              ;
+            },
+          );
         },
         child: Stack(
           children: [
@@ -39,9 +49,7 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
                   ? Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: DeviceConfig.screenWidth! * 0.0817),
-                      child: Image.asset(
-                  "assets/images/camera.png"
-                      ),
+                      child: Image.asset("assets/images/camera.png"),
                     )
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(150.0),
@@ -74,71 +82,17 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
     );
   }
 
-  void showImagePicker() {
-    showModalBottomSheet(
+  void showCustomActionSheet(
+    BuildContext context,
+    VoidCallback cameraTapped,
+    VoidCallback galleryTapped,
+  ) {
+    showCupertinoModalPopup(
       context: context,
-      builder: (builder) {
-        DeviceConfig().init(context);
-        return Observer(
-          builder: (context) => Card(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 5.2,
-              margin: const EdgeInsets.only(top: 8.0),
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.image,
-                            size: 60.0,
-                          ),
-                          SizedBox(height: DeviceConfig.screenHeight! * 0.0170),
-                          Text(
-                            gallery,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16, color: black),
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        informationGetIt.imgFromGallery();
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      child: SizedBox(
-                        child: Column(
-                          children: const [
-                            Icon(
-                              Icons.camera_alt,
-                              size: 60.0,
-                            ),
-                            SizedBox(height: 12.0),
-                            Text(
-                              camera,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16, color: black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        informationGetIt.imgFromCamera();
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+      builder: (BuildContext context) {
+        return ActionSheet(
+          cameraTapped: cameraTapped,
+          galleryTapped: galleryTapped,
         );
       },
     );

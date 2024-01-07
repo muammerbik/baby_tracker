@@ -55,7 +55,7 @@ class _HomeContainerState extends State<HomeContainer> {
               title: sleep,
               img: "assets/images/sleep.png",
               onTap: () {
-                  Navigation.push(page: SleepView());
+                Navigation.push(page: SleepView());
               },
             )
           ],

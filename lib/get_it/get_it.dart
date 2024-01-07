@@ -5,6 +5,7 @@ import 'package:baby_tracker/data/local_data/sleep_local_storage.dart';
 import 'package:baby_tracker/pages/calender/viewmodel/calender_viewmodel.dart';
 import 'package:baby_tracker/pages/diaper_change/viewmodel/diaper_viewmodel.dart';
 import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
+import 'package:baby_tracker/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:baby_tracker/pages/inapp/viewmodel/inapp_view_model.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/onbording/viewmodel/onbording_viewmodel.dart';
@@ -26,5 +27,7 @@ void setupGetIt() {
   locator.registerSingleton<DiaperViewModel>(DiaperViewModel());
   locator.registerSingleton<SettingViewModel>(SettingViewModel());
   locator.registerSingleton<CalenderViewMoel>(CalenderViewMoel());
+  locator.registerSingleton<HomeViewModel>(HomeViewModel());
+
 
 }

@@ -1,9 +1,12 @@
 import 'dart:ffi';
 
+import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/data/local_data/sleep_local_storage.dart';
 import 'package:baby_tracker/data/models/sleeep_model.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
@@ -20,21 +23,26 @@ abstract class _SleepViewModelBase with Store {
 
   @observable
   TextEditingController sleepFellController = TextEditingController();
-
   @observable
   TextEditingController sleepWakeupController = TextEditingController();
-
   @observable
   TextEditingController sleepNoteController = TextEditingController();
-
   @observable
   List<SleepModel> sleepList = [];
-
   @observable
   SleepModel? selectedSlep;
-
   @observable
   bool isButtonEnabledSleep = false;
+
+  @action
+  Future<void> initSlep() async {
+    await getSleep();
+  }
+
+  @action
+  Future<void> init() async {
+    await getAll();
+  }
 
   @action
   void updateButtonStatusSleep() {
@@ -49,18 +57,34 @@ abstract class _SleepViewModelBase with Store {
   }
 
   @action
-  Future<void> initSlep() async {
-    await getSleep();
-  }
-
-  @action
-  Future<void> init() async {
-    await getAll();
-  }
-
-  @action
   void add(SleepModel slepMoel) {
     sleepList = List.from(sleepList)..add(slepMoel);
+  }
+
+  @action
+  Future<void> isSleepButtonTapped(BuildContext context) async {
+    if (isButtonEnabledSleep) {
+      if (selectedSlep == null) {
+        await addSleep();
+        sleepFellController.clear();
+        sleepWakeupController.clear();
+        sleepNoteController.clear();
+      } else {
+        upDate(selectedSlep!.id);
+        sleepFellController.clear();
+        sleepWakeupController.clear();
+        sleepNoteController.clear();
+      }
+
+      Navigation.push(page: HomeView());
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return CustomAlertDialog();
+        },
+      );
+    }
   }
 
   @action
@@ -120,7 +144,4 @@ abstract class _SleepViewModelBase with Store {
       sleepNoteController.text = sleepGet.note;
     }
   }
-
-
-  
 }

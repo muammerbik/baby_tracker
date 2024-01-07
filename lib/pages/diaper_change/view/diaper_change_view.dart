@@ -1,7 +1,9 @@
+import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/diaper_change/viewmodel/diaper_viewmodel.dart';
 import 'package:baby_tracker/pages/diaper_change/widgets/diaper_change_column.dart';
@@ -34,12 +36,14 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
 
   @override
   Widget build(BuildContext context) {
+    DeviceConfig().init(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         title: TextWidgets(
-          text: "Diaper Change",
+          text: diaperChange,
           size: 27,
           color: lightblue,
         ),
@@ -47,9 +51,9 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
       body: Observer(
         builder: (context) => Column(
           children: [
-            SizedBox(height: 15),
+            SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomTextFormField(
-                labelText: "Time",
+                labelText: time,
                 controller: diaperGetIt.diaperTimeController,
                 onTap: () {
                   informationGetIt.selectTime(
@@ -58,49 +62,17 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
                 keyboardType: TextInputType.number),
             DiaperChangeColumn(),
             CustomTextFormField(
-              hintText: "Note",
+              hintText: note,
               controller: diaperGetIt.diaperNoteController,
               maxLines: 10,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomElevatedButtonView(
-                text: "Save",
+                text: save,
                 onTop: () async {
-                  if (diaperGetIt.isButtonEnabledDiaper) {
-                    if (diaperGetIt.selectedDiaper == null) {
-                      await diaperGetIt.addDiaperChange();
-                      diaperGetIt.diaperTimeController.clear();
-                      diaperGetIt.selectedStatus = null;
-                      diaperGetIt.diaperNoteController.clear();
-                    } else {
-                      await diaperGetIt.upDate(diaperGetIt.selectedDiaper!.id);
-                      diaperGetIt.diaperTimeController.clear();
-                      diaperGetIt.selectedStatus = null;
-                      diaperGetIt.diaperNoteController.clear();
-                    }
-                    Navigation.push(page: HomeView());
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Doğrulama Hatası"),
-                          content: Text(
-                              " Devam etmek için  lütfen tüm alanları  doldurun!!!"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text("Tamam"),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
+                  diaperGetIt.isDiaperChangeButtonTapped(context);
                 },
-                color: lightblue)
+                color: lightblue),
           ],
         ),
       ),

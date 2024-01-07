@@ -105,6 +105,16 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
     });
   }
 
+  late final _$isFeedingButtonTappedAsyncAction = AsyncAction(
+      '_FeedingViewModelBase.isFeedingButtonTapped',
+      context: context);
+
+  @override
+  Future<void> isFeedingButtonTapped(BuildContext context) {
+    return _$isFeedingButtonTappedAsyncAction
+        .run(() => super.isFeedingButtonTapped(context));
+  }
+
   late final _$initAsyncAction =
       AsyncAction('_FeedingViewModelBase.init', context: context);
 
@@ -119,14 +129,6 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
   @override
   Future<void> initGet() {
     return _$initGetAsyncAction.run(() => super.initGet());
-  }
-
-  late final _$clearFieldsAsyncAction =
-      AsyncAction('_FeedingViewModelBase.clearFields', context: context);
-
-  @override
-  Future<void> clearFields() {
-    return _$clearFieldsAsyncAction.run(() => super.clearFields());
   }
 
   late final _$addFeedingAsyncAction =

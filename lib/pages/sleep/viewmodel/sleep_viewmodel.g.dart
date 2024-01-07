@@ -123,6 +123,15 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
     return _$initAsyncAction.run(() => super.init());
   }
 
+  late final _$isSleepButtonTappedAsyncAction =
+      AsyncAction('_SleepViewModelBase.isSleepButtonTapped', context: context);
+
+  @override
+  Future<void> isSleepButtonTapped(BuildContext context) {
+    return _$isSleepButtonTappedAsyncAction
+        .run(() => super.isSleepButtonTapped(context));
+  }
+
   late final _$addSleepAsyncAction =
       AsyncAction('_SleepViewModelBase.addSleep', context: context);
 

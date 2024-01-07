@@ -1,7 +1,9 @@
+import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
@@ -33,82 +35,44 @@ class _SleepViewState extends State<SleepView> {
 
   @override
   Widget build(BuildContext context) {
+    DeviceConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        title: TextWidgets(text: "Sleep", size: 27, color: darkBlue),
+        title: TextWidgets(text: sleep, size: 27, color: darkBlue),
       ),
       body: Column(
         children: [
-          SizedBox(height: 15),
+          SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
           CustomTextFormField(
               onTap: () {
                 informationGetIt.selectTime(
                     context, sleepGetIt.sleepFellController);
               },
-              labelText: "Fell Sleep",
+              labelText: fellSleep,
               controller: sleepGetIt.sleepFellController),
-          SizedBox(
-            height: 23,
-          ),
+          SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
           CustomTextFormField(
               onTap: () {
                 informationGetIt.selectTime(
                     context, sleepGetIt.sleepWakeupController);
               },
-              labelText: "Wake Up",
+              labelText: wakeApp,
               controller: sleepGetIt.sleepWakeupController),
-          SizedBox(
-            height: 23,
-          ),
+          SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
           CustomTextFormField(
-              hintText: "Note",
+              hintText: note,
               controller: sleepGetIt.sleepNoteController,
               maxLines: 10),
           Spacer(),
           CustomElevatedButtonView(
-              text: "Save",
+              text: save,
               onTop: () async {
-                if (sleepGetIt.isButtonEnabledSleep) {
-                  if (sleepGetIt.selectedSlep == null) {
-                    await sleepGetIt.addSleep();
-                    sleepGetIt.sleepFellController.clear();
-                    sleepGetIt.sleepWakeupController.clear();
-                    sleepGetIt.sleepNoteController.clear();
-                  } else {
-                    sleepGetIt.upDate(sleepGetIt.selectedSlep!.id);
-                    sleepGetIt.sleepFellController.clear();
-                    sleepGetIt.sleepWakeupController.clear();
-                    sleepGetIt.sleepNoteController.clear();
-                  }
-
-                  Navigation.push(page: HomeView());
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text("Doğrulama Hatası"),
-                        content: Text(
-                            " Devam etmek için  lütfen tüm alanları  doldurun!!!"),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text("Tamam"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
+                sleepGetIt.isSleepButtonTapped(context);
               },
               color: darkBlue),
-          SizedBox(
-            height: 30,
-          )
+          SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
         ],
       ),
     );
