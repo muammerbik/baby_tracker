@@ -70,7 +70,9 @@ class _InformationViewState extends State<InformationView> {
                 child: Column(
                   children: [
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
-                    InformationRow(),
+                    Observer(
+                      builder: (context) => InformationRow(),
+                    ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     CustomTextFormField(
                       labelText: babyFullName,
@@ -78,14 +80,16 @@ class _InformationViewState extends State<InformationView> {
                       keyboardType: TextInputType.name,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
-                    CustomTextFormField(
-                      labelText: birthDate,
-                      keyboardType: TextInputType.datetime,
-                      onTap: () {
-                        informationGetIt.selectDate(
-                            context, informationGetIt.birthDateController);
-                      },
-                      controller: informationGetIt.birthDateController,
+                    Observer(
+                      builder: (context) => CustomTextFormField(
+                        labelText: birthDate,
+                        keyboardType: TextInputType.datetime,
+                        onTap: () {
+                          informationGetIt.selectDate(
+                              context, informationGetIt.birthDateController);
+                        },
+                        controller: informationGetIt.birthDateController,
+                      ),
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     CustomTextFormField(

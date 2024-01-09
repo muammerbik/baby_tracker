@@ -7,6 +7,7 @@ import 'package:baby_tracker/pages/calender/view/calender_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/settings/view/settings_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomeRow extends StatefulWidget {
   const HomeRow({super.key});
@@ -24,47 +25,49 @@ class _HomeRowState extends State<HomeRow> {
 
     final String? localImagePath = informationGetIt.imageFile?.path;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        IconButton(
-          onPressed: () {
-            Navigation.push(page: SettingsView());
-          },
-          icon: Image.asset(
-            "assets/icons/stng.png",
-            height: DeviceConfig.screenHeight! * 0.0269,
+    return Observer(
+      builder: (context) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          IconButton(
+            onPressed: () {
+              Navigation.push(page: SettingsView());
+            },
+            icon: Image.asset(
+              "assets/icons/stng.png",
+              height: DeviceConfig.screenHeight! * 0.0269,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Container(
-            width: DeviceConfig.screenHeight! * 0.1428,
-            height: DeviceConfig.screenHeight! * 0.1399,
-            decoration: ShapeDecoration(
-              image: localImagePath != null
-                  ? DecorationImage(
-                      image: FileImage(File(localImagePath)),
-                      fit: BoxFit.fill,
-                    )
-                  : null, // Eğer resim yoksa null olarak bırakın
-              shape: OvalBorder(
-                side: BorderSide(width: 1, color: purple),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Container(
+              width: DeviceConfig.screenHeight! * 0.1428,
+              height: DeviceConfig.screenHeight! * 0.1399,
+              decoration: ShapeDecoration(
+                image: localImagePath != null
+                    ? DecorationImage(
+                        image: FileImage(File(localImagePath)),
+                        fit: BoxFit.fill,
+                      )
+                    : null, // Eğer resim yoksa null olarak bırakın
+                shape: OvalBorder(
+                  side: BorderSide(width: 1, color: purple),
+                ),
               ),
             ),
           ),
-        ),
-        IconButton(
-          onPressed: () {
-            Navigation.push(page: CalenderView());
-          },
-          icon: Image.asset(
-            "assets/icons/file.png",
-            height: DeviceConfig.screenHeight! * 0.0485,
+          IconButton(
+            onPressed: () {
+              Navigation.push(page: CalenderView());
+            },
+            icon: Image.asset(
+              "assets/icons/file.png",
+              height: DeviceConfig.screenHeight! * 0.0485,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

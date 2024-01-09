@@ -62,6 +62,12 @@ abstract class _InformationViewModelBase with Store {
     isGirl = false;
   }
 
+  @observable
+  List<InformationModel> informationList = [];
+
+  @observable
+  InformationModel? selectedInformation;
+
   @action
   Future<void> InformationComplatedSet() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -74,7 +80,7 @@ abstract class _InformationViewModelBase with Store {
     SharedPreferences pref = await SharedPreferences.getInstance();
     isInformationComplated = pref.getBool("isInformationComplated") ?? false;
   }
-
+/* 
   @action
   Future<void> isInfoButtonTapped(BuildContext context, String pathh) async {
     if (pathh != null &&
@@ -95,7 +101,36 @@ abstract class _InformationViewModelBase with Store {
         },
       );
     }
+  } */
+
+  @action
+Future<void> isInfoButtonTapped(BuildContext context, String pathh) async {
+  if (pathh != null &&
+      nameController.text.isNotEmpty &&
+      birthDateController.text.isNotEmpty &&
+      timeofBirthController.text.isNotEmpty &&
+      dueDateController.text.isNotEmpty &&
+      imageFile != null) {
+    if (selectedInformation != null) {
+      // Kullanıcı mevcut bilgileri güncellemek istiyor
+      await upDate(selectedInformation!.id!);
+    } else {
+      // Kullanıcı yeni bilgi ekliyor
+      await addInformation();
+    }
+
+    InformationComplatedSet();
+    Navigation.push(page: HomeView());
+  } else {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomAlertDialog();
+      },
+    );
   }
+}
+
 
   @action
   Future<void> addInformation() async {
@@ -122,6 +157,32 @@ abstract class _InformationViewModelBase with Store {
       print("Hata: $e");
     }
   }
+@action
+Future<void> upDate(String id) async {
+  try {
+    InformationModel infoToUpdate =
+        informationList.firstWhere((info) => info.id == id);
+    infoToUpdate.cinsiyet = isGirl;
+    infoToUpdate.fullName = nameController.text;
+    infoToUpdate.birthDate = birthDateController.text;
+    infoToUpdate.timeOfBirth = timeofBirthController.text;
+    infoToUpdate.dueDate = dueDateController.text;
+
+ 
+    if (imageFile != null) {
+      Uint8List imageBytes = await _readFileAsBytes(imageFile!.path);
+      final localImagePath =
+          await FileHandler().saveFileToPhoneMemory("test.png", imageBytes);
+      infoToUpdate.img = localImagePath;
+    }
+
+    await informationDB.upDateInformation(informationModel: infoToUpdate);
+    informationList = List.from(informationList);
+  } catch (e) {
+    print(e);
+  }
+}
+
 
   @action
   Future<Uint8List> _readFileAsBytes(String filePath) async {
@@ -147,10 +208,6 @@ abstract class _InformationViewModelBase with Store {
       dueDateController.text = lastInformation.dueDate;
     }
   }
-
-
-
-
 
   @action
   Future<void> selectTime(

@@ -52,9 +52,9 @@ const onboardingTitle3 = 'Stay Connected \nwith Caregivers';
 const onboardingSubTiitle3 =
     "Share access to your baby's tracker with\nfamily members, babysitters, or healthcare\nproviders ";
 const snackbarMassageInaap = "Please choose the appropriate Premium package!";
-const informationContent =
+const errorContent =
     "Please make sure you fill out all fields completely";
-const informationTitle = "Missing or incorrect entry!";
+const errorTitle = "Missing or incorrect entry!";
 const settings = "Settings";
 const getPremiumm = "Get Premium";
 const rateUs = "Rate Us";

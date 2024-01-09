@@ -15,9 +15,9 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(informationTitle),
+      title: Text(errorTitle),
       content: Text(
-        informationContent,
+        errorContent,
         style: TextStyle(fontSize: 16),
       ),
       actions: [

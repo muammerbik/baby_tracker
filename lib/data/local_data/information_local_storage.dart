@@ -5,7 +5,6 @@ import 'package:baby_tracker/data/models/information_model.dart';
 abstract class InformationLocalStorageHive {
   Future<void> addInformation({required InformationModel informationModel});
   Future<InformationModel?> getInformation({required String id});
-
   Future<InformationModel> upDateInformation(
       {required InformationModel informationModel});
 }
@@ -32,4 +31,5 @@ class InformationStorage extends InformationLocalStorageHive {
     await informationModel.save();
     return informationModel;
   }
+  
 }

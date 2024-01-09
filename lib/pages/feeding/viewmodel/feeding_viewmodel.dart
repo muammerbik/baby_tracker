@@ -51,7 +51,6 @@ abstract class _FeedingViewModelBase with Store {
         noteController.clear();
       }
 
-      // Diğer işlemler
       Navigation.push(
         page: HomeView(),
       );
