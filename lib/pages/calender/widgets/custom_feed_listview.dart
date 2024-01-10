@@ -19,6 +19,8 @@ class CustomFeedListView extends StatefulWidget {
 class _CustomFeedListViewState extends State<CustomFeedListView> {
   final feedingGetIt = locator<FeedingViewModel>();
 
+  int? selectedIndex;
+
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -49,17 +51,17 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                   child: GestureDetector(
                     onTap: () {
                       Navigation.push(
-                        page: FeedingView(),
+                        page: FeedingView(/**feedingModel: list */),
                       );
                       feedingGetIt.selectedFeed = list;
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: DeviceConfig.screenHeight! * 0.0109,
-                          horizontal: DeviceConfig.screenHeight! * 0.0200),
+                        vertical: DeviceConfig.screenHeight! * 0.0109,
+                        horizontal: DeviceConfig.screenHeight! * 0.0200,
+                      ),
                       child: Container(
                         width: double.infinity,
-                        height: DeviceConfig.screenHeight! * 0.14,
                         decoration: ShapeDecoration(
                           color: darkWhite,
                           shape: RoundedRectangleBorder(
@@ -69,52 +71,78 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: DeviceConfig.screenHeight! * 0.0059,
-                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 11, vertical: 10),
                               child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Image.asset(
-                                    calenderImg,
-                                    color: orange.shade800,
-                                    height: DeviceConfig.screenHeight! * 0.0491,
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        feedingIcon,
+                                        height:
+                                            DeviceConfig.screenHeight! * 0.0450,
+                                        color: darkBlue,
+                                      ),
+                                      TextWidgets(
+                                        text: feeding,
+                                        size: 18,
+                                        color: darkBlue,
+                                      )
+                                    ],
                                   ),
-                                  Text(
-                                    "12 Feb2021",
-                                    style: TextStyle(fontSize: 20),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          DeviceConfig.screenWidth! * 0.044,
+                                    ),
+                                    child: TextWidgets(
+                                      text: list.time,
+                                      size: 16,
+                                      color: black,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                             Divider(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.asset(feedingIcon,
-                                        height:
-                                            DeviceConfig.screenHeight! * 0.0450,
-                                        color: darkBlue),
-                                    TextWidgets(
-                                      text: feeding,
-                                      size: 18,
-                                      color: darkBlue,
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          DeviceConfig.screenWidth! * 0.024),
-                                  child: TextWidgets(
-                                    text: list.time,
-                                    size: 16,
-                                    color: black,
+                            ListTile(
+                              title: Row(
+                                children: [
+                                  Image.asset(
+                                    calenderImg,
+                                    color: orange.shade800,
+                                    height: DeviceConfig.screenHeight! * 0.0451,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    "Feeding Note",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              ),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      feedingGetIt.updateSelectedIndex(index);
+                                    });
+                                  },
+                                  icon: Icon(
+                                    selectedIndex == index
+                                        ? Icons.expand_less
+                                        : Icons.expand_more,
+                                  )),
                             ),
+                            if (feedingGetIt.selectedIndex == index)
+                              Observer(
+                                builder: (context) => Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    list.note,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
                           ],
                         ),
                       ),

@@ -1,6 +1,5 @@
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 
@@ -11,28 +10,18 @@ class HomeViewModel = _HomeViewModelBase with _$HomeViewModel;
 abstract class _HomeViewModelBase with Store {
   final informationGetIt = locator<InformationViewModel>();
 
-  // Diğer kodlar...
-
   @observable
   String age = '';
 
-  ReactionDisposer? _reactionDisposer;
-
   _HomeViewModelBase() {
     init();
-    _reactionDisposer = reaction(
-      // Burada InformationViewModel'daki birthDateController değerine erişebilirsiniz
-      (_) => informationGetIt.birthDateController.text,
-      (String birthDate) {
-        calculateAge();
-      },
-    );
   }
 
   @action
   Future<void> calculateAge() async {
     try {
-      DateTime birthDate = DateFormat('yyyy-MM-dd').parse(informationGetIt.birthDateController.text);
+      DateTime birthDate = DateFormat('MM/dd/yyyy')
+          .parse(informationGetIt.birthDateController.text);
       DateTime currentDate = DateTime.now();
 
       Duration difference = currentDate.difference(birthDate);
@@ -51,9 +40,5 @@ abstract class _HomeViewModelBase with Store {
   @action
   Future<void> init() async {
     await calculateAge();
-  }
-
-  void dispose() {
-    _reactionDisposer?.call();
   }
 }

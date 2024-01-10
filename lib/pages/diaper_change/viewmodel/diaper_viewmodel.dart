@@ -47,12 +47,19 @@ abstract class _DiaperViewModelBase with Store {
 
   @action
   void add(DiaperChangeModel diaperChange) {
-    diaperList = List.from(diaperList)..add(diaperChange);
+    diaperList = List.from(diaperList)..insert(0, diaperChange);
   }
 
   @action
   void upDateButtonstatus() {
     isButtonEnabledDiaper = statusButtonTapped();
+  }
+  
+  @action
+  bool statusButtonTapped() {
+    return diaperTimeController.text.isNotEmpty &&
+        diaperNoteController.text.isNotEmpty &&
+        selectedStatus!.index.toString().isNotEmpty;
   }
 
   @action
@@ -100,12 +107,6 @@ abstract class _DiaperViewModelBase with Store {
     }
   }
 
-  @action
-  bool statusButtonTapped() {
-    return diaperTimeController.text.isNotEmpty &&
-        diaperNoteController.text.isNotEmpty &&
-        selectedStatus!.index.toString().isNotEmpty;
-  }
 
   @action
   Future<void> addDiaperChange() async {

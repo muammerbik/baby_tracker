@@ -14,7 +14,7 @@ abstract class _CalenderViewMoelBase with Store {
   }
 
   final feedingGetIt = locator<FeedingViewModel>();
-  final diaperGetIt = locator.get<DiaperViewModel>();
+  final diaperGetIt = locator<DiaperViewModel>();
   final sleepGetIt = locator<SleepViewModel>();
 
   @action
@@ -58,7 +58,7 @@ abstract class _CalenderViewMoelBase with Store {
     mergedList.sort((a, b) => b.date.compareTo(a.date));
   }
 }
-
+/* 
 class CalenderModel {
   String id;
   DateTime history;
@@ -70,4 +70,4 @@ class CalenderModel {
     required this.catagori,
     required this.created,
   });
-}
+} */

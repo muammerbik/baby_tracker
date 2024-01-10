@@ -5,6 +5,7 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
+import 'package:baby_tracker/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/information/widgets/add_images_widget.dart';
 import 'package:baby_tracker/pages/information/widgets/information_row.dart';
@@ -20,6 +21,7 @@ class InformationView extends StatefulWidget {
 
 class _InformationViewState extends State<InformationView> {
   final informationGetIt = locator<InformationViewModel>();
+  final homeViewGetIt = locator<HomeViewModel>();
 
   @override
   void initState() {
@@ -84,8 +86,8 @@ class _InformationViewState extends State<InformationView> {
                       builder: (context) => CustomTextFormField(
                         labelText: birthDate,
                         keyboardType: TextInputType.datetime,
-                        onTap: () {
-                          informationGetIt.selectDate(
+                        onTap: () async {
+                          await informationGetIt.selectDate(
                               context, informationGetIt.birthDateController);
                         },
                         controller: informationGetIt.birthDateController,
@@ -114,10 +116,11 @@ class _InformationViewState extends State<InformationView> {
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
                     CustomElevatedButtonView(
                       onTop: () async {
-                        informationGetIt.isInfoButtonTapped(
+                        await informationGetIt.isInfoButtonTapped(
                           context,
                           localImagePath.toString(),
                         );
+                        homeViewGetIt.calculateAge();
                       },
                       text: continuee,
                       color: darkPurple,

@@ -27,14 +27,6 @@ class _CustomAllListViewState extends State<CustomAllListView> {
   final diaperGetIt = locator.get<DiaperViewModel>();
 
   @override
-  void initState() {
-    feedingGetIt.initGet();
-    diaperGetIt.initDiaper();
-    sleepGetIt.initSlep();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
     return Observer(
@@ -71,7 +63,7 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                     child: GestureDetector(
                       onTap: () {
                         if (item.type == "feeding") {
-                          Navigation.push(page: FeedingView());
+                          Navigation.push(page: FeedingView(),);
                           feedingGetIt.selectedFeed =
                               feedingGetIt.feedList[index];
                         } else if (item.type == "diaper") {

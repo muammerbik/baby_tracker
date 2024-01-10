@@ -105,6 +105,22 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
     });
   }
 
+  late final _$selectedIndexAtom =
+      Atom(name: '_FeedingViewModelBase.selectedIndex', context: context);
+
+  @override
+  int? get selectedIndex {
+    _$selectedIndexAtom.reportRead();
+    return super.selectedIndex;
+  }
+
+  @override
+  set selectedIndex(int? value) {
+    _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
+      super.selectedIndex = value;
+    });
+  }
+
   late final _$isFeedingButtonTappedAsyncAction = AsyncAction(
       '_FeedingViewModelBase.isFeedingButtonTapped',
       context: context);
@@ -175,6 +191,17 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
       ActionController(name: '_FeedingViewModelBase', context: context);
 
   @override
+  void updateSelectedIndex(int index) {
+    final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
+        name: '_FeedingViewModelBase.updateSelectedIndex');
+    try {
+      return super.updateSelectedIndex(index);
+    } finally {
+      _$_FeedingViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void updateButtonStatus() {
     final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
         name: '_FeedingViewModelBase.updateButtonStatus');
@@ -215,7 +242,8 @@ mlController: ${mlController},
 noteController: ${noteController},
 feedList: ${feedList},
 selectedFeed: ${selectedFeed},
-isButtonEnabled: ${isButtonEnabled}
+isButtonEnabled: ${isButtonEnabled},
+selectedIndex: ${selectedIndex}
     ''';
   }
 }

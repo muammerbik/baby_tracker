@@ -35,6 +35,18 @@ abstract class _FeedingViewModelBase with Store {
   @observable
   bool isButtonEnabled = false;
 
+  @observable
+  int? selectedIndex;
+
+  @action
+  void updateSelectedIndex(int index) {
+    if (selectedIndex == index) {
+      selectedIndex = null;
+    } else {
+      selectedIndex = index;
+    }
+  }
+
   @action
   Future<void> isFeedingButtonTapped(BuildContext context) async {
     if (isButtonEnabled) {
@@ -63,6 +75,7 @@ abstract class _FeedingViewModelBase with Store {
       );
     }
   }
+  
 
   @action
   void updateButtonStatus() {
@@ -88,18 +101,18 @@ abstract class _FeedingViewModelBase with Store {
 
   @action
   void add(FeedingModel feed) {
-    feedList = List.from(feedList)..add(feed);
+    feedList = List.from(feedList)..insert(0, feed);
   }
 
   @action
   Future<void> addFeeding() async {
     try {
       var feedmodel = FeedingModel(
-          id: Uuid().v4(),
+          id: Uuid().v1(),
           time: timeController.text,
           amount: int.tryParse(mlController.text),
           note: noteController.text);
-      feedingStorage.addFeeding(feedingModel: feedmodel);
+      await feedingStorage.addFeeding(feedingModel: feedmodel);
 
       add(feedmodel);
     } catch (e) {

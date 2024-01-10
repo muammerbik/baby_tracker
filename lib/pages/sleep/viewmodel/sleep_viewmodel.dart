@@ -58,7 +58,7 @@ abstract class _SleepViewModelBase with Store {
 
   @action
   void add(SleepModel slepMoel) {
-    sleepList = List.from(sleepList)..add(slepMoel);
+    sleepList = List.from(sleepList)..insert(0, slepMoel);
   }
 
   @action
@@ -91,7 +91,7 @@ abstract class _SleepViewModelBase with Store {
   Future<void> addSleep() async {
     try {
       var sleepModel = SleepModel(
-          id: Uuid().v4(),
+          id: Uuid().v1(),
           fellSleep: sleepFellController.text,
           wakeUp: sleepWakeupController.text,
           note: sleepNoteController.text);

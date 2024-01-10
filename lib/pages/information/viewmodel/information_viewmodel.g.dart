@@ -141,6 +141,22 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
     });
   }
 
+  late final _$selectedInformationAtom = Atom(
+      name: '_InformationViewModelBase.selectedInformation', context: context);
+
+  @override
+  InformationModel? get selectedInformation {
+    _$selectedInformationAtom.reportRead();
+    return super.selectedInformation;
+  }
+
+  @override
+  set selectedInformation(InformationModel? value) {
+    _$selectedInformationAtom.reportWrite(value, super.selectedInformation, () {
+      super.selectedInformation = value;
+    });
+  }
+
   late final _$initAsyncAction =
       AsyncAction('_InformationViewModelBase.init', context: context);
 
@@ -185,6 +201,14 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
   @override
   Future<void> addInformation() {
     return _$addInformationAsyncAction.run(() => super.addInformation());
+  }
+
+  late final _$upDateAsyncAction =
+      AsyncAction('_InformationViewModelBase.upDate', context: context);
+
+  @override
+  Future<void> upDate() {
+    return _$upDateAsyncAction.run(() => super.upDate());
   }
 
   late final _$_readFileAsBytesAsyncAction = AsyncAction(
@@ -285,7 +309,8 @@ dueDateController: ${dueDateController},
 isInformationComplated: ${isInformationComplated},
 imageFile: ${imageFile},
 picker: ${picker},
-isGirl: ${isGirl}
+isGirl: ${isGirl},
+selectedInformation: ${selectedInformation}
     ''';
   }
 }

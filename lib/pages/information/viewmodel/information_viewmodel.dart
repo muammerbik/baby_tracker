@@ -1,4 +1,3 @@
-// information_viewmodel.dart
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
@@ -63,9 +62,6 @@ abstract class _InformationViewModelBase with Store {
   }
 
   @observable
-  List<InformationModel> informationList = [];
-
-  @observable
   InformationModel? selectedInformation;
 
   @action
@@ -80,7 +76,7 @@ abstract class _InformationViewModelBase with Store {
     SharedPreferences pref = await SharedPreferences.getInstance();
     isInformationComplated = pref.getBool("isInformationComplated") ?? false;
   }
-/* 
+
   @action
   Future<void> isInfoButtonTapped(BuildContext context, String pathh) async {
     if (pathh != null &&
@@ -89,9 +85,13 @@ abstract class _InformationViewModelBase with Store {
         timeofBirthController.text.isNotEmpty &&
         dueDateController.text.isNotEmpty &&
         imageFile != null) {
-      await addInformation();
-      InformationComplatedSet();
+      if (selectedInformation != null) {
+        await upDate();
+      } else {
+        await addInformation();
+      }
 
+      InformationComplatedSet();
       Navigation.push(page: HomeView());
     } else {
       showDialog(
@@ -101,36 +101,7 @@ abstract class _InformationViewModelBase with Store {
         },
       );
     }
-  } */
-
-  @action
-Future<void> isInfoButtonTapped(BuildContext context, String pathh) async {
-  if (pathh != null &&
-      nameController.text.isNotEmpty &&
-      birthDateController.text.isNotEmpty &&
-      timeofBirthController.text.isNotEmpty &&
-      dueDateController.text.isNotEmpty &&
-      imageFile != null) {
-    if (selectedInformation != null) {
-      // Kullanıcı mevcut bilgileri güncellemek istiyor
-      await upDate(selectedInformation!.id!);
-    } else {
-      // Kullanıcı yeni bilgi ekliyor
-      await addInformation();
-    }
-
-    InformationComplatedSet();
-    Navigation.push(page: HomeView());
-  } else {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return CustomAlertDialog();
-      },
-    );
   }
-}
-
 
   @action
   Future<void> addInformation() async {
@@ -157,32 +128,29 @@ Future<void> isInfoButtonTapped(BuildContext context, String pathh) async {
       print("Hata: $e");
     }
   }
-@action
-Future<void> upDate(String id) async {
-  try {
-    InformationModel infoToUpdate =
-        informationList.firstWhere((info) => info.id == id);
-    infoToUpdate.cinsiyet = isGirl;
-    infoToUpdate.fullName = nameController.text;
-    infoToUpdate.birthDate = birthDateController.text;
-    infoToUpdate.timeOfBirth = timeofBirthController.text;
-    infoToUpdate.dueDate = dueDateController.text;
 
- 
-    if (imageFile != null) {
-      Uint8List imageBytes = await _readFileAsBytes(imageFile!.path);
-      final localImagePath =
-          await FileHandler().saveFileToPhoneMemory("test.png", imageBytes);
-      infoToUpdate.img = localImagePath;
+  @action
+  Future<void> upDate() async {
+    try {
+      selectedInformation!.cinsiyet = isGirl;
+      selectedInformation!.fullName = nameController.text;
+      selectedInformation!.birthDate = birthDateController.text;
+      selectedInformation!.timeOfBirth = timeofBirthController.text;
+      selectedInformation!.dueDate = dueDateController.text;
+
+      if (imageFile != null) {
+        Uint8List imageBytes = await _readFileAsBytes(imageFile!.path);
+        final localImagePath =
+            await FileHandler().saveFileToPhoneMemory("test.png", imageBytes);
+        selectedInformation!.img = localImagePath;
+      }
+
+      await informationDB.upDateInformation(
+          informationModel: selectedInformation!);
+    } catch (e) {
+      print(e);
     }
-
-    await informationDB.upDateInformation(informationModel: infoToUpdate);
-    informationList = List.from(informationList);
-  } catch (e) {
-    print(e);
   }
-}
-
 
   @action
   Future<Uint8List> _readFileAsBytes(String filePath) async {
@@ -200,6 +168,7 @@ Future<void> upDate(String id) async {
   Future<void> loadInformation() async {
     if (informationBox.isNotEmpty) {
       InformationModel lastInformation = informationBox.getAt(0)!;
+      selectedInformation = lastInformation;
       nameController.text = lastInformation.fullName;
       imageFile = File(lastInformation.img!);
       isGirl = lastInformation.cinsiyet;

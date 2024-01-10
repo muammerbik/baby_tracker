@@ -34,6 +34,8 @@ class FeedingStorage extends FeedingLocalStorageHive {
     return feedingList;
   }
 
+  
+
   @override
   Future<FeedingModel?> getFeeding({required String id}) async {
     if (feedingBox.containsKey(id)) {
