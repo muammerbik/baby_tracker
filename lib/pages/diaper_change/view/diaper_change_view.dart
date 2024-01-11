@@ -1,20 +1,27 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+
 import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
+import 'package:baby_tracker/data/models/diaper_change_model.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/diaper_change/viewmodel/diaper_viewmodel.dart';
 import 'package:baby_tracker/pages/diaper_change/widgets/diaper_change_column.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
-import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class DiaperChangeView extends StatefulWidget {
-  const DiaperChangeView({super.key});
+  final DiaperChangeModel? diaperChangeModel;
+  const DiaperChangeView({
+    Key? key,
+    this.diaperChangeModel,
+  }) : super(key: key);
 
   @override
   State<DiaperChangeView> createState() => _DiaperChangeViewState();
@@ -28,9 +35,17 @@ class _DiaperChangeViewState extends State<DiaperChangeView> {
   void initState() {
     diaperGetIt.diaperTimeController
         .addListener(diaperGetIt.upDateButtonstatus);
-
     diaperGetIt.diaperNoteController
         .addListener(diaperGetIt.upDateButtonstatus);
+
+    if (widget.diaperChangeModel != null) {
+      diaperGetIt.diaperTimeController.text = widget.diaperChangeModel!.time;
+      diaperGetIt.selectedStatus = DiaperStatus
+          .values[int.parse(widget.diaperChangeModel!.diaperStatus)];
+      diaperGetIt.diaperNoteController.text = widget.diaperChangeModel!.note;
+    }
+    
+
     super.initState();
   }
 

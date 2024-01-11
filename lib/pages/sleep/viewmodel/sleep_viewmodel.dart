@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/core/hive.dart';
@@ -34,6 +32,18 @@ abstract class _SleepViewModelBase with Store {
   @observable
   bool isButtonEnabledSleep = false;
 
+  @observable
+  int? sleepSelectIndex;
+
+  @action
+  void updateSelectedIndex(int index) {
+    if (sleepSelectIndex == index) {
+      sleepSelectIndex = null;
+    } else {
+      sleepSelectIndex = index;
+    }
+  }
+
   @action
   Future<void> initSlep() async {
     await getSleep();
@@ -62,21 +72,23 @@ abstract class _SleepViewModelBase with Store {
   }
 
   @action
+  void clearControlersSleep() {
+    sleepFellController.clear();
+    sleepWakeupController.clear();
+    sleepNoteController.clear();
+  }
+
+  @action
   Future<void> isSleepButtonTapped(BuildContext context) async {
     if (isButtonEnabledSleep) {
       if (selectedSlep == null) {
         await addSleep();
-        sleepFellController.clear();
-        sleepWakeupController.clear();
-        sleepNoteController.clear();
       } else {
         upDate(selectedSlep!.id);
-        sleepFellController.clear();
-        sleepWakeupController.clear();
-        sleepNoteController.clear();
       }
 
       Navigation.push(page: HomeView());
+      clearControlersSleep();
     } else {
       showDialog(
         context: context,

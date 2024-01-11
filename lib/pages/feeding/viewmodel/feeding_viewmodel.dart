@@ -38,6 +38,8 @@ abstract class _FeedingViewModelBase with Store {
   @observable
   int? selectedIndex;
 
+
+
   @action
   void updateSelectedIndex(int index) {
     if (selectedIndex == index) {
@@ -47,35 +49,47 @@ abstract class _FeedingViewModelBase with Store {
     }
   }
 
-  @action
-  Future<void> isFeedingButtonTapped(BuildContext context) async {
-    if (isButtonEnabled) {
-      if (selectedFeed == null) {
-        await addFeeding();
-        timeController.clear();
-        mlController.clear();
+ 
 
-        noteController.clear();
-      } else {
-        await upDate(selectedFeed!.id);
-        timeController.clear();
-        mlController.clear();
-        noteController.clear();
-      }
-
-      Navigation.push(
-        page: HomeView(),
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog();
-        },
-      );
-    }
-  }
   
+  @action
+void clearControllersFeeding() {
+  timeController.clear();
+  mlController.clear();
+  noteController.clear();
+}
+  @action
+Future<void> isFeedingButtonTapped(BuildContext context) async {
+  if (isButtonEnabled) {
+    if (selectedFeed == null) {
+      await addFeeding();
+       clearControllersFeeding();
+    } else {
+      await upDate(selectedFeed!.id);
+       clearControllersFeeding();
+    }
+
+    Navigation.push(
+      page: HomeView(),
+    );
+
+    // Güncelleme işlemi tamamlandıktan sonra kontrolleri temizle
+  
+  } else {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomAlertDialog();
+      },
+    );
+  }
+}
+
+  @action
+  Future<void> initGet() async {
+    await getFeeding();
+  }
+
 
   @action
   void updateButtonStatus() {
@@ -94,10 +108,6 @@ abstract class _FeedingViewModelBase with Store {
     await getAll();
   }
 
-  @action
-  Future<void> initGet() async {
-    await getFeeding();
-  }
 
   @action
   void add(FeedingModel feed) {
@@ -157,6 +167,7 @@ abstract class _FeedingViewModelBase with Store {
   Future<void> getFeeding() async {
     if (feedingBox.isNotEmpty) {
       FeedingModel feedingGet = feedingBox.getAt(0)!;
+      
       timeController.text = feedingGet.time;
       mlController.text = feedingGet.amount.toString();
       noteController.text = feedingGet.note;

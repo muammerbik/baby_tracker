@@ -40,6 +40,18 @@ abstract class _DiaperViewModelBase with Store {
   @observable
   List<DiaperChangeModel> diaperList = [];
 
+  @observable
+  int? diaperSelectedIndex;
+
+  @action
+  void updateSelectedIndex(int index) {
+    if (diaperSelectedIndex == index) {
+      diaperSelectedIndex = null;
+    } else {
+      diaperSelectedIndex = index;
+    }
+  }
+
   @action
   Future<void> init() async {
     await getAll();
@@ -54,7 +66,14 @@ abstract class _DiaperViewModelBase with Store {
   void upDateButtonstatus() {
     isButtonEnabledDiaper = statusButtonTapped();
   }
-  
+
+  @action
+  void clearControllersDiaper() {
+    diaperTimeController.clear();
+    selectedStatus = null;
+    diaperNoteController.clear();
+  }
+
   @action
   bool statusButtonTapped() {
     return diaperTimeController.text.isNotEmpty &&
@@ -77,16 +96,11 @@ abstract class _DiaperViewModelBase with Store {
     if (isButtonEnabledDiaper) {
       if (selectedDiaper == null) {
         await addDiaperChange();
-        diaperTimeController.clear();
-        selectedStatus = null;
-        diaperNoteController.clear();
       } else {
         await upDate(selectedDiaper!.id);
-        diaperTimeController.clear();
-        selectedStatus = null;
-        diaperNoteController.clear();
       }
       Navigation.push(page: HomeView());
+      clearControllersDiaper();
     } else {
       showDialog(
         context: context,
@@ -106,7 +120,6 @@ abstract class _DiaperViewModelBase with Store {
       selectedStatus = DiaperStatus.values[int.parse(diaperGet.diaperStatus)];
     }
   }
-
 
   @action
   Future<void> addDiaperChange() async {

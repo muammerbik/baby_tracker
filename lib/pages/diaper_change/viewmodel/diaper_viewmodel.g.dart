@@ -108,6 +108,22 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     });
   }
 
+  late final _$diaperSelectedIndexAtom =
+      Atom(name: '_DiaperViewModelBase.diaperSelectedIndex', context: context);
+
+  @override
+  int? get diaperSelectedIndex {
+    _$diaperSelectedIndexAtom.reportRead();
+    return super.diaperSelectedIndex;
+  }
+
+  @override
+  set diaperSelectedIndex(int? value) {
+    _$diaperSelectedIndexAtom.reportWrite(value, super.diaperSelectedIndex, () {
+      super.diaperSelectedIndex = value;
+    });
+  }
+
   late final _$initAsyncAction =
       AsyncAction('_DiaperViewModelBase.init', context: context);
 
@@ -178,6 +194,17 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
       ActionController(name: '_DiaperViewModelBase', context: context);
 
   @override
+  void updateSelectedIndex(int index) {
+    final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
+        name: '_DiaperViewModelBase.updateSelectedIndex');
+    try {
+      return super.updateSelectedIndex(index);
+    } finally {
+      _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void add(DiaperChangeModel diaperChange) {
     final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
         name: '_DiaperViewModelBase.add');
@@ -200,22 +227,22 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
   }
 
   @override
-  void setSelectedStatus(DiaperStatus? status) {
+  bool statusButtonTapped() {
     final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
-        name: '_DiaperViewModelBase.setSelectedStatus');
+        name: '_DiaperViewModelBase.statusButtonTapped');
     try {
-      return super.setSelectedStatus(status);
+      return super.statusButtonTapped();
     } finally {
       _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  bool statusButtonTapped() {
+  void setSelectedStatus(DiaperStatus? status) {
     final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
-        name: '_DiaperViewModelBase.statusButtonTapped');
+        name: '_DiaperViewModelBase.setSelectedStatus');
     try {
-      return super.statusButtonTapped();
+      return super.setSelectedStatus(status);
     } finally {
       _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -229,7 +256,8 @@ selectedDiaper: ${selectedDiaper},
 isButtonEnabledDiaper: ${isButtonEnabledDiaper},
 diaperTimeController: ${diaperTimeController},
 diaperNoteController: ${diaperNoteController},
-diaperList: ${diaperList}
+diaperList: ${diaperList},
+diaperSelectedIndex: ${diaperSelectedIndex}
     ''';
   }
 }

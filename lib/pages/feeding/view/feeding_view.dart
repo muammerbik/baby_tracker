@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
@@ -13,9 +14,10 @@ import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 
 class FeedingView extends StatefulWidget {
-  /*  final FeedingModel? feedingModel; */
+  final FeedingModel? feedingModel;
   const FeedingView({
     Key? key,
+    this.feedingModel,
   }) : super(key: key);
 
   @override
@@ -31,9 +33,12 @@ class _FeedingViewState extends State<FeedingView> {
     feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
     feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
     feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
-    /*  if (widget.feedingModel != null) {
+    
+     if (widget.feedingModel != null) {
       feedingGetIt.noteController.text = widget.feedingModel!.note;
-    } */
+      feedingGetIt.timeController.text = widget.feedingModel!.time;
+      feedingGetIt.mlController.text = widget.feedingModel!.amount.toString();
+    } 
     super.initState();
   }
 

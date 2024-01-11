@@ -11,7 +11,7 @@ class FeedItem extends HiveObject {
 
   @HiveField(1)
   final String type;
-  
+
   @HiveField(2)
   final String date;
 
@@ -24,6 +24,9 @@ class FeedItem extends HiveObject {
   @HiveField(5)
   final String time;
 
+  @HiveField(6)
+  final String note;
+
   FeedItem({
     required this.id,
     required this.type,
@@ -31,10 +34,12 @@ class FeedItem extends HiveObject {
     required this.iconPath,
     required this.category,
     required this.time,
+    required this.note,
   });
+
 
   @override
   String toString() {
-    return 'FeedItem(id: $id, type: $type, date: $date, iconPath: $iconPath, category: $category, time: $time)';
+    return 'FeedItem(id: $id, type: $type, date: $date, iconPath: $iconPath, category: $category, time: $time, note: $note)';
   }
 }

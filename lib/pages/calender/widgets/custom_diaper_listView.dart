@@ -53,9 +53,10 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                   child: GestureDetector(
                     onTap: () {
                       Navigation.push(
-                        page: DiaperChangeView(),
+                        page: DiaperChangeView(diaperChangeModel: list,),
                       );
                       diaperGetIt.selectedDiaper = list;
+                
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -63,7 +64,6 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                           horizontal: DeviceConfig.screenHeight! * 0.0200),
                       child: Container(
                         width: double.infinity,
-                        height: DeviceConfig.screenHeight! * 0.14,
                         decoration: ShapeDecoration(
                           color: darkWhite,
                           shape: RoundedRectangleBorder(
@@ -73,53 +73,79 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: DeviceConfig.screenHeight! * 0.0059,
-                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
                               child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Image.asset(
-                                    calenderImg,
-                                    color: orange.shade800,
-                                    height: DeviceConfig.screenHeight! * 0.0491,
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        diaperIcon,
+                                        height:
+                                            DeviceConfig.screenHeight! * 0.0300,
+                                        color: darkBlue,
+                                      ),
+                                      SizedBox(width: 10),
+                                      TextWidgets(
+                                        text: diaper,
+                                        size: 18,
+                                        color: darkBlue,
+                                      )
+                                    ],
                                   ),
-                                  Text(
-                                    "12 Feb2021",
-                                    style: TextStyle(fontSize: 20),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          DeviceConfig.screenWidth! * 0.044,
+                                    ),
+                                    child: TextWidgets(
+                                      text: list.time,
+                                      size: 16,
+                                      color: black,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                             Divider(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal:
-                                              DeviceConfig.screenWidth! *
-                                                  0.0302),
-                                      child: DiaperStatusDisplay(
-                                        status: getDiaperStatusFromString(
-                                            list.diaperStatus),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          DeviceConfig.screenWidth! * 0.024),
+                            ListTile(
+                              title: Row(
+                                children: [
+                                  Image.asset(
+                                    calenderImg,
+                                    color: orange.shade800,
+                                    height: DeviceConfig.screenHeight! * 0.0451,
+                                  ),
+                                  Text(
+                                    "Diaper Note",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              ),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      diaperGetIt.updateSelectedIndex(index);
+                                    });
+                                  },
+                                  icon: Icon(
+                                    diaperGetIt.diaperSelectedIndex == index
+                                        ? Icons.expand_less
+                                        : Icons.expand_more,
+                                  )),
+                            ),
+                            if (diaperGetIt.diaperSelectedIndex == index)
+                              Observer(
+                                builder: (context) => Padding(
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    list.time,
-                                    style: TextStyle(
-                                        fontSize: 18, color: darkBlue),
+                                    list.note,
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
                           ],
                         ),
                       ),

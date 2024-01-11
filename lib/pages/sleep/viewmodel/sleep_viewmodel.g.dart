@@ -107,6 +107,22 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
     });
   }
 
+  late final _$sleepSelectIndexAtom =
+      Atom(name: '_SleepViewModelBase.sleepSelectIndex', context: context);
+
+  @override
+  int? get sleepSelectIndex {
+    _$sleepSelectIndexAtom.reportRead();
+    return super.sleepSelectIndex;
+  }
+
+  @override
+  set sleepSelectIndex(int? value) {
+    _$sleepSelectIndexAtom.reportWrite(value, super.sleepSelectIndex, () {
+      super.sleepSelectIndex = value;
+    });
+  }
+
   late final _$initSlepAsyncAction =
       AsyncAction('_SleepViewModelBase.initSlep', context: context);
 
@@ -176,6 +192,17 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
       ActionController(name: '_SleepViewModelBase', context: context);
 
   @override
+  void updateSelectedIndex(int index) {
+    final _$actionInfo = _$_SleepViewModelBaseActionController.startAction(
+        name: '_SleepViewModelBase.updateSelectedIndex');
+    try {
+      return super.updateSelectedIndex(index);
+    } finally {
+      _$_SleepViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void updateButtonStatusSleep() {
     final _$actionInfo = _$_SleepViewModelBaseActionController.startAction(
         name: '_SleepViewModelBase.updateButtonStatusSleep');
@@ -216,7 +243,8 @@ sleepWakeupController: ${sleepWakeupController},
 sleepNoteController: ${sleepNoteController},
 sleepList: ${sleepList},
 selectedSlep: ${selectedSlep},
-isButtonEnabledSleep: ${isButtonEnabledSleep}
+isButtonEnabledSleep: ${isButtonEnabledSleep},
+sleepSelectIndex: ${sleepSelectIndex}
     ''';
   }
 }

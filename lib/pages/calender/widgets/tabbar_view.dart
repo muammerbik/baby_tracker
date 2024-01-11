@@ -1,4 +1,5 @@
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
+import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
@@ -7,6 +8,10 @@ import 'package:baby_tracker/pages/calender/widgets/custom_all_listView.dart';
 import 'package:baby_tracker/pages/calender/widgets/custom_diaper_listView.dart';
 import 'package:baby_tracker/pages/calender/widgets/custom_feed_listview.dart';
 import 'package:baby_tracker/pages/calender/widgets/custom_sleep_listView.dart';
+import 'package:baby_tracker/pages/diaper_change/viewmodel/diaper_viewmodel.dart';
+import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
+import 'package:baby_tracker/pages/home/view/home_view.dart';
+import 'package:baby_tracker/pages/sleep/viewmodel/sleep_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -21,6 +26,9 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
   late final TabController tabController;
 
   final calenderGetIt = locator<CalenderViewMoel>();
+  final feedingGetIt = locator<FeedingViewModel>();
+  final diaperGetIt = locator<DiaperViewModel>();
+  final sleepGetIt = locator<SleepViewModel>();
 
   @override
   void initState() {
@@ -39,6 +47,14 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
     return Observer(
       builder: (context) => Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                feedingGetIt.clearControllersFeeding();
+                diaperGetIt.clearControllersDiaper();
+                sleepGetIt.clearControlersSleep();
+                Navigation.push(page: HomeView());
+              },
+              icon: Icon(Icons.arrow_back_ios_new_outlined)),
           title: Column(
             children: [
               TextWidgets(
@@ -54,7 +70,7 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
         body: Column(
           children: [
             Text(
-              "Tue, 12 Monday",
+              calenderGetIt.getFormattedDate(DateTime.now()),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             Padding(

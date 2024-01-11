@@ -63,18 +63,24 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                     child: GestureDetector(
                       onTap: () {
                         if (item.type == "feeding") {
-                          Navigation.push(page: FeedingView(),);
+                          Navigation.push(
+                            page: FeedingView(),
+                          );
+
                           feedingGetIt.selectedFeed =
                               feedingGetIt.feedList[index];
+                        //  feedingGetIt.initGet();
                         } else if (item.type == "diaper") {
                           Navigation.push(page: DiaperChangeView());
 
                           diaperGetIt.selectedDiaper =
                               diaperGetIt.diaperList[index];
+                        //  diaperGetIt.initDiaper();
                         } else {
                           Navigation.push(page: SleepView());
 
                           sleepGetIt.selectedSlep = sleepGetIt.sleepList[index];
+                        //  sleepGetIt.initSlep();
                         }
                       },
                       child: Padding(
@@ -83,7 +89,6 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                             horizontal: DeviceConfig.screenHeight! * 0.0200),
                         child: Container(
                           width: double.infinity,
-                          height: DeviceConfig.screenHeight! * 0.14,
                           decoration: ShapeDecoration(
                             color: darkWhite,
                             shape: RoundedRectangleBorder(
@@ -93,53 +98,82 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: DeviceConfig.screenHeight! * 0.0059,
-                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Image.asset(
-                                      calenderImg,
-                                      color: orange.shade800,
-                                      height:
-                                          DeviceConfig.screenHeight! * 0.0491,
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          item.iconPath,
+                                          height: DeviceConfig.screenHeight! *
+                                              0.0480,
+                                          color: darkBlue,
+                                        ),
+                                        SizedBox(width: 5),
+                                        TextWidgets(
+                                          text: item.category,
+                                          size: 18,
+                                          color: darkBlue,
+                                        )
+                                      ],
                                     ),
-                                    Text(
-                                      "12 Feb2021",
-                                      style: TextStyle(fontSize: 20),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            DeviceConfig.screenWidth! * 0.044,
+                                      ),
+                                      child: TextWidgets(
+                                        text: item.date,
+                                        size: 16,
+                                        color: black,
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
                               Divider(),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Image.asset(item.iconPath,
-                                          height: DeviceConfig.screenHeight! *
-                                              0.0451,
-                                          color: darkBlue),
-                                      SizedBox(width: 5),
-                                      TextWidgets(
-                                        text: item.category,
-                                        size: 18,
-                                        color: darkBlue,
-                                      )
-                                    ],
+                              ListTile(
+                                title: Row(
+                                  children: [
+                                    Image.asset(
+                                      calenderImg,
+                                      color: orange.shade800,
+                                      height:
+                                          DeviceConfig.screenHeight! * 0.0451,
+                                    ),
+                                    Text(
+                                      calenderGetIt.capitalizeWithSuffix(
+                                          item.type, " Note"),
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ],
+                                ),
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      calenderGetIt.updateSelectedIndex(index);
+                                    });
+                                  },
+                                  icon: Icon(
+                                    calenderGetIt.allSelectedIndex == index
+                                        ? Icons.expand_less
+                                        : Icons.expand_more,
                                   ),
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15),
-                                      child: TextWidgets(
-                                        text: item.time,
-                                        size: 16,
-                                        color: black,
-                                      ))
-                                ],
+                                ),
                               ),
+                              if (calenderGetIt.allSelectedIndex == index)
+                                Observer(
+                                  builder: (context) => Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      item.note,
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                ),
                             ],
                           ),
                         ),

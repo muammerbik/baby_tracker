@@ -23,13 +23,14 @@ class FeedItemAdapter extends TypeAdapter<FeedItem> {
       iconPath: fields[3] as String,
       category: fields[4] as String,
       time: fields[5] as String,
+      note: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, FeedItem obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class FeedItemAdapter extends TypeAdapter<FeedItem> {
       ..writeByte(4)
       ..write(obj.category)
       ..writeByte(5)
-      ..write(obj.time);
+      ..write(obj.time)
+      ..writeByte(6)
+      ..write(obj.note);
   }
 
   @override

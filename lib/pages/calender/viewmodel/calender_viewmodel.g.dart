@@ -25,6 +25,22 @@ mixin _$CalenderViewMoel on _CalenderViewMoelBase, Store {
     });
   }
 
+  late final _$allSelectedIndexAtom =
+      Atom(name: '_CalenderViewMoelBase.allSelectedIndex', context: context);
+
+  @override
+  int? get allSelectedIndex {
+    _$allSelectedIndexAtom.reportRead();
+    return super.allSelectedIndex;
+  }
+
+  @override
+  set allSelectedIndex(int? value) {
+    _$allSelectedIndexAtom.reportWrite(value, super.allSelectedIndex, () {
+      super.allSelectedIndex = value;
+    });
+  }
+
   late final _$initGetAllAsyncAction =
       AsyncAction('_CalenderViewMoelBase.initGetAll', context: context);
 
@@ -35,6 +51,17 @@ mixin _$CalenderViewMoel on _CalenderViewMoelBase, Store {
 
   late final _$_CalenderViewMoelBaseActionController =
       ActionController(name: '_CalenderViewMoelBase', context: context);
+
+  @override
+  void updateSelectedIndex(int index) {
+    final _$actionInfo = _$_CalenderViewMoelBaseActionController.startAction(
+        name: '_CalenderViewMoelBase.updateSelectedIndex');
+    try {
+      return super.updateSelectedIndex(index);
+    } finally {
+      _$_CalenderViewMoelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void mergeLists() {
@@ -50,7 +77,8 @@ mixin _$CalenderViewMoel on _CalenderViewMoelBase, Store {
   @override
   String toString() {
     return '''
-mergedList: ${mergedList}
+mergedList: ${mergedList},
+allSelectedIndex: ${allSelectedIndex}
     ''';
   }
 }

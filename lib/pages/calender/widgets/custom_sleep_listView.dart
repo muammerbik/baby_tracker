@@ -1,11 +1,13 @@
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/sleep/view/sleep_view.dart';
 import 'package:baby_tracker/pages/sleep/viewmodel/sleep_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class CustomSleepListView extends StatefulWidget {
   const CustomSleepListView({super.key});
@@ -46,9 +48,10 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                 child: GestureDetector(
                   onTap: () {
                     Navigation.push(
-                      page: SleepView(),
+                      page: SleepView(sleepModel: list),
                     );
                     sleepGetIt.selectedSlep = list;
+                 
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -56,7 +59,6 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                         horizontal: DeviceConfig.screenHeight! * 0.0200),
                     child: Container(
                       width: double.infinity,
-                      height: DeviceConfig.screenHeight! * 0.14,
                       decoration: ShapeDecoration(
                         color: darkWhite,
                         shape: RoundedRectangleBorder(
@@ -66,53 +68,78 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: DeviceConfig.screenHeight! * 0.0059,
-                            ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Image.asset(
-                                  calenderImg,
-                                  color: orange.shade800,
-                                  height: DeviceConfig.screenHeight! * 0.0491,
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      sleepIcon,
+                                      height:
+                                          DeviceConfig.screenHeight! * 0.0480,
+                                      color: darkBlue,
+                                    ),
+                                    SizedBox(width: 5),
+                                    TextWidgets(
+                                      text: sleep,
+                                      size: 18,
+                                      color: darkBlue,
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  "12 Feb2021",
-                                  style: TextStyle(fontSize: 20),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        DeviceConfig.screenWidth! * 0.044,
+                                  ),
+                                  child: TextWidgets(
+                                    text: list.wakeUp,
+                                    size: 16,
+                                    color: black,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           Divider(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(sleepIcon,
-                                      height:
-                                          DeviceConfig.screenHeight! * 0.0450,
-                                      color: darkBlue),
-                                  SizedBox(width: 5),
-                                  TextWidgets(
-                                    text: sleep,
-                                    size: 18,
-                                    color: darkBlue,
-                                  )
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        DeviceConfig.screenWidth! * 0.024),
-                                child: TextWidgets(
-                                  text: list.fellSleep,
-                                  size: 16,
-                                  color: black,
+                          ListTile(
+                            title: Row(
+                              children: [
+                                Image.asset(
+                                  calenderImg,
+                                  color: orange.shade800,
+                                  height: DeviceConfig.screenHeight! * 0.0451,
                                 ),
-                              )
-                            ],
+                                Text(
+                                  "Sleep Note",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ],
+                            ),
+                            trailing: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    sleepGetIt.updateSelectedIndex(index);
+                                  });
+                                },
+                                icon: Icon(
+                                  sleepGetIt.sleepSelectIndex == index
+                                      ? Icons.expand_less
+                                      : Icons.expand_more,
+                                )),
                           ),
+                          if (sleepGetIt.sleepSelectIndex == index)
+                            Observer(
+                              builder: (context) => Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  list.note,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ),

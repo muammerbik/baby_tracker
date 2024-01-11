@@ -19,8 +19,6 @@ class CustomFeedListView extends StatefulWidget {
 class _CustomFeedListViewState extends State<CustomFeedListView> {
   final feedingGetIt = locator<FeedingViewModel>();
 
-  int? selectedIndex;
-
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -51,9 +49,10 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                   child: GestureDetector(
                     onTap: () {
                       Navigation.push(
-                        page: FeedingView(/**feedingModel: list */),
+                        page: FeedingView(feedingModel: list ),
                       );
                       feedingGetIt.selectedFeed = list;
+                     
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -72,7 +71,7 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 11, vertical: 10),
+                                  horizontal: 14, vertical: 10),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -82,9 +81,10 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                                       Image.asset(
                                         feedingIcon,
                                         height:
-                                            DeviceConfig.screenHeight! * 0.0450,
+                                            DeviceConfig.screenHeight! * 0.0480,
                                         color: darkBlue,
                                       ),
+                                      SizedBox(width: 5),
                                       TextWidgets(
                                         text: feeding,
                                         size: 18,
@@ -128,7 +128,7 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                                     });
                                   },
                                   icon: Icon(
-                                    selectedIndex == index
+                                    feedingGetIt.selectedIndex == index
                                         ? Icons.expand_less
                                         : Icons.expand_more,
                                   )),
