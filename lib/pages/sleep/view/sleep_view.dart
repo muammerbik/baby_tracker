@@ -29,23 +29,23 @@ class SleepView extends StatefulWidget {
 class _SleepViewState extends State<SleepView> {
   final sleepGetIt = locator<SleepViewModel>();
   final informationGetIt = locator<InformationViewModel>();
-  @override
-  void initState() {
-    sleepGetIt.sleepFellController
-        .addListener(sleepGetIt.updateButtonStatusSleep);
-    sleepGetIt.sleepWakeupController
-        .addListener(sleepGetIt.updateButtonStatusSleep);
-    sleepGetIt.sleepNoteController
-        .addListener(sleepGetIt.updateButtonStatusSleep);
+@override
+void initState() {
+  sleepGetIt.sleepFellController.addListener(sleepGetIt.updateButtonStatusSleep);
+  sleepGetIt.sleepWakeupController.addListener(sleepGetIt.updateButtonStatusSleep);
+  sleepGetIt.sleepNoteController.addListener(sleepGetIt.updateButtonStatusSleep);
 
-    if (widget.sleepModel != null) {
-      sleepGetIt.sleepFellController.text = widget.sleepModel!.fellSleep;
-      sleepGetIt.sleepWakeupController.text = widget.sleepModel!.wakeUp;
-      sleepGetIt.sleepNoteController.text = widget.sleepModel!.note;
-    }
-
-    super.initState();
+  if (widget.sleepModel != null) {
+    sleepGetIt.sleepFellController.text = widget.sleepModel!.fellSleep;
+    sleepGetIt.sleepWakeupController.text = widget.sleepModel!.wakeUp;
+    sleepGetIt.sleepNoteController.text = widget.sleepModel!.note;
+  } else {
+    sleepGetIt.selectedSlep = null;
   }
+
+  super.initState();
+}
+
 
   @override
   Widget build(BuildContext context) {

@@ -90,27 +90,25 @@ abstract class _DiaperViewModelBase with Store {
   void setSelectedStatus(DiaperStatus? status) {
     selectedStatus = status;
   }
-
-  @action
-  Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
-    if (isButtonEnabledDiaper) {
-      if (selectedDiaper == null) {
-        await addDiaperChange();
-      } else {
-        await upDate(selectedDiaper!.id);
-      }
-      Navigation.push(page: HomeView());
-      clearControllersDiaper();
+@action
+Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
+  if (isButtonEnabledDiaper) {
+    if (selectedDiaper == null) {
+      await addDiaperChange();
     } else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return CustomAlertDialog();
-        },
-      );
+      await upDate(selectedDiaper!.id);
     }
+    Navigation.push(page: HomeView());
+    clearControllersDiaper();
+  } else {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomAlertDialog();
+      },
+    );
   }
-
+}
   @action
   Future<void> getDiaper() async {
     if (diaperBox.isNotEmpty) {

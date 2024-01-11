@@ -27,20 +27,23 @@ class FeedingView extends StatefulWidget {
 class _FeedingViewState extends State<FeedingView> {
   final feedingGetIt = locator<FeedingViewModel>();
   final informationGetIt = locator<InformationViewModel>();
+@override
+void initState() {
+  feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
+  feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
+  feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
 
-  @override
-  void initState() {
-    feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
-    feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
-    feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
-    
-     if (widget.feedingModel != null) {
-      feedingGetIt.noteController.text = widget.feedingModel!.note;
-      feedingGetIt.timeController.text = widget.feedingModel!.time;
-      feedingGetIt.mlController.text = widget.feedingModel!.amount.toString();
-    } 
-    super.initState();
+  if (widget.feedingModel != null) {
+    feedingGetIt.noteController.text = widget.feedingModel!.note;
+    feedingGetIt.timeController.text = widget.feedingModel!.time;
+    feedingGetIt.mlController.text = widget.feedingModel!.amount.toString();
+    feedingGetIt.selectedFeed = widget.feedingModel; // Güncellendi
+  } else {
+    feedingGetIt.selectedFeed = null; 
   }
+  super.initState();
+}
+
 
   @override
   Widget build(BuildContext context) {

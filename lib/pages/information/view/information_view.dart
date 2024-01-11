@@ -120,7 +120,9 @@ class _InformationViewState extends State<InformationView> {
                           context,
                           localImagePath.toString(),
                         );
-                        homeViewGetIt.calculateAge();
+                      if(informationGetIt.birthDateController.text.isNotEmpty){
+                          homeViewGetIt.calculateAge();
+                      }
                       },
                       text: continuee,
                       color: darkPurple,

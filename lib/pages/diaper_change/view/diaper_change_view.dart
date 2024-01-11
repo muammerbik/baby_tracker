@@ -30,24 +30,23 @@ class DiaperChangeView extends StatefulWidget {
 class _DiaperChangeViewState extends State<DiaperChangeView> {
   final diaperGetIt = locator<DiaperViewModel>();
   final informationGetIt = locator<InformationViewModel>();
+@override
+void initState() {
+  diaperGetIt.diaperTimeController.addListener(diaperGetIt.upDateButtonstatus);
+  diaperGetIt.diaperNoteController.addListener(diaperGetIt.upDateButtonstatus);
 
-  @override
-  void initState() {
-    diaperGetIt.diaperTimeController
-        .addListener(diaperGetIt.upDateButtonstatus);
-    diaperGetIt.diaperNoteController
-        .addListener(diaperGetIt.upDateButtonstatus);
-
-    if (widget.diaperChangeModel != null) {
-      diaperGetIt.diaperTimeController.text = widget.diaperChangeModel!.time;
-      diaperGetIt.selectedStatus = DiaperStatus
-          .values[int.parse(widget.diaperChangeModel!.diaperStatus)];
-      diaperGetIt.diaperNoteController.text = widget.diaperChangeModel!.note;
-    }
-    
-
-    super.initState();
+  if (widget.diaperChangeModel != null) {
+    diaperGetIt.diaperTimeController.text = widget.diaperChangeModel!.time;
+    diaperGetIt.selectedStatus = DiaperStatus
+        .values[int.parse(widget.diaperChangeModel!.diaperStatus)];
+    diaperGetIt.diaperNoteController.text = widget.diaperChangeModel!.note;
+    diaperGetIt.selectedDiaper = widget.diaperChangeModel;
+  } else {
+    diaperGetIt.selectedDiaper = null; // Yeni veri eklenirken seçili öğeyi temizle
   }
+
+  super.initState();
+}
 
   @override
   Widget build(BuildContext context) {

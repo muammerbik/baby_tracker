@@ -58,23 +58,21 @@ void clearControllersFeeding() {
   mlController.clear();
   noteController.clear();
 }
+
   @action
 Future<void> isFeedingButtonTapped(BuildContext context) async {
   if (isButtonEnabled) {
     if (selectedFeed == null) {
       await addFeeding();
-       clearControllersFeeding();
     } else {
-      await upDate(selectedFeed!.id);
-       clearControllersFeeding();
+      await upDate(selectedFeed!.id); // Güncellendi
     }
 
     Navigation.push(
       page: HomeView(),
     );
 
-    // Güncelleme işlemi tamamlandıktan sonra kontrolleri temizle
-  
+    clearControllersFeeding();
   } else {
     showDialog(
       context: context,
@@ -84,6 +82,7 @@ Future<void> isFeedingButtonTapped(BuildContext context) async {
     );
   }
 }
+
 
   @action
   Future<void> initGet() async {
