@@ -129,13 +129,13 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
       Atom(name: '_InformationViewModelBase.isGirl', context: context);
 
   @override
-  bool get isGirl {
+  bool? get isGirl {
     _$isGirlAtom.reportRead();
     return super.isGirl;
   }
 
   @override
-  set isGirl(bool value) {
+  set isGirl(bool? value) {
     _$isGirlAtom.reportWrite(value, super.isGirl, () {
       super.isGirl = value;
     });

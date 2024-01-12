@@ -29,6 +29,7 @@ abstract class _DiaperViewModelBase with Store {
 
   @observable
   DiaperStatus? selectedStatus;
+  
   @observable
   DiaperChangeModel? selectedDiaper;
   @observable
@@ -50,6 +51,12 @@ abstract class _DiaperViewModelBase with Store {
     } else {
       diaperSelectedIndex = index;
     }
+  }
+
+  
+  @action
+  DiaperChangeModel getItemDiaper(String id) {
+    return diaperList.firstWhere((feed) => feed.id == id);
   }
 
   @action

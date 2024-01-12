@@ -62,19 +62,21 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
             Positioned(
               bottom: 5,
               right: 5,
-              child: Container(
-                height: DeviceConfig.screenHeight! * 0.0323,
-                width: DeviceConfig.screenWidth! * 0.0700,
-                decoration: ShapeDecoration(
-                  color: white,
-                  shape: OvalBorder(
-                    side: BorderSide(width: 1, color: purple),
-                  ),
-                ),
-                child: Image.asset(
-                  "assets/images/add.png",
-                ),
-              ),
+              child: informationGetIt.imageFile == null
+                  ? Container(
+                      height: DeviceConfig.screenHeight! * 0.0323,
+                      width: DeviceConfig.screenWidth! * 0.0700,
+                      decoration: ShapeDecoration(
+                        color: white,
+                        shape: OvalBorder(
+                          side: BorderSide(width: 1, color: purple),
+                        ),
+                      ),
+                      child: Image.asset(
+                        "assets/images/add.png",
+                      ),
+                    )
+                  : Container(),
             )
           ],
         ),

@@ -41,16 +41,30 @@ mixin _$CalenderViewMoel on _CalenderViewMoelBase, Store {
     });
   }
 
-  late final _$initGetAllAsyncAction =
-      AsyncAction('_CalenderViewMoelBase.initGetAll', context: context);
-
-  @override
-  Future<void> initGetAll() {
-    return _$initGetAllAsyncAction.run(() => super.initGetAll());
-  }
-
   late final _$_CalenderViewMoelBaseActionController =
       ActionController(name: '_CalenderViewMoelBase', context: context);
+
+  @override
+  String getFormattedDate(DateTime date) {
+    final _$actionInfo = _$_CalenderViewMoelBaseActionController.startAction(
+        name: '_CalenderViewMoelBase.getFormattedDate');
+    try {
+      return super.getFormattedDate(date);
+    } finally {
+      _$_CalenderViewMoelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  String capitalizeWithSuffix(String text, String suffix) {
+    final _$actionInfo = _$_CalenderViewMoelBaseActionController.startAction(
+        name: '_CalenderViewMoelBase.capitalizeWithSuffix');
+    try {
+      return super.capitalizeWithSuffix(text, suffix);
+    } finally {
+      _$_CalenderViewMoelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void updateSelectedIndex(int index) {

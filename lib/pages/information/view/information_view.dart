@@ -28,6 +28,7 @@ class _InformationViewState extends State<InformationView> {
     super.initState();
     informationGetIt.loadInformation();
   }
+  bool isAge = false;
 
   @override
   Widget build(BuildContext context) {
@@ -120,9 +121,7 @@ class _InformationViewState extends State<InformationView> {
                           context,
                           localImagePath.toString(),
                         );
-                      if(informationGetIt.birthDateController.text.isNotEmpty){
-                          homeViewGetIt.calculateAge();
-                      }
+                  
                       },
                       text: continuee,
                       color: darkPurple,

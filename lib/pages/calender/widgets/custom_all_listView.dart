@@ -65,7 +65,7 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                         if (item.type == "feeding") {
                           Navigation.push(
                             page: FeedingView(
-                                feedingModel: feedingGetIt.selectedFeed),
+                                feedingModel: feedingGetIt.getItem(item.id)),
                           );
 
                           feedingGetIt.selectedFeed =
@@ -73,8 +73,8 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                         } else if (item.type == "diaper") {
                           Navigation.push(
                             page: DiaperChangeView(
-                              diaperChangeModel: diaperGetIt.selectedDiaper,
-                            ),
+                                diaperChangeModel:
+                                    diaperGetIt.getItemDiaper(item.id)),
                           );
 
                           diaperGetIt.selectedDiaper =
@@ -82,7 +82,7 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                         } else {
                           Navigation.push(
                             page: SleepView(
-                              sleepModel: sleepGetIt.selectedSlep,
+                              sleepModel: sleepGetIt.getItemSlep(item.id),
                             ),
                           );
 

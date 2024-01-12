@@ -43,13 +43,16 @@ abstract class _InformationViewModelBase with Store {
   File? imageFile;
   @observable
   ImagePicker picker = ImagePicker();
-  @observable
-  bool isGirl = false;
+
+ 
 
   @action
   Future<void> init() async {
     await loadInformation();
   }
+/* 
+ @observable
+  bool isGirl = false;
 
   @action
   void toggleGirlImage() {
@@ -59,7 +62,21 @@ abstract class _InformationViewModelBase with Store {
   @action
   void toggleSonImage() {
     isGirl = false;
-  }
+  } */
+
+  @observable
+bool? isGirl; // Başlangıçta null (hiçbiri seçili değil) olarak ayarla
+
+@action
+void toggleGirlImage() {
+  isGirl = true;
+}
+
+@action
+void toggleSonImage() {
+  isGirl = false;
+}
+
 
   @observable
   InformationModel? selectedInformation;
@@ -132,7 +149,7 @@ abstract class _InformationViewModelBase with Store {
   @action
   Future<void> upDate() async {
     try {
-      selectedInformation!.cinsiyet = isGirl;
+      selectedInformation!.cinsiyet = isGirl!;
       selectedInformation!.fullName = nameController.text;
       selectedInformation!.birthDate = birthDateController.text;
       selectedInformation!.timeOfBirth = timeofBirthController.text;

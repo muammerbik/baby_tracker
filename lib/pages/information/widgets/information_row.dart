@@ -20,41 +20,44 @@ class _InformationRowState extends State<InformationRow> {
       builder: (context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          GestureDetector(
-            onTap: () {
-              informationGetIt.toggleGirlImage();
-            },
-            child: informationGetIt.isGirl
-                ? Image.asset(
-                    "assets/images/bbbx.png",
-                    height: DeviceConfig.screenHeight! * 0.0323,
-                    width: DeviceConfig.screenWidth! * 0.0700,
-                  )
-                : Image.asset(
-                    "assets/images/xx.png",
-                    height: DeviceConfig.screenHeight! * 0.0323,
-                    width: DeviceConfig.screenWidth! * 0.0700,
-                  ),
-          ),
-          SizedBox(
-            width: DeviceConfig.screenWidth! * 0.0700,
-          ),
-          GestureDetector(
-            onTap: () {
-              informationGetIt.toggleSonImage();
-            },
-            child: !informationGetIt.isGirl
-                ? Image.asset(
-                    "assets/images/aaay.png",
-                    height: DeviceConfig.screenHeight! * 0.0323,
-                    width: DeviceConfig.screenWidth! * 0.0700,
-                  )
-                : Image.asset(
-                    "assets/images/yy.png",
-                    height: DeviceConfig.screenHeight! * 0.0323,
-                    width: DeviceConfig.screenWidth! * 0.0700,
-                  ),
-          ),
+        GestureDetector(
+  onTap: () {
+    informationGetIt.toggleGirlImage();
+  },
+  child: informationGetIt.isGirl != null && informationGetIt.isGirl!
+      ? Image.asset(
+          "assets/images/bbbx.png",
+          height: DeviceConfig.screenHeight! * 0.0323,
+          width: DeviceConfig.screenWidth! * 0.0700,
+        )
+      : Image.asset(
+          "assets/images/xx.png",
+          height: DeviceConfig.screenHeight! * 0.0323,
+          width: DeviceConfig.screenWidth! * 0.0700,
+        ),
+),
+
+SizedBox(
+  width: DeviceConfig.screenWidth! * 0.0700,
+),
+
+GestureDetector(
+  onTap: () {
+    informationGetIt.toggleSonImage();
+  },
+  child: informationGetIt.isGirl != null && !informationGetIt.isGirl!
+      ? Image.asset(
+          "assets/images/aaay.png",
+          height: DeviceConfig.screenHeight! * 0.0323,
+          width: DeviceConfig.screenWidth! * 0.0700,
+        )
+      : Image.asset(
+          "assets/images/yy.png",
+          height: DeviceConfig.screenHeight! * 0.0323,
+          width: DeviceConfig.screenWidth! * 0.0700,
+        ),
+),
+
         ],
       ),
     );

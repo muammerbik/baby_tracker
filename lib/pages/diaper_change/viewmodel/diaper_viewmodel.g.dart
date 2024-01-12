@@ -205,6 +205,17 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
   }
 
   @override
+  DiaperChangeModel getItemDiaper(String id) {
+    final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
+        name: '_DiaperViewModelBase.getItemDiaper');
+    try {
+      return super.getItemDiaper(id);
+    } finally {
+      _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void add(DiaperChangeModel diaperChange) {
     final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
         name: '_DiaperViewModelBase.add');
@@ -221,6 +232,17 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
         name: '_DiaperViewModelBase.upDateButtonstatus');
     try {
       return super.upDateButtonstatus();
+    } finally {
+      _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearControllersDiaper() {
+    final _$actionInfo = _$_DiaperViewModelBaseActionController.startAction(
+        name: '_DiaperViewModelBase.clearControllersDiaper');
+    try {
+      return super.clearControllersDiaper();
     } finally {
       _$_DiaperViewModelBaseActionController.endAction(_$actionInfo);
     }

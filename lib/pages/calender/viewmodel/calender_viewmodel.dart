@@ -11,19 +11,13 @@ class CalenderViewMoel = _CalenderViewMoelBase with _$CalenderViewMoel;
 
 abstract class _CalenderViewMoelBase with Store {
   _CalenderViewMoelBase() {
-    initGetAll();
+  
   }
 
   final feedingGetIt = locator<FeedingViewModel>();
   final diaperGetIt = locator<DiaperViewModel>();
   final sleepGetIt = locator<SleepViewModel>();
 
-  @action
-  Future<void> initGetAll() async {
-    /*   await feedingGetIt.getAll();
-    await diaperGetIt.getAll();
-    await sleepGetIt.getAll(); */
-  }
 
 //günlük olarak traih değerini veren fonksiyon
   @action
@@ -101,16 +95,3 @@ abstract class _CalenderViewMoelBase with Store {
     mergedList.sort((a, b) => b.date.compareTo(a.date));
   }
 }
-/* 
-class CalenderModel {
-  String id;
-  DateTime history;
-  String catagori;
-  String created;
-  CalenderModel({
-    required this.id,
-    required this.history,
-    required this.catagori,
-    required this.created,
-  });
-} */

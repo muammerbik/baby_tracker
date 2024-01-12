@@ -2,6 +2,7 @@ import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart'
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
+import 'package:baby_tracker/pages/calender/viewmodel/calender_viewmodel.dart';
 import 'package:baby_tracker/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:baby_tracker/pages/home/widgets/home_container.dart';
 import 'package:baby_tracker/pages/home/widgets/home_row.dart';
@@ -21,6 +22,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final InformationGetIt = locator<InformationViewModel>();
   final HomeGetIt = locator<HomeViewModel>();
+  final calenderGetIt = locator<CalenderViewMoel>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class _HomeViewState extends State<HomeView> {
             ),
             Observer(
               builder: (context) => TextWidgets(
-                text: HomeGetIt.age,
+                text: calenderGetIt.getFormattedDate(DateTime.now()),
                 size: 17,
                 color: black,
                 fontWeight: FontWeight.w500,

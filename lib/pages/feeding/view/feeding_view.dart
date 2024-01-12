@@ -37,7 +37,7 @@ void initState() {
     feedingGetIt.noteController.text = widget.feedingModel!.note;
     feedingGetIt.timeController.text = widget.feedingModel!.time;
     feedingGetIt.mlController.text = widget.feedingModel!.amount.toString();
-    feedingGetIt.selectedFeed = widget.feedingModel; // Güncellendi
+    feedingGetIt.selectedFeed = widget.feedingModel; 
   } else {
     feedingGetIt.selectedFeed = null; 
   }

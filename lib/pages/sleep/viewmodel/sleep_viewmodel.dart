@@ -100,6 +100,13 @@ Future<void> isSleepButtonTapped(BuildContext context) async {
   }
 }
 
+
+  @action
+  SleepModel getItemSlep(String id) {
+    return sleepList.firstWhere((feed) => feed.id == id);
+  }
+
+
   @action
   Future<void> addSleep() async {
     try {

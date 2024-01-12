@@ -131,20 +131,20 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
         .run(() => super.isFeedingButtonTapped(context));
   }
 
-  late final _$initAsyncAction =
-      AsyncAction('_FeedingViewModelBase.init', context: context);
-
-  @override
-  Future<void> init() {
-    return _$initAsyncAction.run(() => super.init());
-  }
-
   late final _$initGetAsyncAction =
       AsyncAction('_FeedingViewModelBase.initGet', context: context);
 
   @override
   Future<void> initGet() {
     return _$initGetAsyncAction.run(() => super.initGet());
+  }
+
+  late final _$initAsyncAction =
+      AsyncAction('_FeedingViewModelBase.init', context: context);
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
   }
 
   late final _$addFeedingAsyncAction =
@@ -202,6 +202,17 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
   }
 
   @override
+  void clearControllersFeeding() {
+    final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
+        name: '_FeedingViewModelBase.clearControllersFeeding');
+    try {
+      return super.clearControllersFeeding();
+    } finally {
+      _$_FeedingViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void updateButtonStatus() {
     final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
         name: '_FeedingViewModelBase.updateButtonStatus');
@@ -229,6 +240,17 @@ mixin _$FeedingViewModel on _FeedingViewModelBase, Store {
         name: '_FeedingViewModelBase.add');
     try {
       return super.add(feed);
+    } finally {
+      _$_FeedingViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  FeedingModel getItem(String id) {
+    final _$actionInfo = _$_FeedingViewModelBaseActionController.startAction(
+        name: '_FeedingViewModelBase.getItem');
+    try {
+      return super.getItem(id);
     } finally {
       _$_FeedingViewModelBaseActionController.endAction(_$actionInfo);
     }

@@ -38,8 +38,6 @@ abstract class _FeedingViewModelBase with Store {
   @observable
   int? selectedIndex;
 
-
-
   @action
   void updateSelectedIndex(int index) {
     if (selectedIndex == index) {
@@ -49,46 +47,41 @@ abstract class _FeedingViewModelBase with Store {
     }
   }
 
- 
-
-  
   @action
-void clearControllersFeeding() {
-  timeController.clear();
-  mlController.clear();
-  noteController.clear();
-}
-
-  @action
-Future<void> isFeedingButtonTapped(BuildContext context) async {
-  if (isButtonEnabled) {
-    if (selectedFeed == null) {
-      await addFeeding();
-    } else {
-      await upDate(selectedFeed!.id); // Güncellendi
-    }
-
-    Navigation.push(
-      page: HomeView(),
-    );
-
-    clearControllersFeeding();
-  } else {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return CustomAlertDialog();
-      },
-    );
+  void clearControllersFeeding() {
+    timeController.clear();
+    mlController.clear();
+    noteController.clear();
   }
-}
 
+  @action
+  Future<void> isFeedingButtonTapped(BuildContext context) async {
+    if (isButtonEnabled) {
+      if (selectedFeed == null) {
+        await addFeeding();
+      } else {
+        await upDate(selectedFeed!.id); // Güncellendi
+      }
+
+      Navigation.push(
+        page: HomeView(),
+      );
+
+      clearControllersFeeding();
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return CustomAlertDialog();
+        },
+      );
+    }
+  }
 
   @action
   Future<void> initGet() async {
     await getFeeding();
   }
-
 
   @action
   void updateButtonStatus() {
@@ -106,7 +99,6 @@ Future<void> isFeedingButtonTapped(BuildContext context) async {
   Future<void> init() async {
     await getAll();
   }
-
 
   @action
   void add(FeedingModel feed) {
@@ -149,6 +141,11 @@ Future<void> isFeedingButtonTapped(BuildContext context) async {
   }
 
   @action
+  FeedingModel getItem(String id) {
+    return feedList.firstWhere((feed) => feed.id == id);
+  }
+
+  @action
   Future<void> upDate(String id) async {
     try {
       FeedingModel feedToUpdate = feedList.firstWhere((feed) => feed.id == id);
@@ -166,7 +163,7 @@ Future<void> isFeedingButtonTapped(BuildContext context) async {
   Future<void> getFeeding() async {
     if (feedingBox.isNotEmpty) {
       FeedingModel feedingGet = feedingBox.getAt(0)!;
-      
+
       timeController.text = feedingGet.time;
       mlController.text = feedingGet.amount.toString();
       noteController.text = feedingGet.note;

@@ -236,6 +236,28 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
   }
 
   @override
+  void clearControlersSleep() {
+    final _$actionInfo = _$_SleepViewModelBaseActionController.startAction(
+        name: '_SleepViewModelBase.clearControlersSleep');
+    try {
+      return super.clearControlersSleep();
+    } finally {
+      _$_SleepViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  SleepModel getItemSlep(String id) {
+    final _$actionInfo = _$_SleepViewModelBaseActionController.startAction(
+        name: '_SleepViewModelBase.getItemSlep');
+    try {
+      return super.getItemSlep(id);
+    } finally {
+      _$_SleepViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 sleepFellController: ${sleepFellController},
