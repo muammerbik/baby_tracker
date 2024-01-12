@@ -3,7 +3,6 @@ import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart'
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
-import 'package:baby_tracker/pages/calender/widgets/Diaper_status_display.dart';
 import 'package:baby_tracker/pages/diaper_change/view/diaper_change_view.dart';
 import 'package:baby_tracker/pages/diaper_change/viewmodel/diaper_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
 
                 return Dismissible(
                   direction: DismissDirection.startToEnd,
-                  background: Row(
+                  background: const Row(
                     children: [
                       Icon(
                         Icons.delete,
@@ -53,10 +52,11 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                   child: GestureDetector(
                     onTap: () {
                       Navigation.push(
-                        page: DiaperChangeView(diaperChangeModel: list,),
+                        page: DiaperChangeView(
+                          diaperChangeModel: list,
+                        ),
                       );
                       diaperGetIt.selectedDiaper = list;
-                
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -73,8 +73,11 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      DeviceConfig.screenWidth! * 0.0373,
+                                  vertical:
+                                      DeviceConfig.screenHeight! * 0.0107),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -87,8 +90,8 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                                             DeviceConfig.screenHeight! * 0.0300,
                                         color: darkBlue,
                                       ),
-                                      SizedBox(width: 10),
-                                      TextWidgets(
+                                      const SizedBox(width: 10),
+                                      const TextWidgets(
                                         text: diaper,
                                         size: 18,
                                         color: darkBlue,
@@ -109,7 +112,7 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                                 ],
                               ),
                             ),
-                            Divider(),
+                            const Divider(),
                             ListTile(
                               title: Row(
                                 children: [
@@ -118,7 +121,7 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                                     color: orange.shade800,
                                     height: DeviceConfig.screenHeight! * 0.0451,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Diaper Note",
                                     style: TextStyle(fontSize: 20),
                                   ),
@@ -139,10 +142,13 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                             if (diaperGetIt.diaperSelectedIndex == index)
                               Observer(
                                 builder: (context) => Padding(
-                                  padding: const EdgeInsets.all(16.0),
+                                  padding:  EdgeInsets.symmetric(   horizontal:
+                                        DeviceConfig.screenWidth! * 0.0373,
+                                    vertical:
+                                        DeviceConfig.screenHeight! * 0.0107),
                                   child: Text(
                                     list.note,
-                                    style: TextStyle(fontSize: 16),
+                                    style: const TextStyle(fontSize: 16),
                                   ),
                                 ),
                               ),
@@ -154,7 +160,7 @@ class _CustomDiaperListViewState extends State<CustomDiaperListView> {
                 );
               },
             )
-          : Center(
+          : const Center(
               child: Text(
                 diaperIsempty,
                 style: TextStyle(fontSize: 18),

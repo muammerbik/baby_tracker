@@ -1,10 +1,11 @@
+import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:flutter/cupertino.dart';
 
 class ActionSheet extends StatelessWidget {
   final VoidCallback cameraTapped;
   final VoidCallback galleryTapped;
 
-  ActionSheet({
+  const ActionSheet({
     required this.cameraTapped,
     required this.galleryTapped,
   });
@@ -14,14 +15,14 @@ class ActionSheet extends StatelessWidget {
     return CupertinoActionSheet(
       actions: <Widget>[
         CupertinoActionSheetAction(
-          child: Text("Camera"),
+          child: const Text(camera),
           onPressed: () {
             cameraTapped();
             Navigator.of(context).pop();
           },
         ),
         CupertinoActionSheetAction(
-          child: Text("Gallery"),
+          child: const Text(gallery),
           onPressed: () {
             galleryTapped();
             Navigator.pop(context);
@@ -33,7 +34,7 @@ class ActionSheet extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
         },
-        child: Text("Cancel"),
+        child: const Text(cancel),
       ),
     );
   }

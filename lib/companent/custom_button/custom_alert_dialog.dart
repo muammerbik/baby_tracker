@@ -15,8 +15,8 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(errorTitle),
-      content: Text(
+      title: const Text(errorTitle),
+      content: const Text(
         errorContent,
         style: TextStyle(fontSize: 16),
       ),
@@ -25,7 +25,7 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
           onPressed: () {
             Navigation.ofPop();
           },
-          child: Text(ok),
+          child: const Text(ok),
         ),
       ],
     );

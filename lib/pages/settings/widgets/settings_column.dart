@@ -34,7 +34,7 @@ class _SettingsColumnState extends State<SettingsColumn> {
       builder: (context) => GestureDetector(
         onTap: () {
           if (isFirstElement) {
-            Navigation.push(page: InappView());
+            Navigation.push(page: const InappView());
           }
         },
         child: Padding(
@@ -43,7 +43,7 @@ class _SettingsColumnState extends State<SettingsColumn> {
             width: 380,
             height: isFirstElement ? 70 : 60,
             decoration: ShapeDecoration(
-              color: isFirstElement ? Color(0xFF4625C3) : Colors.grey.shade100,
+              color: isFirstElement ? const Color(0xFF4625C3) : Colors.grey.shade100,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(35),
               ),

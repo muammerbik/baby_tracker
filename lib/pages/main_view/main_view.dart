@@ -38,14 +38,14 @@ class _MainViewState extends State<MainView> {
         if (onbordingGetIt.isOnbordingComplated == true &&
             inAppGetIt.isInappComplated == true &&
             informationGetIt.isInformationComplated == true) {
-          return HomeView();
+          return const HomeView();
         } else if (onbordingGetIt.isOnbordingComplated == true &&
             inAppGetIt.isInappComplated == true) {
-          return InformationView();
+          return const InformationView();
         } else if (onbordingGetIt.isOnbordingComplated == true) {
-          return InappView();
+          return const InappView();
         } else {
-          return OnbordingView();
+          return const OnbordingView();
         }
       },
     ); 

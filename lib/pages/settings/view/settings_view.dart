@@ -23,7 +23,7 @@ class _SettingsViewState extends State<SettingsView> {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title: TextWidgets(
+          title: const TextWidgets(
             text: settings,
             size: 27,
             color: btnBlue,

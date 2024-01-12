@@ -64,7 +64,7 @@ abstract class _FeedingViewModelBase with Store {
       }
 
       Navigation.push(
-        page: HomeView(),
+        page: const HomeView(),
       );
 
       clearControllersFeeding();
@@ -72,7 +72,7 @@ abstract class _FeedingViewModelBase with Store {
       showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog();
+          return const CustomAlertDialog();
         },
       );
     }
@@ -109,7 +109,7 @@ abstract class _FeedingViewModelBase with Store {
   Future<void> addFeeding() async {
     try {
       var feedmodel = FeedingModel(
-          id: Uuid().v1(),
+          id: const Uuid().v1(),
           time: timeController.text,
           amount: int.tryParse(mlController.text),
           note: noteController.text);
@@ -137,6 +137,7 @@ abstract class _FeedingViewModelBase with Store {
       feedList.remove(feedToDelete);
     } catch (e) {
       print(e);
+    
     }
   }
 
@@ -154,9 +155,7 @@ abstract class _FeedingViewModelBase with Store {
       feedToUpdate.note = noteController.text;
       await feedingStorage.upDateFeeding(feedModel: feedToUpdate);
       feedList = List.from(feedList);
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   @action

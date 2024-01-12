@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class DiaperStatusDisplay extends StatelessWidget {
   final DiaperStatus status;
 
-  DiaperStatusDisplay({required this.status});
+  const DiaperStatusDisplay({required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class DiaperStatusDisplay extends StatelessWidget {
           height: 22,
           color: textColor,
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Text(
           text,
           style: TextStyle(fontSize: 16, color: textColor),

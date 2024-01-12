@@ -38,7 +38,7 @@ class _InappViewState extends State<InappView> {
                 child: IconButton(
                   onPressed: () {
                     Navigation.push(
-                      page: InformationView(),
+                      page: const InformationView(),
                     );
                   },
                   icon: Image.asset(
@@ -49,7 +49,7 @@ class _InappViewState extends State<InappView> {
                 ),
               ),
             ),
-            Center(
+            const Center(
               child: TextWidgets(text: getPremium, size: 27, color: btnBlue),
             ),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0389),
@@ -57,7 +57,7 @@ class _InappViewState extends State<InappView> {
                 width: double.infinity,
                 height: DeviceConfig.screenHeight! * 0.1229),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0403),
-            InappRowWidgets(
+            const InappRowWidgets(
               size: 16,
               texts: [
                 inappText1,
@@ -66,7 +66,7 @@ class _InappViewState extends State<InappView> {
               ],
             ),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0479),
-            InappButton(),
+            const InappButton(),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0423),
             CustomElevatedButtonView(
               text: btnStart,

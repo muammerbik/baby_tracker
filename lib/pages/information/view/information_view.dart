@@ -48,14 +48,14 @@ class _InformationViewState extends State<InformationView> {
                 child: IconButton(
                   onPressed: () {
                     Navigation.push(
-                      page: HomeView(),
+                      page: const HomeView(),
                     );
                   },
-                  icon: Icon(Icons.arrow_back_ios),
+                  icon: const Icon(Icons.arrow_back_ios),
                 ),
               ),
             ),
-            AddImageWidgets(),
+            const AddImageWidgets(),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
             Align(
               alignment: Alignment.bottomCenter,
@@ -65,7 +65,7 @@ class _InformationViewState extends State<InformationView> {
                 decoration: BoxDecoration(
                   border: Border.all(color: lightGrey, width: 1),
                   color: white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25),
                   ),
@@ -74,7 +74,7 @@ class _InformationViewState extends State<InformationView> {
                   children: [
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     Observer(
-                      builder: (context) => InformationRow(),
+                      builder: (context) => const InformationRow(),
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     CustomTextFormField(

@@ -2,7 +2,6 @@ import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
-import 'package:baby_tracker/core/hive.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/feeding/view/feeding_view.dart';
 import 'package:baby_tracker/pages/feeding/viewmodel/feeding_viewmodel.dart';
@@ -30,7 +29,7 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                 final list = feedingGetIt.feedList[index];
                 return Dismissible(
                   direction: DismissDirection.startToEnd,
-                  background: Row(children: [
+                  background: const Row(children: [
                     Icon(
                       Icons.delete,
                       color: red,
@@ -49,10 +48,9 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                   child: GestureDetector(
                     onTap: () {
                       Navigation.push(
-                        page: FeedingView(feedingModel: list ),
+                        page: FeedingView(feedingModel: list),
                       );
                       feedingGetIt.selectedFeed = list;
-                     
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -70,8 +68,11 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 10),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      DeviceConfig.screenWidth! * 0.0373,
+                                  vertical:
+                                      DeviceConfig.screenHeight! * 0.0107),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -84,8 +85,8 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                                             DeviceConfig.screenHeight! * 0.0480,
                                         color: darkBlue,
                                       ),
-                                      SizedBox(width: 5),
-                                      TextWidgets(
+                                      const SizedBox(width: 5),
+                                      const TextWidgets(
                                         text: feeding,
                                         size: 18,
                                         color: darkBlue,
@@ -106,7 +107,7 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                                 ],
                               ),
                             ),
-                            Divider(),
+                            const Divider(),
                             ListTile(
                               title: Row(
                                 children: [
@@ -115,7 +116,7 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                                     color: orange.shade800,
                                     height: DeviceConfig.screenHeight! * 0.0451,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Feeding Note",
                                     style: TextStyle(fontSize: 20),
                                   ),
@@ -139,7 +140,7 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
                                     list.note,
-                                    style: TextStyle(fontSize: 16),
+                                    style: const TextStyle(fontSize: 16),
                                   ),
                                 ),
                               ),
@@ -151,7 +152,7 @@ class _CustomFeedListViewState extends State<CustomFeedListView> {
                 );
               },
             )
-          : Center(
+          : const Center(
               child: TextWidgets(
                 text: feedingIsempty,
                 size: 18,

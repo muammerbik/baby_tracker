@@ -58,7 +58,7 @@ class _StackWidgetsState extends State<StackWidgets> {
                     fontWeight: FontWeight.w500,
                   ),
                   SizedBox(height: DeviceConfig.screenHeight! * 0.0485),
-                  RowWidgets(),
+                  const RowWidgets(),
                 ],
               ),
             ),

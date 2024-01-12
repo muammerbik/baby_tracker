@@ -19,6 +19,7 @@ Future<void> main() async {
     statusBarColor: cTransparent,
     statusBarIconBrightness: Brightness.dark,
   ));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
@@ -32,12 +33,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: Navigation.navigationKey,
         theme: ThemeData(
-          appBarTheme: AppBarTheme(backgroundColor: white),
+          appBarTheme: const AppBarTheme(backgroundColor: white),
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: purple)
               .copyWith(background: white)
               .copyWith(background: white),
         ),
-        home: MainView());
+        home: const MainView());
   }
 }

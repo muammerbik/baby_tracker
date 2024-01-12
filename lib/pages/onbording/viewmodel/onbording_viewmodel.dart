@@ -37,7 +37,7 @@ abstract class _OnbordingViewModelBase with Store {
   void continueButtonTapped() {
     if (currentIndex == OnbordingList.length - 1) {
       onbordingComplatedSet();
-      Navigation.push(page: InappView());
+      Navigation.push(page: const InappView());
     }
     pageController.nextPage(
         duration: const Duration(milliseconds: 200), curve: Curves.linear);

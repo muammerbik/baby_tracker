@@ -10,35 +10,9 @@ part 'calender_viewmodel.g.dart';
 class CalenderViewMoel = _CalenderViewMoelBase with _$CalenderViewMoel;
 
 abstract class _CalenderViewMoelBase with Store {
-  _CalenderViewMoelBase() {
-  
-  }
-
   final feedingGetIt = locator<FeedingViewModel>();
   final diaperGetIt = locator<DiaperViewModel>();
   final sleepGetIt = locator<SleepViewModel>();
-
-
-//günlük olarak traih değerini veren fonksiyon
-  @action
-  String getFormattedDate(DateTime date) {
-    final dayFormat = DateFormat('E'); // Gün adını al
-    final dateFormat = DateFormat('d MMMM y'); // Tarihi al
-
-    final day = dayFormat.format(date);
-    final formattedDate = dateFormat.format(date);
-
-    return '$day, $formattedDate';
-  }
-
-// all alanında notları yazarken type'ın ilk değerini büyütüp yanına Note ekledim (Feeding Note)
-  @action
-  String capitalizeWithSuffix(String text, String suffix) {
-    if (text.isEmpty) {
-      return text;
-    }
-    return text[0].toUpperCase() + text.substring(1) + suffix;
-  }
 
   @observable
   List<FeedItem> mergedList = [];
@@ -53,6 +27,27 @@ abstract class _CalenderViewMoelBase with Store {
     } else {
       allSelectedIndex = index;
     }
+  }
+
+  // all alanında notları yazarken type'ın ilk değerini büyütüp yanına Note ekledim (Feeding Note)
+  @action
+  String capitalizeWithSuffix(String text, String suffix) {
+    if (text.isEmpty) {
+      return text;
+    }
+    return text[0].toUpperCase() + text.substring(1) + suffix;
+  }
+
+//günlük olarak traih değerini veren fonksiyon
+  @action
+  String getFormattedDate(DateTime date) {
+    final dayFormat = DateFormat('E'); // Gün adını al
+    final dateFormat = DateFormat('d MMMM y'); // Tarihi al
+
+    final day = dayFormat.format(date);
+    final formattedDate = dateFormat.format(date);
+
+    return '$day, $formattedDate';
   }
 
   @action

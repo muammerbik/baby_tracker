@@ -10,7 +10,7 @@ class TextWidgets extends StatelessWidget {
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
 
-  const TextWidgets({
+  const TextWidgets({super.key, 
     required this.text,
     this.color,
     required this.size,

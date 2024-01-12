@@ -32,15 +32,17 @@ class _HomeRowState extends State<HomeRow> {
         children: [
           IconButton(
             onPressed: () {
-              Navigation.push(page: SettingsView());
+              Navigation.push(page: const SettingsView());
             },
             icon: Image.asset(
-              "assets/icons/stng.png",
+              settngImg,
               height: DeviceConfig.screenHeight! * 0.0269,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(
+              vertical: DeviceConfig.screenHeight! * 0.0259,
+            ),
             child: Container(
               width: DeviceConfig.screenHeight! * 0.1428,
               height: DeviceConfig.screenHeight! * 0.1399,
@@ -50,8 +52,8 @@ class _HomeRowState extends State<HomeRow> {
                         image: FileImage(File(localImagePath)),
                         fit: BoxFit.fill,
                       )
-                    : null, // Eğer resim yoksa null olarak bırakın
-                shape: OvalBorder(
+                    : null,
+                shape: const OvalBorder(
                   side: BorderSide(width: 1, color: purple),
                 ),
               ),
@@ -59,10 +61,12 @@ class _HomeRowState extends State<HomeRow> {
           ),
           IconButton(
             onPressed: () {
-              Navigation.push(page: CalenderView());
+              Navigation.push(
+                page: const CalenderView(),
+              );
             },
             icon: Image.asset(
-              "assets/icons/file.png",
+              calenderImg,
               height: DeviceConfig.screenHeight! * 0.0485,
             ),
           ),

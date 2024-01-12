@@ -1,7 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
@@ -27,23 +25,22 @@ class FeedingView extends StatefulWidget {
 class _FeedingViewState extends State<FeedingView> {
   final feedingGetIt = locator<FeedingViewModel>();
   final informationGetIt = locator<InformationViewModel>();
-@override
-void initState() {
-  feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
-  feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
-  feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
+  @override
+  void initState() {
+    feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
+    feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
+    feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
 
-  if (widget.feedingModel != null) {
-    feedingGetIt.noteController.text = widget.feedingModel!.note;
-    feedingGetIt.timeController.text = widget.feedingModel!.time;
-    feedingGetIt.mlController.text = widget.feedingModel!.amount.toString();
-    feedingGetIt.selectedFeed = widget.feedingModel; 
-  } else {
-    feedingGetIt.selectedFeed = null; 
+    if (widget.feedingModel != null) {
+      feedingGetIt.noteController.text = widget.feedingModel!.note;
+      feedingGetIt.timeController.text = widget.feedingModel!.time;
+      feedingGetIt.mlController.text = widget.feedingModel!.amount.toString();
+      feedingGetIt.selectedFeed = widget.feedingModel;
+    } else {
+      feedingGetIt.selectedFeed = null;
+    }
+    super.initState();
   }
-  super.initState();
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +52,9 @@ void initState() {
             onPressed: () {
               Navigation.ofPop();
             },
-            icon: Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.arrow_back)),
         centerTitle: true,
-        title: TextWidgets(text: feeding, size: 27, color: darkBlue),
+        title: const TextWidgets(text: feeding, size: 27, color: darkBlue),
       ),
       body: Observer(
         builder: (context) => Column(
@@ -87,7 +84,7 @@ void initState() {
               keyboardType: TextInputType.name,
               maxLines: 10,
             ),
-            Spacer(),
+            const Spacer(),
             CustomElevatedButtonView(
                 text: save,
                 onTop: () async {

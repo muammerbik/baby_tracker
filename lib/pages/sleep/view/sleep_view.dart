@@ -1,17 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
-
-import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/custom_textFormField/custom_textFormField.dart';
-import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/data/models/sleeep_model.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
-import 'package:baby_tracker/pages/home/view/home_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/sleep/viewmodel/sleep_viewmodel.dart';
 
@@ -54,7 +49,7 @@ void initState() {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        title: TextWidgets(text: sleep, size: 27, color: darkBlue),
+        title: const TextWidgets(text: sleep, size: 27, color: darkBlue),
       ),
       body: Column(
         children: [
@@ -79,7 +74,7 @@ void initState() {
               hintText: note,
               controller: sleepGetIt.sleepNoteController,
               maxLines: 10),
-          Spacer(),
+          const Spacer(),
           CustomElevatedButtonView(
               text: save,
               onTop: () async {

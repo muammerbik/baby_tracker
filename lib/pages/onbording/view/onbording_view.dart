@@ -41,8 +41,8 @@ class _OnbordingViewState extends State<OnbordingView> {
                 controller: onbordingGetIt.pageController,
                 onPageChanged: onbordingGetIt.onPageChanged,
                 physics: onbordingGetIt.notGoBack
-                    ? PageScrollPhysics()
-                    : NeverScrollableScrollPhysics(),
+                    ? const PageScrollPhysics()
+                    : const NeverScrollableScrollPhysics(),
                 itemCount: onbordingGetIt.OnbordingList.length,
                 itemBuilder: (context, index) {
                   return StackWidgets(

@@ -42,7 +42,7 @@ class _CustomElevatedButtonViewState extends State<CustomElevatedButtonView> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
-                shadows: [
+                shadows: const [
                   BoxShadow(
                     color: lightGrey,
                     blurRadius: 10,

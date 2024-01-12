@@ -27,7 +27,7 @@ class _DiaperChangeColumnState extends State<DiaperChangeColumn> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextWidgets(
+            const TextWidgets(
               text: diaperStatus,
               size: 15,
               color: black,
@@ -68,16 +68,15 @@ class _DiaperChangeColumnState extends State<DiaperChangeColumn> {
             Container(
               width: DeviceConfig.screenWidth! * 0.0700,
               height: DeviceConfig.screenHeight! * 0.0363,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
               ),
               child: Image.asset(
-                isSelected
-                    ? "assets/images/$imagePath"
-                    : "assets/images/$imagePath",
-                height: DeviceConfig.screenHeight! * 0.0363,
-                color: isSelected ? null : Color(0xFFC2C2C2),
-              ),
+                  isSelected
+                      ? "assets/images/$imagePath"
+                      : "assets/images/$imagePath",
+                  height: DeviceConfig.screenHeight! * 0.0363,
+                  color: isSelected ? null : diaperColor),
             ),
             SizedBox(width: DeviceConfig.screenWidth! * 0.0233),
             TextWidgets(

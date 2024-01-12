@@ -44,15 +44,13 @@ abstract class _InformationViewModelBase with Store {
   @observable
   ImagePicker picker = ImagePicker();
 
- 
-
   @action
   Future<void> init() async {
     await loadInformation();
   }
-/* 
- @observable
-  bool isGirl = false;
+
+  @observable
+  bool? isGirl;
 
   @action
   void toggleGirlImage() {
@@ -62,21 +60,7 @@ abstract class _InformationViewModelBase with Store {
   @action
   void toggleSonImage() {
     isGirl = false;
-  } */
-
-  @observable
-bool? isGirl; // Başlangıçta null (hiçbiri seçili değil) olarak ayarla
-
-@action
-void toggleGirlImage() {
-  isGirl = true;
-}
-
-@action
-void toggleSonImage() {
-  isGirl = false;
-}
-
+  }
 
   @observable
   InformationModel? selectedInformation;
@@ -109,12 +93,12 @@ void toggleSonImage() {
       }
 
       InformationComplatedSet();
-      Navigation.push(page: HomeView());
+      Navigation.push(page: const HomeView());
     } else {
       showDialog(
         context: context,
         builder: (context) {
-          return CustomAlertDialog();
+          return const CustomAlertDialog();
         },
       );
     }
@@ -131,7 +115,7 @@ void toggleSonImage() {
           await FileHandler().saveFileToPhoneMemory("test.png", imageBytes);
 
       var model = InformationModel(
-        id: Uuid().v4(),
+        id: const Uuid().v4(),
         img: localImagePath,
         cinsiyet: isGirl ?? false,
         fullName: nameController.text,

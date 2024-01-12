@@ -38,14 +38,14 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                   final item = calenderGetIt.mergedList[index];
                   return Dismissible(
                     direction: DismissDirection.startToEnd,
-                    background: Row(children: [
+                    background: const Row(children: [
                       Icon(
                         Icons.delete,
                         color: red,
                         size: 30,
                       ),
                       TextWidgets(
-                        text: "Delete",
+                        text: delete,
                         size: 20,
                         color: black,
                       )
@@ -104,8 +104,11 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                           child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 10),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        DeviceConfig.screenWidth! * 0.0373,
+                                    vertical:
+                                        DeviceConfig.screenHeight! * 0.0107),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -118,7 +121,7 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                                               0.0480,
                                           color: darkBlue,
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         TextWidgets(
                                           text: item.category,
                                           size: 18,
@@ -140,7 +143,7 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                                   ],
                                 ),
                               ),
-                              Divider(),
+                              const Divider(),
                               ListTile(
                                 title: Row(
                                   children: [
@@ -152,16 +155,19 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                                     ),
                                     Text(
                                       calenderGetIt.capitalizeWithSuffix(
-                                          item.type, " Note"),
-                                      style: TextStyle(fontSize: 20),
+                                          item.type, notee),
+                                      style: const TextStyle(fontSize: 20),
                                     ),
                                   ],
                                 ),
                                 trailing: IconButton(
                                   onPressed: () {
-                                    setState(() {
-                                      calenderGetIt.updateSelectedIndex(index);
-                                    });
+                                    setState(
+                                      () {
+                                        calenderGetIt
+                                            .updateSelectedIndex(index);
+                                      },
+                                    );
                                   },
                                   icon: Icon(
                                     calenderGetIt.allSelectedIndex == index
@@ -173,10 +179,14 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                               if (calenderGetIt.allSelectedIndex == index)
                                 Observer(
                                   builder: (context) => Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            DeviceConfig.screenWidth! * 0.0373,
+                                        vertical: DeviceConfig.screenHeight! *
+                                            0.0107),
                                     child: Text(
                                       item.note,
-                                      style: TextStyle(fontSize: 16),
+                                      style: const TextStyle(fontSize: 16),
                                     ),
                                   ),
                                 ),
@@ -188,7 +198,7 @@ class _CustomAllListViewState extends State<CustomAllListView> {
                   );
                 },
               )
-            : Center(
+            : const Center(
                 child: TextWidgets(
                   text: diaperIsempty,
                   size: 18,

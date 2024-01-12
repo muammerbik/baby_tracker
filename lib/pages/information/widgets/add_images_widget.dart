@@ -25,11 +25,9 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
           showCustomActionSheet(
             context,
             () {
-              // Camera Tapped
               informationGetIt.imgFromCamera();
             },
             () {
-              // Gallery Tapped
               informationGetIt.imgFromGallery();
               ;
             },
@@ -40,7 +38,7 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
             Container(
               width: DeviceConfig.screenWidth! * 0.3130,
               height: DeviceConfig.screenHeight! * 0.1459,
-              decoration: ShapeDecoration(
+              decoration: const ShapeDecoration(
                 shape: OvalBorder(
                   side: BorderSide(width: 1, color: purple),
                 ),
@@ -52,7 +50,7 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
                       child: Image.asset("assets/images/camera.png"),
                     )
                   : ClipRRect(
-                      borderRadius: BorderRadius.circular(150.0),
+                      borderRadius: BorderRadius.circular(70.0),
                       child: Image.file(
                         informationGetIt.imageFile!,
                         fit: BoxFit.fill,
@@ -66,7 +64,7 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
                   ? Container(
                       height: DeviceConfig.screenHeight! * 0.0323,
                       width: DeviceConfig.screenWidth! * 0.0700,
-                      decoration: ShapeDecoration(
+                      decoration: const ShapeDecoration(
                         color: white,
                         shape: OvalBorder(
                           side: BorderSide(width: 1, color: purple),

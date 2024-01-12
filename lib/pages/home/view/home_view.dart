@@ -3,7 +3,6 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/calender/viewmodel/calender_viewmodel.dart';
-import 'package:baby_tracker/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:baby_tracker/pages/home/widgets/home_container.dart';
 import 'package:baby_tracker/pages/home/widgets/home_row.dart';
 import 'package:baby_tracker/pages/information/view/information_view.dart';
@@ -20,8 +19,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final InformationGetIt = locator<InformationViewModel>();
-  final HomeGetIt = locator<HomeViewModel>();
+  final informationGetIt = locator<InformationViewModel>();
   final calenderGetIt = locator<CalenderViewMoel>();
 
   @override
@@ -33,13 +31,13 @@ class _HomeViewState extends State<HomeView> {
         builder: (context) => Column(
           children: [
             SizedBox(height: DeviceConfig.screenHeight! * 0.0640),
-            HomeRow(),
+            const HomeRow(),
             Observer(
               builder: (context) => TextButton(
                 onPressed: () {
-                  Navigation.push(page: InformationView());
+                  Navigation.push(page: const InformationView());
                 },
-                child: TextWidgets(
+                child: const TextWidgets(
                   text: editProfie,
                   size: 15,
                   color: darkBlue,
@@ -48,16 +46,17 @@ class _HomeViewState extends State<HomeView> {
             ),
             Observer(
               builder: (context) => TextWidgets(
-                  text: InformationGetIt.nameController.text,
+                  text: informationGetIt.nameController.text,
                   size: 25,
                   color: purple),
             ),
             SizedBox(
-              height: 8,
+              height: DeviceConfig.screenHeight! * 0.0100,
             ),
             Observer(
               builder: (context) => TextWidgets(
-                text: calenderGetIt.getFormattedDate(DateTime.now()),
+                text: informationGetIt.birthDateController
+                    .text, //calenderGetIt.getFormattedDate(DateTime.now()),
                 size: 17,
                 color: black,
                 fontWeight: FontWeight.w500,
@@ -67,7 +66,7 @@ class _HomeViewState extends State<HomeView> {
               height: DeviceConfig.screenHeight! * 0.0169,
             ),
             Observer(
-              builder: (context) => HomeContainer(),
+              builder: (context) => const HomeContainer(),
             ),
           ],
         ),

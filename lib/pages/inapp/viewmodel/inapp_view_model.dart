@@ -21,11 +21,11 @@ abstract class _InappViewModelBase with Store {
     await InappComplatedGet();
     if (selectedButtonIndex != -1 && isInappComplated) {
       Navigation.push(
-        page: InformationView(),
+        page: const InformationView(),
       );
     } else if (selectedButtonIndex == -1) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text(snackbarMassageInaap),
           duration: Duration(seconds: 2),
         ),

@@ -26,36 +26,44 @@ class _HomeContainerState extends State<HomeContainer> {
         decoration: BoxDecoration(
           border: Border.all(color: lightGrey, width: 1),
           color: white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(25),
             topRight: Radius.circular(25),
           ),
         ),
         child: Column(
           children: [
-            SizedBox(height: 10),
+            SizedBox(
+              height: DeviceConfig.screenHeight! * 0.0139,
+            ),
             HomeButtons(
               color: darkPurple,
               title: feeding,
-              img: "assets/images/bottle.png",
+              img: feedingIcon,
               onTap: () {
-                Navigation.push(page: FeedingView());
+                Navigation.push(
+                  page: const FeedingView(),
+                );
               },
             ),
             HomeButtons(
               color: lightblue,
               title: diaper,
-              img: "assets/images/diaper1.png",
+              img: diaperIcon,
               onTap: () {
-                Navigation.push(page: DiaperChangeView());
+                Navigation.push(
+                  page: const DiaperChangeView(),
+                );
               },
             ),
             HomeButtons(
               color: darkBlue,
               title: sleep,
-              img: "assets/images/sleep.png",
+              img: sleepIcon,
               onTap: () {
-                Navigation.push(page: SleepView());
+                Navigation.push(
+                  page: const SleepView(),
+                );
               },
             )
           ],

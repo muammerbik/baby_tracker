@@ -24,7 +24,6 @@ class TabbarView extends StatefulWidget {
 
 class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
   late final TabController tabController;
-
   final calenderGetIt = locator<CalenderViewMoel>();
   final feedingGetIt = locator<FeedingViewModel>();
   final diaperGetIt = locator<DiaperViewModel>();
@@ -52,10 +51,10 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
                 feedingGetIt.clearControllersFeeding();
                 diaperGetIt.clearControllersDiaper();
                 sleepGetIt.clearControlersSleep();
-                Navigation.push(page: HomeView());
+                Navigation.push(page: const HomeView());
               },
-              icon: Icon(Icons.arrow_back_ios_new_outlined)),
-          title: Column(
+              icon: const Icon(Icons.arrow_back_ios_new_outlined)),
+          title: const Column(
             children: [
               TextWidgets(
                 text: calender,
@@ -70,8 +69,10 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
         body: Column(
           children: [
             Text(
-              calenderGetIt.getFormattedDate(DateTime.now()),
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              calenderGetIt.getFormattedDate(
+                DateTime.now(),
+              ),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -80,7 +81,7 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
               child: TabBar(
                 controller: tabController,
                 tabs: <Widget>[
-                  Tab(
+                  const Tab(
                     child: Tooltip(
                       message: all,
                       child: Text(
@@ -123,17 +124,17 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
                   Observer(
                     builder: (context) {
                       calenderGetIt.mergeLists();
-                      return CustomAllListView();
+                      return const CustomAllListView();
                     },
                   ),
                   Observer(
-                    builder: (context) => CustomFeedListView(),
+                    builder: (context) => const CustomFeedListView(),
                   ),
                   Observer(
-                    builder: (context) => CustomDiaperListView(),
+                    builder: (context) => const CustomDiaperListView(),
                   ),
                   Observer(
-                    builder: (context) => CustomSleepListView(),
+                    builder: (context) => const CustomSleepListView(),
                   ),
                 ],
               ),

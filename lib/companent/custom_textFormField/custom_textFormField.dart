@@ -48,7 +48,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             labelText: widget.labelText,
             hintText: widget.hintText,
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: purple, width: 1),
+              borderSide: const BorderSide(color: purple, width: 1),
               borderRadius: BorderRadius.circular(30),
             ),
           ),

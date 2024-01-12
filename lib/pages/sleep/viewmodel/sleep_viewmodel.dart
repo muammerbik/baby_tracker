@@ -78,40 +78,37 @@ abstract class _SleepViewModelBase with Store {
     sleepNoteController.clear();
   }
 
- 
-@action
-Future<void> isSleepButtonTapped(BuildContext context) async {
-  if (isButtonEnabledSleep) {
-    if (selectedSlep == null) {
-      await addSleep();
+  @action
+  Future<void> isSleepButtonTapped(BuildContext context) async {
+    if (isButtonEnabledSleep) {
+      if (selectedSlep == null) {
+        await addSleep();
+      } else {
+        upDate(selectedSlep!.id);
+      }
+
+      Navigation.push(page: const HomeView());
+      clearControlersSleep();
     } else {
-      upDate(selectedSlep!.id);
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const CustomAlertDialog();
+        },
+      );
     }
-
-    Navigation.push(page: HomeView());
-    clearControlersSleep();
-  } else {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return CustomAlertDialog();
-      },
-    );
   }
-}
-
 
   @action
   SleepModel getItemSlep(String id) {
     return sleepList.firstWhere((feed) => feed.id == id);
   }
 
-
   @action
   Future<void> addSleep() async {
     try {
       var sleepModel = SleepModel(
-          id: Uuid().v1(),
+          id: const Uuid().v1(),
           fellSleep: sleepFellController.text,
           wakeUp: sleepWakeupController.text,
           note: sleepNoteController.text);

@@ -1,7 +1,6 @@
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
-import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/sleep/view/sleep_view.dart';
@@ -29,7 +28,7 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
               final list = sleepGetIt.sleepList[index];
               return Dismissible(
                 direction: DismissDirection.startToEnd,
-                background: Row(children: [
+                background: const Row(children: [
                   Icon(
                     Icons.delete,
                     color: red,
@@ -51,7 +50,6 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                       page: SleepView(sleepModel: list),
                     );
                     sleepGetIt.selectedSlep = list;
-                 
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -68,8 +66,9 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 10),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: DeviceConfig.screenWidth! * 0.0373,
+                                vertical: DeviceConfig.screenHeight! * 0.0107),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -81,8 +80,8 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                                           DeviceConfig.screenHeight! * 0.0480,
                                       color: darkBlue,
                                     ),
-                                    SizedBox(width: 5),
-                                    TextWidgets(
+                                    const SizedBox(width: 5),
+                                    const TextWidgets(
                                       text: sleep,
                                       size: 18,
                                       color: darkBlue,
@@ -103,7 +102,7 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                               ],
                             ),
                           ),
-                          Divider(),
+                          const Divider(),
                           ListTile(
                             title: Row(
                               children: [
@@ -112,7 +111,7 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                                   color: orange.shade800,
                                   height: DeviceConfig.screenHeight! * 0.0451,
                                 ),
-                                Text(
+                                const Text(
                                   "Sleep Note",
                                   style: TextStyle(fontSize: 20),
                                 ),
@@ -133,10 +132,14 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
                           if (sleepGetIt.sleepSelectIndex == index)
                             Observer(
                               builder: (context) => Padding(
-                                padding: const EdgeInsets.all(16.0),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        DeviceConfig.screenWidth! * 0.0373,
+                                    vertical:
+                                        DeviceConfig.screenHeight! * 0.0107),
                                 child: Text(
                                   list.note,
-                                  style: TextStyle(fontSize: 16),
+                                  style: const TextStyle(fontSize: 16),
                                 ),
                               ),
                             ),
@@ -148,7 +151,7 @@ class _CustomSleepListViewState extends State<CustomSleepListView> {
               );
             },
           )
-        : Center(
+        : const Center(
             child: TextWidgets(
               text: sleepIsnotempty,
               size: 18,

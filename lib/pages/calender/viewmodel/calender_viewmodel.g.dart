@@ -45,11 +45,11 @@ mixin _$CalenderViewMoel on _CalenderViewMoelBase, Store {
       ActionController(name: '_CalenderViewMoelBase', context: context);
 
   @override
-  String getFormattedDate(DateTime date) {
+  void updateSelectedIndex(int index) {
     final _$actionInfo = _$_CalenderViewMoelBaseActionController.startAction(
-        name: '_CalenderViewMoelBase.getFormattedDate');
+        name: '_CalenderViewMoelBase.updateSelectedIndex');
     try {
-      return super.getFormattedDate(date);
+      return super.updateSelectedIndex(index);
     } finally {
       _$_CalenderViewMoelBaseActionController.endAction(_$actionInfo);
     }
@@ -67,11 +67,11 @@ mixin _$CalenderViewMoel on _CalenderViewMoelBase, Store {
   }
 
   @override
-  void updateSelectedIndex(int index) {
+  String getFormattedDate(DateTime date) {
     final _$actionInfo = _$_CalenderViewMoelBaseActionController.startAction(
-        name: '_CalenderViewMoelBase.updateSelectedIndex');
+        name: '_CalenderViewMoelBase.getFormattedDate');
     try {
-      return super.updateSelectedIndex(index);
+      return super.getFormattedDate(date);
     } finally {
       _$_CalenderViewMoelBaseActionController.endAction(_$actionInfo);
     }

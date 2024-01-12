@@ -10,6 +10,7 @@ import 'package:mobx/mobx.dart';
 import 'package:uuid/uuid.dart';
 part 'diaper_viewmodel.g.dart';
 
+// ignore: constant_identifier_names
 enum DiaperStatus { Wet, Dirty, Mixed, Dry }
 
 class DiaperViewModel = _DiaperViewModelBase with _$DiaperViewModel;
@@ -105,13 +106,13 @@ Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
     } else {
       await upDate(selectedDiaper!.id);
     }
-    Navigation.push(page: HomeView());
+    Navigation.push(page: const HomeView());
     clearControllersDiaper();
   } else {
     showDialog(
       context: context,
       builder: (context) {
-        return CustomAlertDialog();
+        return const CustomAlertDialog();
       },
     );
   }
@@ -130,7 +131,7 @@ Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
   Future<void> addDiaperChange() async {
     try {
       var diaperModel = DiaperChangeModel(
-          id: Uuid().v1(),
+          id: const Uuid().v1(),
           time: diaperTimeController.text,
           diaperStatus: selectedStatus!.index.toString(),
           note: diaperNoteController.text);

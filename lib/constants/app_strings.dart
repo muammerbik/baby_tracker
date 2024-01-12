@@ -18,6 +18,7 @@ const darkBlue = Color(0xFF635AFF);
 const greyy = Colors.grey;
 const red = Colors.red;
 const orange = Colors.orange;
+const diaperColor = Color(0xFFC2C2C2);
 
 //Text
 //
@@ -40,6 +41,7 @@ const feeding = 'Feeding';
 const diaper = 'Diaper Change';
 const sleep = 'Sleep';
 const ok = "OK";
+const cancel = "cancel";
 const poppins = 'Poppins';
 const delete = "Delete";
 const onboardingTitle1 = "Track Your Baby's\nActivities with Ease";
@@ -52,8 +54,7 @@ const onboardingTitle3 = 'Stay Connected \nwith Caregivers';
 const onboardingSubTiitle3 =
     "Share access to your baby's tracker with\nfamily members, babysitters, or healthcare\nproviders ";
 const snackbarMassageInaap = "Please choose the appropriate Premium package!";
-const errorContent =
-    "Please make sure you fill out all fields completely";
+const errorContent = "Please make sure you fill out all fields completely";
 const errorTitle = "Missing or incorrect entry!";
 const settings = "Settings";
 const getPremiumm = "Get Premium";
@@ -75,6 +76,9 @@ const all = "All";
 const feedingIsempty = "No information about feeding!";
 const diaperIsempty = "No information about changing diapers!";
 const sleepIsnotempty = "No information about sleep!";
+const feedingNote = "Feeding Note";
+const diaperNote = "Diaper Note";
+const notee = " Note";
 
 //imgage
 const onboardingImg1 = "assets/images/onbording1.png";
@@ -93,3 +97,4 @@ const feedingIcon = "assets/images/bottle.png";
 const diaperIcon = "assets/images/diaper1.png";
 const sleepIcon = "assets/images/sleep.png";
 const calenderImg = "assets/icons/file.png";
+const settngImg = "assets/icons/stng.png";
