@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/onbording/viewmodel/onbording_viewmodel.dart';
 import 'package:baby_tracker/pages/onbording/widgets/row_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class StackWidgets extends StatefulWidget {

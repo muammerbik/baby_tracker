@@ -48,6 +48,7 @@ dependencies:
   uuid: ^4.2.2
   date_format: ^2.0.7
   path_provider: ^2.1.1
+  flutter_launcher_icons: ^0.13.1
  
 
 dev_dependencies:
@@ -63,6 +64,12 @@ dev_dependencies:
   mobx_codegen: ^2.4.0
   build_runner: ^2.4.7
   hive_generator: ^2.0.1
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/appicon.png"  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

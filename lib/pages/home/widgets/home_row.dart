@@ -36,7 +36,7 @@ class _HomeRowState extends State<HomeRow> {
             },
             icon: Image.asset(
               settngImg,
-              height: DeviceConfig.screenHeight! * 0.0269,
+              height: DeviceConfig.screenHeight! * 0.0339,
             ),
           ),
           Padding(
@@ -67,7 +67,7 @@ class _HomeRowState extends State<HomeRow> {
             },
             icon: Image.asset(
               calenderImg,
-              height: DeviceConfig.screenHeight! * 0.0485,
+              height: DeviceConfig.screenHeight! * 0.0585,
             ),
           ),
         ],

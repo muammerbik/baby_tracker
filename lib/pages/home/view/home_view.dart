@@ -1,3 +1,4 @@
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
@@ -7,7 +8,6 @@ import 'package:baby_tracker/pages/home/widgets/home_container.dart';
 import 'package:baby_tracker/pages/home/widgets/home_row.dart';
 import 'package:baby_tracker/pages/information/view/information_view.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
-import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 

@@ -39,7 +39,7 @@ class _HomeContainerState extends State<HomeContainer> {
             HomeButtons(
               color: darkPurple,
               title: feeding,
-              img: feedingIcon,
+              img: "assets/images/feedinggg.png",
               onTap: () {
                 Navigation.push(
                   page: const FeedingView(),
@@ -49,7 +49,7 @@ class _HomeContainerState extends State<HomeContainer> {
             HomeButtons(
               color: lightblue,
               title: diaper,
-              img: diaperIcon,
+              img: "assets/images/diaperrr.png",
               onTap: () {
                 Navigation.push(
                   page: const DiaperChangeView(),
@@ -59,7 +59,7 @@ class _HomeContainerState extends State<HomeContainer> {
             HomeButtons(
               color: darkBlue,
               title: sleep,
-              img: sleepIcon,
+              img: "assets/images/sleeppp.png",
               onTap: () {
                 Navigation.push(
                   page: const SleepView(),

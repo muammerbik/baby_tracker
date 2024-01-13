@@ -1,7 +1,8 @@
+import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
+import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:flutter/material.dart';
 
-import 'package:baby_tracker/constants/device_config.dart';
-import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 
 class HomeButtons extends StatefulWidget {
   final Color color;
@@ -42,10 +43,12 @@ class _HomeButtonsState extends State<HomeButtons> {
             ),
           ),
           child: ListTile(
-            contentPadding:
-                EdgeInsets.only(left: DeviceConfig.screenWidth! * 0.0150),
-            leading: Image.asset(
-              widget.img,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                widget.img,
+                color: white,
+              ),
             ),
             title: TextWidgets(
               text: widget.title,

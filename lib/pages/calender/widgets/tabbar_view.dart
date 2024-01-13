@@ -77,7 +77,7 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: DeviceConfig.screenWidth! * 0.0467,
-                  vertical: DeviceConfig.screenHeight! * 0.0107),
+                  vertical: DeviceConfig.screenHeight! * 0.0207),
               child: TabBar(
                 controller: tabController,
                 tabs: <Widget>[
@@ -86,11 +86,15 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
                       message: all,
                       child: Text(
                         all,
-                        style: TextStyle(color: greyy, fontSize: 27),
+                        style: TextStyle(
+                            color: greyy,
+                            fontSize: 32,
+                            fontWeight: FontWeight.w300),
                       ),
                     ),
                   ),
                   Tab(
+                    height: 40,
                     child: Tooltip(
                       message: feeding,
                       child: Image.asset(
@@ -100,6 +104,7 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
                     ),
                   ),
                   Tab(
+                    height: 40,
                     child: Tooltip(
                       message: diaperChange,
                       child: Image.asset(
@@ -111,7 +116,10 @@ class _TabbarViewState extends State<TabbarView> with TickerProviderStateMixin {
                   Tab(
                     child: Tooltip(
                       message: sleep,
-                      child: Image.asset(sleepIcon, color: greyy),
+                      child: Image.asset(
+                        sleepIcon,
+                        color: greyy,
+                      ),
                     ),
                   ),
                 ],
