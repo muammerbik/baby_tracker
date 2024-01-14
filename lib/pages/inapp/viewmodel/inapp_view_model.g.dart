@@ -41,29 +41,29 @@ mixin _$InappViewModel on _InappViewModelBase, Store {
     });
   }
 
-  late final _$InappButtonTappedAsyncAction =
-      AsyncAction('_InappViewModelBase.InappButtonTapped', context: context);
+  late final _$inappButtonTappedAsyncAction =
+      AsyncAction('_InappViewModelBase.inappButtonTapped', context: context);
 
   @override
-  Future<void> InappButtonTapped(BuildContext context) {
-    return _$InappButtonTappedAsyncAction
-        .run(() => super.InappButtonTapped(context));
+  Future<void> inappButtonTapped(BuildContext context) {
+    return _$inappButtonTappedAsyncAction
+        .run(() => super.inappButtonTapped(context));
   }
 
-  late final _$InappComplatedSetAsyncAction =
-      AsyncAction('_InappViewModelBase.InappComplatedSet', context: context);
+  late final _$inappComplatedSetAsyncAction =
+      AsyncAction('_InappViewModelBase.inappComplatedSet', context: context);
 
   @override
-  Future<void> InappComplatedSet() {
-    return _$InappComplatedSetAsyncAction.run(() => super.InappComplatedSet());
+  Future<void> inappComplatedSet() {
+    return _$inappComplatedSetAsyncAction.run(() => super.inappComplatedSet());
   }
 
-  late final _$InappComplatedGetAsyncAction =
-      AsyncAction('_InappViewModelBase.InappComplatedGet', context: context);
+  late final _$inappComplatedGetAsyncAction =
+      AsyncAction('_InappViewModelBase.inappComplatedGet', context: context);
 
   @override
-  Future<void> InappComplatedGet() {
-    return _$InappComplatedGetAsyncAction.run(() => super.InappComplatedGet());
+  Future<void> inappComplatedGet() {
+    return _$inappComplatedGetAsyncAction.run(() => super.inappComplatedGet());
   }
 
   @override

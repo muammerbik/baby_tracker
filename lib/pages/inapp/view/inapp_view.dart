@@ -19,8 +19,7 @@ class InappView extends StatefulWidget {
 }
 
 class _InappViewState extends State<InappView> {
-  final inappGetIt = locator<InappViewModel>();
-
+  final inappViewmodel = locator<InappViewModel>();
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -71,7 +70,7 @@ class _InappViewState extends State<InappView> {
             CustomElevatedButtonView(
               text: btnStart,
               onTop: () async {
-                inappGetIt.InappButtonTapped(context);
+                inappViewmodel.inappButtonTapped(context);
               },
               color: btnBlue,
             ),

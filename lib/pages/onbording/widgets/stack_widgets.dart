@@ -20,7 +20,7 @@ class StackWidgets extends StatefulWidget {
 }
 
 class _StackWidgetsState extends State<StackWidgets> {
-  final onbordingGetIt = locator<OnbordingViewModel>();
+  final onboardingViewmodel = locator<OnbordingViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,10 @@ class _StackWidgetsState extends State<StackWidgets> {
     return Observer(
       builder: (context) => Stack(
         children: [
-          Image.asset(onbordingGetIt.OnbordingList[widget.onbordingIndex].img),
+          Image.asset(
+            onboardingViewmodel.OnbordingList[widget.onbordingIndex].img,
+            width: double.infinity,
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -45,13 +48,13 @@ class _StackWidgetsState extends State<StackWidgets> {
                 children: [
                   SizedBox(height: DeviceConfig.screenHeight! * 0.0269),
                   TextWidgets(
-                      text: onbordingGetIt
+                      text: onboardingViewmodel
                           .OnbordingList[widget.onbordingIndex].title,
                       size: 31,
                       color: black),
                   SizedBox(height: DeviceConfig.screenHeight! * 0.0161),
                   TextWidgets(
-                    text: onbordingGetIt
+                    text: onboardingViewmodel
                         .OnbordingList[widget.onbordingIndex].subTitle,
                     size: 17,
                     color: black,
@@ -62,7 +65,7 @@ class _StackWidgetsState extends State<StackWidgets> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

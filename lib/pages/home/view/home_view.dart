@@ -19,8 +19,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final informationGetIt = locator<InformationViewModel>();
-  final calenderGetIt = locator<CalenderViewMoel>();
+  final informationViewmodel = locator<InformationViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,9 @@ class _HomeViewState extends State<HomeView> {
             Observer(
               builder: (context) => TextButton(
                 onPressed: () {
-                  Navigation.push(page: const InformationView());
+                  Navigation.push(
+                    page: const InformationView(),
+                  );
                 },
                 child: const TextWidgets(
                   text: editProfie,
@@ -46,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
             ),
             Observer(
               builder: (context) => TextWidgets(
-                  text: informationGetIt.nameController.text,
+                  text: informationViewmodel.nameController.text,
                   size: 25,
                   color: purple),
             ),
@@ -55,8 +56,8 @@ class _HomeViewState extends State<HomeView> {
             ),
             Observer(
               builder: (context) => TextWidgets(
-                text: informationGetIt.birthDateController
-                    .text, //calenderGetIt.getFormattedDate(DateTime.now()),
+                text: informationViewmodel.birthDateController
+                    .text, 
                 size: 17,
                 color: black,
                 fontWeight: FontWeight.w500,

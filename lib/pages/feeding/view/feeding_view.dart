@@ -23,21 +23,25 @@ class FeedingView extends StatefulWidget {
 }
 
 class _FeedingViewState extends State<FeedingView> {
-  final feedingGetIt = locator<FeedingViewModel>();
-  final informationGetIt = locator<InformationViewModel>();
+  final feedingViewmodel = locator<FeedingViewModel>();
+  final informationViewmodel = locator<InformationViewModel>();
   @override
   void initState() {
-    feedingGetIt.timeController.addListener(feedingGetIt.updateButtonStatus);
-    feedingGetIt.mlController.addListener(feedingGetIt.updateButtonStatus);
-    feedingGetIt.noteController.addListener(feedingGetIt.updateButtonStatus);
+    feedingViewmodel.timeController
+        .addListener(feedingViewmodel.updateButtonStatus);
+    feedingViewmodel.mlController
+        .addListener(feedingViewmodel.updateButtonStatus);
+    feedingViewmodel.noteController
+        .addListener(feedingViewmodel.updateButtonStatus);
 
     if (widget.feedingModel != null) {
-      feedingGetIt.noteController.text = widget.feedingModel!.note;
-      feedingGetIt.timeController.text = widget.feedingModel!.time;
-      feedingGetIt.mlController.text = widget.feedingModel!.amount.toString();
-      feedingGetIt.selectedFeed = widget.feedingModel;
+      feedingViewmodel.noteController.text = widget.feedingModel!.note;
+      feedingViewmodel.timeController.text = widget.feedingModel!.time;
+      feedingViewmodel.mlController.text =
+          widget.feedingModel!.amount.toString();
+      feedingViewmodel.selectedFeed = widget.feedingModel;
     } else {
-      feedingGetIt.selectedFeed = null;
+      feedingViewmodel.selectedFeed = null;
     }
     super.initState();
   }
@@ -62,25 +66,25 @@ class _FeedingViewState extends State<FeedingView> {
             SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomTextFormField(
               labelText: time,
-              controller: feedingGetIt.timeController,
+              controller: feedingViewmodel.timeController,
               keyboardType: TextInputType.name,
               onTap: () {
-                informationGetIt.selectTime(
+                informationViewmodel.selectTime(
                   context,
-                  feedingGetIt.timeController,
+                  feedingViewmodel.timeController,
                 );
               },
             ),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomTextFormField(
               labelText: amount,
-              controller: feedingGetIt.mlController,
+              controller: feedingViewmodel.mlController,
               keyboardType: TextInputType.number,
             ),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomTextFormField(
               hintText: note,
-              controller: feedingGetIt.noteController,
+              controller: feedingViewmodel.noteController,
               keyboardType: TextInputType.name,
               maxLines: 10,
             ),
@@ -88,7 +92,7 @@ class _FeedingViewState extends State<FeedingView> {
             CustomElevatedButtonView(
                 text: save,
                 onTop: () async {
-                  feedingGetIt.isFeedingButtonTapped(context);
+                  feedingViewmodel.isFeedingButtonTapped(context);
                 },
                 color: darkPurple),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0323),

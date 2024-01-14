@@ -41,20 +41,6 @@ mixin _$SettingViewModel on _SettingViewModelBase, Store {
     });
   }
 
-  late final _$_SettingViewModelBaseActionController =
-      ActionController(name: '_SettingViewModelBase', context: context);
-
-  @override
-  void setSelectedIndex(int index) {
-    final _$actionInfo = _$_SettingViewModelBaseActionController.startAction(
-        name: '_SettingViewModelBase.setSelectedIndex');
-    try {
-      return super.setSelectedIndex(index);
-    } finally {
-      _$_SettingViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''

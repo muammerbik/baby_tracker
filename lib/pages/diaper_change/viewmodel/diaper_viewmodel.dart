@@ -30,7 +30,6 @@ abstract class _DiaperViewModelBase with Store {
 
   @observable
   DiaperStatus? selectedStatus;
-  
   @observable
   DiaperChangeModel? selectedDiaper;
   @observable
@@ -54,7 +53,6 @@ abstract class _DiaperViewModelBase with Store {
     }
   }
 
-  
   @action
   DiaperChangeModel getItemDiaper(String id) {
     return diaperList.firstWhere((feed) => feed.id == id);
@@ -90,40 +88,27 @@ abstract class _DiaperViewModelBase with Store {
   }
 
   @action
-  Future<void> initDiaper() async {
-    await getDiaper();
-  }
-
-  @action
   void setSelectedStatus(DiaperStatus? status) {
     selectedStatus = status;
   }
-@action
-Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
-  if (isButtonEnabledDiaper) {
-    if (selectedDiaper == null) {
-      await addDiaperChange();
-    } else {
-      await upDate(selectedDiaper!.id);
-    }
-    Navigation.push(page: const HomeView());
-    clearControllersDiaper();
-  } else {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const CustomAlertDialog();
-      },
-    );
-  }
-}
+
   @action
-  Future<void> getDiaper() async {
-    if (diaperBox.isNotEmpty) {
-      DiaperChangeModel diaperGet = diaperBox.getAt(0)!;
-      diaperTimeController.text = diaperGet.time;
-      diaperNoteController.text = diaperGet.note;
-      selectedStatus = DiaperStatus.values[int.parse(diaperGet.diaperStatus)];
+  Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
+    if (isButtonEnabledDiaper) {
+      if (selectedDiaper == null) {
+        await addDiaperChange();
+      } else {
+        await upDate(selectedDiaper!.id);
+      }
+      Navigation.push(page: const HomeView());
+      clearControllersDiaper();
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const CustomAlertDialog();
+        },
+      );
     }
   }
 
@@ -139,7 +124,7 @@ Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
       await diaperStoragee.addDiaper(diaperChangeModel: diaperModel);
       add(diaperModel);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -148,7 +133,6 @@ Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
     diaperList.clear();
     var data = await diaperStoragee.getAllDiaper();
     diaperList.addAll(data);
-    print(diaperList);
   }
 
   @action
@@ -159,7 +143,9 @@ Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
       await diaperStoragee.deleteDiaper(diaperChangeModel: diaperToDelete);
       diaperList.remove(diaperToDelete);
     } catch (e) {
-      print(e);
+      debugPrint(
+        e.toString(),
+      );
     }
   }
 
@@ -174,7 +160,9 @@ Future<void> isDiaperChangeButtonTapped(BuildContext context) async {
       await diaperStoragee.upDateDiaper(diaperChangeModel: diaperToUpdate);
       diaperList = List.from(diaperList);
     } catch (e) {
-      print(e);
+      debugPrint(
+        e.toString(),
+      );
     }
   }
 }

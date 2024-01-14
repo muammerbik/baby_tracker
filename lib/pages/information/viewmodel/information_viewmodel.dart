@@ -43,14 +43,15 @@ abstract class _InformationViewModelBase with Store {
   File? imageFile;
   @observable
   ImagePicker picker = ImagePicker();
+  @observable
+  bool? isGirl;
+  @observable
+  InformationModel? selectedInformation;
 
   @action
   Future<void> init() async {
     await loadInformation();
   }
-
-  @observable
-  bool? isGirl;
 
   @action
   void toggleGirlImage() {
@@ -62,18 +63,15 @@ abstract class _InformationViewModelBase with Store {
     isGirl = false;
   }
 
-  @observable
-  InformationModel? selectedInformation;
-
   @action
-  Future<void> InformationComplatedSet() async {
+  Future<void> informationComplatedSet() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setBool("isInformationComplated", true);
     isInformationComplated = true;
   }
 
   @action
-  Future<void> InformationComlatedGet() async {
+  Future<void> informationComlatedGet() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     isInformationComplated = pref.getBool("isInformationComplated") ?? false;
   }
@@ -92,7 +90,7 @@ abstract class _InformationViewModelBase with Store {
         await addInformation();
       }
 
-      InformationComplatedSet();
+      informationComplatedSet();
       Navigation.push(page: const HomeView());
     } else {
       showDialog(

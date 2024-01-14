@@ -17,17 +17,16 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  final onbordingGetIt = locator<OnbordingViewModel>();
-  final inAppGetIt = locator<InappViewModel>();
-  final informationGetIt = locator<InformationViewModel>();
-
+  final onboardingViewmodel = locator<OnbordingViewModel>();
+  final inappViewmodel = locator<InappViewModel>();
+  final informationViewModel = locator<InformationViewModel>();
 
   @override
   initState() {
-    onbordingGetIt.onbordingComlatedGet();
-    inAppGetIt.InappComplatedGet();
-    informationGetIt.InformationComlatedGet();
-    
+    onboardingViewmodel.onbordingComlatedGet();
+    inappViewmodel.inappComplatedGet();
+    informationViewModel.informationComlatedGet();
+
     super.initState();
   }
 
@@ -35,19 +34,19 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        if (onbordingGetIt.isOnbordingComplated == true &&
-            inAppGetIt.isInappComplated == true &&
-            informationGetIt.isInformationComplated == true) {
+        if (onboardingViewmodel.isOnbordingComplated == true &&
+            inappViewmodel.isInappComplated == true &&
+            informationViewModel.isInformationComplated == true) {
           return const HomeView();
-        } else if (onbordingGetIt.isOnbordingComplated == true &&
-            inAppGetIt.isInappComplated == true) {
+        } else if (onboardingViewmodel.isOnbordingComplated == true &&
+            inappViewmodel.isInappComplated == true) {
           return const InformationView();
-        } else if (onbordingGetIt.isOnbordingComplated == true) {
+        } else if (onboardingViewmodel.isOnbordingComplated == true) {
           return const InappView();
         } else {
           return const OnbordingView();
         }
       },
-    ); 
+    );
   }
 }

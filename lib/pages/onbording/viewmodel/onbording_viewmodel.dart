@@ -9,6 +9,7 @@ part 'onbording_viewmodel.g.dart';
 class OnbordingViewModel = _OnbordingViewModelBase with _$OnbordingViewModel;
 
 abstract class _OnbordingViewModelBase with Store {
+  
   @observable
   bool isOnbordingComplated = false;
 

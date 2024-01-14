@@ -123,14 +123,6 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
     });
   }
 
-  late final _$initSlepAsyncAction =
-      AsyncAction('_SleepViewModelBase.initSlep', context: context);
-
-  @override
-  Future<void> initSlep() {
-    return _$initSlepAsyncAction.run(() => super.initSlep());
-  }
-
   late final _$initAsyncAction =
       AsyncAction('_SleepViewModelBase.init', context: context);
 
@@ -178,14 +170,6 @@ mixin _$SleepViewModel on _SleepViewModelBase, Store {
   @override
   Future<void> upDate(String id) {
     return _$upDateAsyncAction.run(() => super.upDate(id));
-  }
-
-  late final _$getSleepAsyncAction =
-      AsyncAction('_SleepViewModelBase.getSleep', context: context);
-
-  @override
-  Future<void> getSleep() {
-    return _$getSleepAsyncAction.run(() => super.getSleep());
   }
 
   late final _$_SleepViewModelBaseActionController =

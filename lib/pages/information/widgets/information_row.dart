@@ -1,4 +1,3 @@
-
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
@@ -13,7 +12,7 @@ class InformationRow extends StatefulWidget {
 }
 
 class _InformationRowState extends State<InformationRow> {
-  final informationGetIt = locator<InformationViewModel>();
+  final informationViewmodel = locator<InformationViewModel>();
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -23,9 +22,10 @@ class _InformationRowState extends State<InformationRow> {
         children: [
           GestureDetector(
             onTap: () {
-              informationGetIt.toggleGirlImage();
+              informationViewmodel.toggleGirlImage();
             },
-            child: informationGetIt.isGirl != null && informationGetIt.isGirl!
+            child: informationViewmodel.isGirl != null &&
+                    informationViewmodel.isGirl!
                 ? Image.asset(
                     "assets/images/bbbx.png",
                     height: DeviceConfig.screenHeight! * 0.0323,
@@ -42,9 +42,10 @@ class _InformationRowState extends State<InformationRow> {
           ),
           GestureDetector(
             onTap: () {
-              informationGetIt.toggleSonImage();
+              informationViewmodel.toggleSonImage();
             },
-            child: informationGetIt.isGirl != null && !informationGetIt.isGirl!
+            child: informationViewmodel.isGirl != null &&
+                    !informationViewmodel.isGirl!
                 ? Image.asset(
                     "assets/images/aaay.png",
                     height: DeviceConfig.screenHeight! * 0.0323,

@@ -11,7 +11,7 @@ class InformationModel extends HiveObject {
   String id;
 
   @HiveField(1)
-  String? img; // Resmi temsil eden byte dizisi
+  String? img; 
 
   @HiveField(2)
   bool cinsiyet;

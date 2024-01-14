@@ -1,7 +1,7 @@
-
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
+import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/inapp/view/inapp_view.dart';
 
@@ -24,27 +24,30 @@ class SettingsColumn extends StatefulWidget {
 }
 
 class _SettingsColumnState extends State<SettingsColumn> {
-  final settingsGetIt = locator<SettingViewModel>();
+  final settingsviewmodel = locator<SettingViewModel>();
 
   @override
   Widget build(BuildContext context) {
-    final isFirstElement = settingsGetIt.settingsList.isNotEmpty &&
-        widget.title == settingsGetIt.settingsList.first.title;
+    final isFirstElement = settingsviewmodel.settingsList.isNotEmpty &&
+        widget.title == settingsviewmodel.settingsList.first.title;
 
     return Observer(
       builder: (context) => GestureDetector(
         onTap: () {
           if (isFirstElement) {
-            Navigation.push(page: const InappView());
+            Navigation.push(
+              page: const InappView(),
+            );
           }
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(
+              horizontal: DeviceConfig.screenWidth! * 0.0373),
           child: Container(
-            width: 380,
+            width: double.infinity,
             height: isFirstElement ? 70 : 60,
             decoration: ShapeDecoration(
-              color: isFirstElement ? const Color(0xFF4625C3) : Colors.grey.shade100,
+              color: isFirstElement ? btnBlue : darkWhite,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(35),
               ),

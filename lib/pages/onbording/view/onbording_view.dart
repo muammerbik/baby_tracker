@@ -1,4 +1,3 @@
-
 import 'package:baby_tracker/companent/custom_button/custom_elevated_button.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
@@ -16,17 +15,17 @@ class OnbordingView extends StatefulWidget {
 }
 
 class _OnbordingViewState extends State<OnbordingView> {
-  final onbordingGetIt = locator<OnbordingViewModel>();
+  final onboardingViewmodel = locator<OnbordingViewModel>();
 
   @override
   void initState() {
-    onbordingGetIt.pageController = PageController(initialPage: 0);
+    onboardingViewmodel.pageController = PageController(initialPage: 0);
     super.initState();
   }
 
   @override
   void dispose() {
-    onbordingGetIt.pageController.dispose();
+    onboardingViewmodel.pageController.dispose();
     super.dispose();
   }
 
@@ -39,12 +38,12 @@ class _OnbordingViewState extends State<OnbordingView> {
           children: [
             Expanded(
               child: PageView.builder(
-                controller: onbordingGetIt.pageController,
-                onPageChanged: onbordingGetIt.onPageChanged,
-                physics: onbordingGetIt.notGoBack
+                controller: onboardingViewmodel.pageController,
+                onPageChanged: onboardingViewmodel.onPageChanged,
+                physics: onboardingViewmodel.notGoBack
                     ? const PageScrollPhysics()
                     : const NeverScrollableScrollPhysics(),
-                itemCount: onbordingGetIt.OnbordingList.length,
+                itemCount: onboardingViewmodel.OnbordingList.length,
                 itemBuilder: (context, index) {
                   return StackWidgets(
                     onbordingIndex: index,
@@ -54,7 +53,7 @@ class _OnbordingViewState extends State<OnbordingView> {
             ),
             CustomElevatedButtonView(
               onTop: () {
-                onbordingGetIt.continueButtonTapped();
+                onboardingViewmodel.continueButtonTapped();
               },
               text: btnNext,
               color: btnBlue,

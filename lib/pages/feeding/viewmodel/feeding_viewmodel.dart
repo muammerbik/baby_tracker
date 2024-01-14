@@ -60,7 +60,7 @@ abstract class _FeedingViewModelBase with Store {
       if (selectedFeed == null) {
         await addFeeding();
       } else {
-        await upDate(selectedFeed!.id); // Güncellendi
+        await upDate(selectedFeed!.id);
       }
 
       Navigation.push(
@@ -76,11 +76,6 @@ abstract class _FeedingViewModelBase with Store {
         },
       );
     }
-  }
-
-  @action
-  Future<void> initGet() async {
-    await getFeeding();
   }
 
   @action
@@ -114,10 +109,11 @@ abstract class _FeedingViewModelBase with Store {
           amount: int.tryParse(mlController.text),
           note: noteController.text);
       await feedingStorage.addFeeding(feedingModel: feedmodel);
-
       add(feedmodel);
     } catch (e) {
-      print(e);
+      debugPrint(
+        e.toString(),
+      );
     }
   }
 
@@ -126,7 +122,6 @@ abstract class _FeedingViewModelBase with Store {
     feedList.clear();
     var data = await feedingStorage.getAllFeeding();
     feedList.addAll(data);
-    print(feedList);
   }
 
   @action
@@ -136,8 +131,7 @@ abstract class _FeedingViewModelBase with Store {
       await feedingStorage.deleteFeeding(feedModel: feedToDelete);
       feedList.remove(feedToDelete);
     } catch (e) {
-      print(e);
-    
+      debugPrint(e.toString());
     }
   }
 
@@ -155,17 +149,10 @@ abstract class _FeedingViewModelBase with Store {
       feedToUpdate.note = noteController.text;
       await feedingStorage.upDateFeeding(feedModel: feedToUpdate);
       feedList = List.from(feedList);
-    } catch (e) {}
-  }
-
-  @action
-  Future<void> getFeeding() async {
-    if (feedingBox.isNotEmpty) {
-      FeedingModel feedingGet = feedingBox.getAt(0)!;
-
-      timeController.text = feedingGet.time;
-      mlController.text = feedingGet.amount.toString();
-      noteController.text = feedingGet.note;
+    } catch (e) {
+      debugPrint(
+        e.toString(),
+      );
     }
   }
 }

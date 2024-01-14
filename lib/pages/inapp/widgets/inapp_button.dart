@@ -5,19 +5,15 @@ import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/inapp/viewmodel/inapp_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
 class InappButton extends StatefulWidget {
   const InappButton({Key? key}) : super(key: key);
 
   @override
   State<InappButton> createState() => _InappButtonState();
 }
-
 class _InappButtonState extends State<InappButton> {
-  final inappGetIt = locator<InappViewModel>();
-
-  bool isAnyButtonSelected() {
-    return inappGetIt.selectedButtonIndex != -1;
-  }
+  final inappViewmodel = locator<InappViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +34,7 @@ class _InappButtonState extends State<InappButton> {
 
   Widget buildButton(int index,
       {required String buttonText, required String buttonPrice}) {
-    bool isSelected = inappGetIt.selectedButtonIndex == index;
+    bool isSelected = inappViewmodel.selectedButtonIndex == index;
 
     return Observer(
       builder: (context) => Padding(
@@ -48,13 +44,10 @@ class _InappButtonState extends State<InappButton> {
         ),
         child: GestureDetector(
           onTap: () {
-        
-            if (inappGetIt.selectedButtonIndex == index) {
-            
-              inappGetIt.selectedButtonIndex = -1;
+            if (inappViewmodel.selectedButtonIndex == index) {
+              inappViewmodel.selectedButtonIndex = -1;
             } else {
-            
-              inappGetIt.selectedButtonIndex = index;
+              inappViewmodel.selectedButtonIndex = index;
             }
           },
           child: Container(

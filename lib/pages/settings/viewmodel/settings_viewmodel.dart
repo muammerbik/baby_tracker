@@ -1,7 +1,5 @@
-
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:mobx/mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 part 'settings_viewmodel.g.dart';
 
 class SettingViewModel = _SettingViewModelBase with _$SettingViewModel;
@@ -9,11 +7,6 @@ class SettingViewModel = _SettingViewModelBase with _$SettingViewModel;
 abstract class _SettingViewModelBase with Store {
   @observable
   int selectedIndex = -1;
-
-  @action
-  void setSelectedIndex(int index) {
-    selectedIndex = index;
-  }
 
   @observable
   List<SettingsData> settingsList = [

@@ -14,7 +14,7 @@ class DiaperChangeColumn extends StatefulWidget {
 }
 
 class _DiaperChangeColumnState extends State<DiaperChangeColumn> {
-  final diaperGetIt = locator<DiaperViewModel>();
+  final diaperViewmodel = locator<DiaperViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +54,12 @@ class _DiaperChangeColumnState extends State<DiaperChangeColumn> {
   }
 
   Widget diaperStatusRow(DiaperStatus status, String imagePath, String text) {
-    bool isSelected = diaperGetIt.selectedStatus == status;
+    bool isSelected = diaperViewmodel.selectedStatus == status;
 
     return Observer(
       builder: (context) => InkWell(
         onTap: () async {
-          diaperGetIt.selectedStatus = isSelected ? null : status;
+          diaperViewmodel.selectedStatus = isSelected ? null : status;
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

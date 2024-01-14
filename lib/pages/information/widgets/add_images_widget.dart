@@ -1,4 +1,3 @@
-
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
@@ -51,10 +50,10 @@ class _AddImageWidgetsState extends State<AddImageWidgets> {
                       child: Image.asset("assets/images/camera.png"),
                     )
                   : ClipRRect(
-                      borderRadius: BorderRadius.circular(70.0),
+                      borderRadius: BorderRadius.circular(70),
                       child: Image.file(
                         informationGetIt.imageFile!,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       ),
                     ),
             ),

@@ -16,9 +16,9 @@ abstract class _InappViewModelBase with Store {
   bool isInappComplated = false;
 
   @action
-  Future<void> InappButtonTapped(BuildContext context) async {
-    await InappComplatedSet();
-    await InappComplatedGet();
+  Future<void> inappButtonTapped(BuildContext context) async {
+    await inappComplatedSet();
+    await inappComplatedGet();
     if (selectedButtonIndex != -1 && isInappComplated) {
       Navigation.push(
         page: const InformationView(),
@@ -34,14 +34,14 @@ abstract class _InappViewModelBase with Store {
   }
 
   @action
-  Future<void> InappComplatedSet() async {
+  Future<void> inappComplatedSet() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setBool("isInappComplated", true);
     isInappComplated = true;
   }
 
   @action
-  Future<void> InappComplatedGet() async {
+  Future<void> inappComplatedGet() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     isInappComplated = pref.getBool("isInappComplated") ?? false;
   }

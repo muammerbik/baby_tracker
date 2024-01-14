@@ -1,4 +1,3 @@
-
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
@@ -14,7 +13,7 @@ class RowWidgets extends StatefulWidget {
 }
 
 class _RowWidgetsState extends State<RowWidgets> {
-  final onbordingGetIt = locator<OnbordingViewModel>();
+  final onboardingViewmodel = locator<OnbordingViewModel>();
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
@@ -22,17 +21,18 @@ class _RowWidgetsState extends State<RowWidgets> {
       builder: (context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
-          onbordingGetIt.OnbordingList.length,
+          onboardingViewmodel.OnbordingList.length,
           (index) => Container(
             height: DeviceConfig.screenHeight! * 0.0053,
-            width: onbordingGetIt.currentIndex == index
+            width: onboardingViewmodel.currentIndex == index
                 ? DeviceConfig.screenWidth! * 0.0700
                 : DeviceConfig.screenWidth! * 0.0350,
             margin: const EdgeInsets.only(right: 5),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color:
-                    onbordingGetIt.currentIndex == index ? btnBlue : lightGrey),
+                color: onboardingViewmodel.currentIndex == index
+                    ? btnBlue
+                    : lightGrey),
           ),
         ),
       ),

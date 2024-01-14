@@ -165,24 +165,24 @@ mixin _$InformationViewModel on _InformationViewModelBase, Store {
     return _$initAsyncAction.run(() => super.init());
   }
 
-  late final _$InformationComplatedSetAsyncAction = AsyncAction(
-      '_InformationViewModelBase.InformationComplatedSet',
+  late final _$informationComplatedSetAsyncAction = AsyncAction(
+      '_InformationViewModelBase.informationComplatedSet',
       context: context);
 
   @override
-  Future<void> InformationComplatedSet() {
-    return _$InformationComplatedSetAsyncAction
-        .run(() => super.InformationComplatedSet());
+  Future<void> informationComplatedSet() {
+    return _$informationComplatedSetAsyncAction
+        .run(() => super.informationComplatedSet());
   }
 
-  late final _$InformationComlatedGetAsyncAction = AsyncAction(
-      '_InformationViewModelBase.InformationComlatedGet',
+  late final _$informationComlatedGetAsyncAction = AsyncAction(
+      '_InformationViewModelBase.informationComlatedGet',
       context: context);
 
   @override
-  Future<void> InformationComlatedGet() {
-    return _$InformationComlatedGetAsyncAction
-        .run(() => super.InformationComlatedGet());
+  Future<void> informationComlatedGet() {
+    return _$informationComlatedGetAsyncAction
+        .run(() => super.informationComlatedGet());
   }
 
   late final _$isInfoButtonTappedAsyncAction = AsyncAction(

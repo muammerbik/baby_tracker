@@ -25,25 +25,27 @@ class SleepView extends StatefulWidget {
 }
 
 class _SleepViewState extends State<SleepView> {
-  final sleepGetIt = locator<SleepViewModel>();
-  final informationGetIt = locator<InformationViewModel>();
-@override
-void initState() {
-  sleepGetIt.sleepFellController.addListener(sleepGetIt.updateButtonStatusSleep);
-  sleepGetIt.sleepWakeupController.addListener(sleepGetIt.updateButtonStatusSleep);
-  sleepGetIt.sleepNoteController.addListener(sleepGetIt.updateButtonStatusSleep);
+  final sleepViewmodel = locator<SleepViewModel>();
+  final informationViewmodel = locator<InformationViewModel>();
+  @override
+  void initState() {
+    sleepViewmodel.sleepFellController
+        .addListener(sleepViewmodel.updateButtonStatusSleep);
+    sleepViewmodel.sleepWakeupController
+        .addListener(sleepViewmodel.updateButtonStatusSleep);
+    sleepViewmodel.sleepNoteController
+        .addListener(sleepViewmodel.updateButtonStatusSleep);
 
-  if (widget.sleepModel != null) {
-    sleepGetIt.sleepFellController.text = widget.sleepModel!.fellSleep;
-    sleepGetIt.sleepWakeupController.text = widget.sleepModel!.wakeUp;
-    sleepGetIt.sleepNoteController.text = widget.sleepModel!.note;
-  } else {
-    sleepGetIt.selectedSlep = null;
+    if (widget.sleepModel != null) {
+      sleepViewmodel.sleepFellController.text = widget.sleepModel!.fellSleep;
+      sleepViewmodel.sleepWakeupController.text = widget.sleepModel!.wakeUp;
+      sleepViewmodel.sleepNoteController.text = widget.sleepModel!.note;
+    } else {
+      sleepViewmodel.selectedSlep = null;
+    }
+
+    super.initState();
   }
-
-  super.initState();
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,29 +61,29 @@ void initState() {
           SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
           CustomTextFormField(
               onTap: () {
-                informationGetIt.selectTime(
-                    context, sleepGetIt.sleepFellController);
+                informationViewmodel.selectTime(
+                    context, sleepViewmodel.sleepFellController);
               },
               labelText: fellSleep,
-              controller: sleepGetIt.sleepFellController),
+              controller: sleepViewmodel.sleepFellController),
           SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
           CustomTextFormField(
               onTap: () {
-                informationGetIt.selectTime(
-                    context, sleepGetIt.sleepWakeupController);
+                informationViewmodel.selectTime(
+                    context, sleepViewmodel.sleepWakeupController);
               },
               labelText: wakeApp,
-              controller: sleepGetIt.sleepWakeupController),
+              controller: sleepViewmodel.sleepWakeupController),
           SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
           CustomTextFormField(
               hintText: note,
-              controller: sleepGetIt.sleepNoteController,
+              controller: sleepViewmodel.sleepNoteController,
               maxLines: 10),
           const Spacer(),
           CustomElevatedButtonView(
               text: save,
               onTop: () async {
-                sleepGetIt.isSleepButtonTapped(context);
+                sleepViewmodel.isSleepButtonTapped(context);
               },
               color: darkBlue),
           SizedBox(height: DeviceConfig.screenHeight! * 0.0323),

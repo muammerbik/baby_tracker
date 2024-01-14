@@ -1,4 +1,3 @@
-
 import 'package:baby_tracker/companent/custom_text/text_widgets.dart';
 import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
@@ -15,7 +14,7 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
-  final settingsGetIt = locator<SettingViewModel>();
+  final settingsViewmodel = locator<SettingViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +31,12 @@ class _SettingsViewState extends State<SettingsView> {
         child: Column(
           children: [
             SizedBox(height: DeviceConfig.screenHeight! * 0.0120),
-            for (int i = 0; i < settingsGetIt.settingsList.length; i++)
+            for (int i = 0; i < settingsViewmodel.settingsList.length; i++)
               Column(
                 children: [
                   SettingsColumn(
-                    leading: settingsGetIt.settingsList[i].leading,
-                    title: settingsGetIt.settingsList[i].title,
+                    leading: settingsViewmodel.settingsList[i].leading,
+                    title: settingsViewmodel.settingsList[i].title,
                   ),
                   SizedBox(height: DeviceConfig.screenHeight! * 0.0120),
                 ],

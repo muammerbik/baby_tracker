@@ -132,14 +132,6 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
     return _$initAsyncAction.run(() => super.init());
   }
 
-  late final _$initDiaperAsyncAction =
-      AsyncAction('_DiaperViewModelBase.initDiaper', context: context);
-
-  @override
-  Future<void> initDiaper() {
-    return _$initDiaperAsyncAction.run(() => super.initDiaper());
-  }
-
   late final _$isDiaperChangeButtonTappedAsyncAction = AsyncAction(
       '_DiaperViewModelBase.isDiaperChangeButtonTapped',
       context: context);
@@ -148,14 +140,6 @@ mixin _$DiaperViewModel on _DiaperViewModelBase, Store {
   Future<void> isDiaperChangeButtonTapped(BuildContext context) {
     return _$isDiaperChangeButtonTappedAsyncAction
         .run(() => super.isDiaperChangeButtonTapped(context));
-  }
-
-  late final _$getDiaperAsyncAction =
-      AsyncAction('_DiaperViewModelBase.getDiaper', context: context);
-
-  @override
-  Future<void> getDiaper() {
-    return _$getDiaperAsyncAction.run(() => super.getDiaper());
   }
 
   late final _$addDiaperChangeAsyncAction =

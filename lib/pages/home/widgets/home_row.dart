@@ -17,13 +17,13 @@ class HomeRow extends StatefulWidget {
 }
 
 class _HomeRowState extends State<HomeRow> {
-  final informationGetIt = locator<InformationViewModel>();
+  final informationViewmodel = locator<InformationViewModel>();
 
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
 
-    final String? localImagePath = informationGetIt.imageFile?.path;
+    final String? localImagePath = informationViewmodel.imageFile?.path;
 
     return Observer(
       builder: (context) => Row(
@@ -32,7 +32,9 @@ class _HomeRowState extends State<HomeRow> {
         children: [
           IconButton(
             onPressed: () {
-              Navigation.push(page: const SettingsView());
+              Navigation.push(
+                page: const SettingsView(),
+              );
             },
             icon: Image.asset(
               settngImg,
@@ -49,8 +51,10 @@ class _HomeRowState extends State<HomeRow> {
               decoration: ShapeDecoration(
                 image: localImagePath != null
                     ? DecorationImage(
-                        image: FileImage(File(localImagePath)),
-                        fit: BoxFit.fill,
+                        image: FileImage(
+                          File(localImagePath),
+                        ),
+                        fit: BoxFit.cover,
                       )
                     : null,
                 shape: const OvalBorder(

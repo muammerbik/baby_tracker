@@ -1,4 +1,3 @@
-
 import 'package:baby_tracker/companent/custom_button/custom_alert_dialog.dart';
 import 'package:baby_tracker/companent/navigation_helper/navigation_helper.dart';
 import 'package:baby_tracker/core/hive.dart';
@@ -32,7 +31,6 @@ abstract class _SleepViewModelBase with Store {
   SleepModel? selectedSlep;
   @observable
   bool isButtonEnabledSleep = false;
-
   @observable
   int? sleepSelectIndex;
 
@@ -43,11 +41,6 @@ abstract class _SleepViewModelBase with Store {
     } else {
       sleepSelectIndex = index;
     }
-  }
-
-  @action
-  Future<void> initSlep() async {
-    await getSleep();
   }
 
   @action
@@ -116,7 +109,9 @@ abstract class _SleepViewModelBase with Store {
       await sleepStorage.addSleep(sleepModel: sleepModel);
       add(sleepModel);
     } catch (e) {
-      print(e);
+      debugPrint(
+        e.toString(),
+      );
     }
   }
 
@@ -125,7 +120,6 @@ abstract class _SleepViewModelBase with Store {
     sleepList.clear();
     var data = await sleepStorage.getAllSSleep();
     sleepList.addAll(data);
-    print(sleepList);
   }
 
   @action
@@ -135,7 +129,9 @@ abstract class _SleepViewModelBase with Store {
       await sleepStorage.deleteSleep(sleepModel: sleepToDelete);
       sleepList.remove(sleepToDelete);
     } catch (e) {
-      print(e);
+      debugPrint(
+        e.toString(),
+      );
     }
   }
 
@@ -149,17 +145,9 @@ abstract class _SleepViewModelBase with Store {
       await sleepStorage.upDateSleep(sleepModel: sleepToUpdate);
       sleepList = List.from(sleepList);
     } catch (e) {
-      print(e);
-    }
-  }
-
-  @action
-  Future<void> getSleep() async {
-    if (sleepBox.isNotEmpty) {
-      SleepModel sleepGet = sleepBox.getAt(0)!;
-      sleepFellController.text = sleepGet.fellSleep;
-      sleepWakeupController.text = sleepGet.wakeUp;
-      sleepNoteController.text = sleepGet.note;
+      debugPrint(
+        e.toString(),
+      );
     }
   }
 }

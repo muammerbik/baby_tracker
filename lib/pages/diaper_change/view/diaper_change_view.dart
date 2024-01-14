@@ -24,25 +24,31 @@ class DiaperChangeView extends StatefulWidget {
 }
 
 class _DiaperChangeViewState extends State<DiaperChangeView> {
-  final diaperGetIt = locator<DiaperViewModel>();
-  final informationGetIt = locator<InformationViewModel>();
-@override
-void initState() {
-  diaperGetIt.diaperTimeController.addListener(diaperGetIt.upDateButtonstatus);
-  diaperGetIt.diaperNoteController.addListener(diaperGetIt.upDateButtonstatus);
+  final diaperViewmodel = locator<DiaperViewModel>();
+  final informationViewmodel = locator<InformationViewModel>();
+  
+  @override
+  void initState() {
+    diaperViewmodel.diaperTimeController
+        .addListener(diaperViewmodel.upDateButtonstatus);
+    diaperViewmodel.diaperNoteController
+        .addListener(diaperViewmodel.upDateButtonstatus);
 
-  if (widget.diaperChangeModel != null) {
-    diaperGetIt.diaperTimeController.text = widget.diaperChangeModel!.time;
-    diaperGetIt.selectedStatus = DiaperStatus
-        .values[int.parse(widget.diaperChangeModel!.diaperStatus)];
-    diaperGetIt.diaperNoteController.text = widget.diaperChangeModel!.note;
-    diaperGetIt.selectedDiaper = widget.diaperChangeModel;
-  } else {
-    diaperGetIt.selectedDiaper = null; // Yeni veri eklenirken seçili öğeyi temizle
+    if (widget.diaperChangeModel != null) {
+      diaperViewmodel.diaperTimeController.text =
+          widget.diaperChangeModel!.time;
+      diaperViewmodel.selectedStatus = DiaperStatus
+          .values[int.parse(widget.diaperChangeModel!.diaperStatus)];
+      diaperViewmodel.diaperNoteController.text =
+          widget.diaperChangeModel!.note;
+      diaperViewmodel.selectedDiaper = widget.diaperChangeModel;
+    } else {
+      diaperViewmodel.selectedDiaper =
+          null; // Yeni veri eklenirken seçili öğeyi temizle
+    }
+
+    super.initState();
   }
-
-  super.initState();
-}
 
   @override
   Widget build(BuildContext context) {
@@ -64,23 +70,23 @@ void initState() {
             SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomTextFormField(
                 labelText: time,
-                controller: diaperGetIt.diaperTimeController,
+                controller: diaperViewmodel.diaperTimeController,
                 onTap: () {
-                  informationGetIt.selectTime(
-                      context, diaperGetIt.diaperTimeController);
+                  informationViewmodel.selectTime(
+                      context, diaperViewmodel.diaperTimeController);
                 },
                 keyboardType: TextInputType.number),
             const DiaperChangeColumn(),
             CustomTextFormField(
               hintText: note,
-              controller: diaperGetIt.diaperNoteController,
+              controller: diaperViewmodel.diaperNoteController,
               maxLines: 10,
             ),
             SizedBox(height: DeviceConfig.screenHeight! * 0.0323),
             CustomElevatedButtonView(
                 text: save,
                 onTop: () async {
-                  diaperGetIt.isDiaperChangeButtonTapped(context);
+                  diaperViewmodel.isDiaperChangeButtonTapped(context);
                 },
                 color: lightblue),
           ],

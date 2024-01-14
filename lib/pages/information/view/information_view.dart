@@ -5,7 +5,6 @@ import 'package:baby_tracker/constants/app_strings.dart';
 import 'package:baby_tracker/constants/device_config.dart';
 import 'package:baby_tracker/get_it/get_it.dart';
 import 'package:baby_tracker/pages/home/view/home_view.dart';
-import 'package:baby_tracker/pages/home/viewmodel/home_viewmodel.dart';
 import 'package:baby_tracker/pages/information/viewmodel/information_viewmodel.dart';
 import 'package:baby_tracker/pages/information/widgets/add_images_widget.dart';
 import 'package:baby_tracker/pages/information/widgets/information_row.dart';
@@ -20,20 +19,18 @@ class InformationView extends StatefulWidget {
 }
 
 class _InformationViewState extends State<InformationView> {
-  final informationGetIt = locator<InformationViewModel>();
-  final homeViewGetIt = locator<HomeViewModel>();
+  final informationViewmodel = locator<InformationViewModel>();
 
   @override
   void initState() {
     super.initState();
-    informationGetIt.loadInformation();
+    informationViewmodel.loadInformation();
   }
-  bool isAge = false;
 
   @override
   Widget build(BuildContext context) {
     DeviceConfig().init(context);
-    final String? localImagePath = informationGetIt.imageFile?.path;
+    final String? localImagePath = informationViewmodel.imageFile?.path;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Observer(
@@ -79,7 +76,7 @@ class _InformationViewState extends State<InformationView> {
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     CustomTextFormField(
                       labelText: babyFullName,
-                      controller: informationGetIt.nameController,
+                      controller: informationViewmodel.nameController,
                       keyboardType: TextInputType.name,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
@@ -88,10 +85,10 @@ class _InformationViewState extends State<InformationView> {
                         labelText: birthDate,
                         keyboardType: TextInputType.datetime,
                         onTap: () async {
-                          await informationGetIt.selectDate(
-                              context, informationGetIt.birthDateController);
+                          await informationViewmodel.selectDate(context,
+                              informationViewmodel.birthDateController);
                         },
-                        controller: informationGetIt.birthDateController,
+                        controller: informationViewmodel.birthDateController,
                       ),
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
@@ -99,29 +96,28 @@ class _InformationViewState extends State<InformationView> {
                       labelText: timeOfBirth,
                       keyboardType: TextInputType.number,
                       onTap: () {
-                        informationGetIt.selectTime(
-                            context, informationGetIt.timeofBirthController);
+                        informationViewmodel.selectTime(context,
+                            informationViewmodel.timeofBirthController);
                       },
-                      controller: informationGetIt.timeofBirthController,
+                      controller: informationViewmodel.timeofBirthController,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0369),
                     CustomTextFormField(
                       labelText: dueDate,
                       keyboardType: TextInputType.number,
                       onTap: () {
-                        informationGetIt.selectTime(
-                            context, informationGetIt.dueDateController);
+                        informationViewmodel.selectTime(
+                            context, informationViewmodel.dueDateController);
                       },
-                      controller: informationGetIt.dueDateController,
+                      controller: informationViewmodel.dueDateController,
                     ),
                     SizedBox(height: DeviceConfig.screenHeight! * 0.0493),
                     CustomElevatedButtonView(
                       onTop: () async {
-                        await informationGetIt.isInfoButtonTapped(
+                        await informationViewmodel.isInfoButtonTapped(
                           context,
                           localImagePath.toString(),
                         );
-                  
                       },
                       text: continuee,
                       color: darkPurple,
