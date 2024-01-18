@@ -24,6 +24,8 @@ From the home page, users can add information about the baby's feeding, diaper c
 - path_provider
 - flutter_launcher_icons
 
+- App Link :https://www.linkedin.com/feed/update/urn:li:activity:7151887610729132032/
+
 
  
 
